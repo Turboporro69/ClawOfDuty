@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://or1pm1e5nl4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tryy7"]
+size = Vector2(50, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qknq6"]
+
+[node name="Enemy" type="Area2D"]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -248.0
+offset_top = -304.0
+offset_right = 248.0
+offset_bottom = -277.0
+max_value = 10.0
+step = 1.0
+show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_tryy7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(500, 500)
+texture = SubResource("PlaceholderTexture2D_qknq6")
