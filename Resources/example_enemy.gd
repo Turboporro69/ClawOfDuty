@@ -1,9 +1,17 @@
 extends Area2D
 
-@export var title : 
+
+@export var health : float
 
 func _ready() -> void:
-	pass
+	%ProgressBar.value = health
+	%ProgressBar.max_value = health
 
 func _process(delta: float) -> void:
-	pass
+	if health == 0:
+		queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	health -= 1
+	%ProgressBar.value = health
+	
