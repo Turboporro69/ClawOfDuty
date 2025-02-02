@@ -18,3 +18,13 @@ shape = SubResource("RectangleShape2D_iy6ip")
 position = Vector2(25.875, 26.125)
 scale = Vector2(70.25, 69.75)
 texture = SubResource("PlaceholderTexture2D_1pdf3")
+
+[node name="dashduration" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="dashcooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
+[connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
