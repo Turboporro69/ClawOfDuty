@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ui8a0xtgwkor"]
+[gd_scene load_steps=4 format=3 uid="uid://ui8a0xtgwkor"]
 
 [ext_resource type="Script" path="res://Resources/example_world.gd" id="1_c47m8"]
 [ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="1_x0l7c"]
+[ext_resource type="PackedScene" uid="uid://bmgjdmqukwo18" path="res://player.tscn" id="3_3fury"]
 
 [node name="Example_World" type="Node2D"]
 script = ExtResource("1_c47m8")
@@ -9,3 +10,5 @@ script = ExtResource("1_c47m8")
 [node name="Enemy" parent="." instance=ExtResource("1_x0l7c")]
 position = Vector2(1405, 552)
 health = 3.0
+
+[node name="player" parent="." instance=ExtResource("3_3fury")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2xdhjqmgxufd"]
+[gd_scene load_steps=4 format=3 uid="uid://bmgjdmqukwo18"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_k1csn"]
 
@@ -8,6 +8,7 @@ size = Vector2(72, 72)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1pdf3"]
 
 [node name="player" type="CharacterBody2D"]
+scale = Vector2(2.01441, 1.97861)
 script = ExtResource("1_k1csn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -23,7 +24,6 @@ texture = SubResource("PlaceholderTexture2D_1pdf3")
 wait_time = 0.3
 
 [node name="dashcooldown" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]

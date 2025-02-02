@@ -8,6 +8,7 @@ size = Vector2(50, 50)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qknq6"]
 
 [node name="Enemy" type="Area2D"]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_sm0fq")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

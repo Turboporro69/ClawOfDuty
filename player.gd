@@ -6,9 +6,10 @@ extends CharacterBody2D
 var speed = normal_speed
 var is_dashing = false
 var dash_available = true
-#################################### CODIGO ##########################################
+@onready var bullet = preload("res://Resources/bullet.tscn")
+
+
 func _physics_process(delta: float) -> void:
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction_x := Input.get_axis("ui_left", "ui_right")
 	if direction_x:
 		velocity.x = direction_x * speed
@@ -23,6 +24,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
 		start_wedashing()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		var instance = bullet.instantiate()
+		add_child(instance)
+
 
 func start_wedashing():
 	is_dashing = true
