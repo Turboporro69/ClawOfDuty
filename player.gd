@@ -6,7 +6,6 @@ extends CharacterBody2D
 var speed = normal_speed
 var is_dashing = false
 var dash_available = true
-@onready var bullet = preload("res://Resources/bullet.tscn")
 
 
 func _physics_process(delta: float) -> void:
@@ -24,18 +23,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
 		start_wedashing()
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		var instance = bullet.instantiate()
-		add_child(instance)
 
-
+		
 func start_wedashing():
 	is_dashing = true
 	dash_available = false
 	speed = dash_speed
 	dashcooldown.start()
 	dashduration.start()
+	
 func _on_dashduration_timeout() -> void:
 	is_dashing = false
 	speed = normal_speed
@@ -43,4 +39,6 @@ func _on_dashduration_timeout() -> void:
 
 func _on_dashcooldown_timeout() -> void:
 	dash_available = true
+	
+
 	

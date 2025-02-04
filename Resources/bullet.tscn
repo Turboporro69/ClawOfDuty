@@ -8,12 +8,14 @@ size = Vector2(26, 10)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_doa57"]
 
 [node name="Bullet" type="Area2D"]
+z_index = -1
 script = ExtResource("1_fn0rq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.33, 0.33)
 shape = SubResource("RectangleShape2D_nr6dg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-9.83477e-07, 0)
-scale = Vector2(26, 10)
+scale = Vector2(8, 3.077)
 texture = SubResource("PlaceholderTexture2D_doa57")
