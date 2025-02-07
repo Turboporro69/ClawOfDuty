@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhwh3xawo08vw"]
+
+[ext_resource type="Script" path="res://Resources/gunbot.gd" id="1_xanab"]
+[ext_resource type="Texture2D" uid="uid://oe31jw84ntx7" path="res://Sprites/rostmartin-rm1c-black.1708549237676-500x333.png" id="2_r5rwt"]
+
+[node name="GunBot" type="Node2D"]
+script = ExtResource("1_xanab")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_r5rwt")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(101, 0)

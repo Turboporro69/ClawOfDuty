@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 @onready var dashduration = $dashduration
 @onready var dashcooldown = $dashcooldown
 @export var normal_speed = 300.0
@@ -6,6 +7,8 @@ extends CharacterBody2D
 var speed = normal_speed
 var is_dashing = false
 var dash_available = true
+@export var health : int
+
 
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +26,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
 		start_wedashing()
+	if health == 0:
+		queue_free()
+	health_label()
+	
 
 		
 func start_wedashing():
@@ -39,6 +46,11 @@ func _on_dashduration_timeout() -> void:
 
 func _on_dashcooldown_timeout() -> void:
 	dash_available = true
-	
 
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("bullets"):
+		health -= 1
+
+func health_label():
+	$Camera2D/Label.text = "<3: " + str(health) + "/3"
 	

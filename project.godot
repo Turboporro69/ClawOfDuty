@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Shoot, Kill Bark!"
+run/main_scene="res://Resources/example_world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -32,6 +33,10 @@ shoot={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(166, 12),"global_position":Vector2(175, 58),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_render/layer_2="Bullet"
 
 [rendering]
 

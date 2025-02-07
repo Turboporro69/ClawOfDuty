@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var bullet_scene = preload("res://Resources/bullet.tscn")
+@onready var marker_2d: Marker2D = $Marker2D
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -12,10 +13,9 @@ func _process(delta: float) -> void:
 
 func shoot():
 	var bullet = bullet_scene.instantiate()
-	bullet.position = position
-	bullet.bullet_direction = (position - get_global_mouse_position()).normalized()
-	bullet.look_at(get_global_mouse_position())
-	get_parent().add_child(bullet)
+	get_tree().root.add_child(bullet)
+	bullet.global_position = marker_2d.global_position
+	bullet.rotation = rotation
 	
 
 func rotation():
