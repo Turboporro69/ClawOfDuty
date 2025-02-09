@@ -12,7 +12,7 @@ atlas = ExtResource("2_f1imq")
 region = Rect2(5, 103, 20, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8v51"]
-size = Vector2(20, 21.8)
+size = Vector2(13.8, 21.8)
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -57,7 +57,7 @@ collision_mask = 2
 [node name="Hurtbox" type="CollisionShape2D" parent="Hurtbox"]
 light_mask = 0
 visibility_layer = 0
-position = Vector2(0, 7.1)
+position = Vector2(0.3, 7.1)
 shape = SubResource("RectangleShape2D_s8v51")
 
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]

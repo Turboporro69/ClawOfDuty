@@ -2,30 +2,33 @@ extends Node2D
 
 @onready var bullet_scene = preload("res://Resources/bullet.tscn")
 @onready var marker_2d: Marker2D = $Marker2D
-@onready var player = preload("res://player.tscn")
-var player_instance
-var last_shoot_time
+@onready var player_instance = preload("res://player.tscn")
+var player
+var last_shoot_time = 0
+var shoot_cooldown = .5
 
 func _ready():
-	pass
+	player = get_parent().get_node("../player")
 
 func _process(delta: float) -> void:
-	if player != null:
-		look_at(player.global_position)
-		rotation_degrees = wrap(rotation_degrees, 0, 360)
-		rotation()
+	if player:
+		var direction = (player.global_position - global_position).normalized()
+		rotation = direction.angle()
+		update_rotation()
+		
+	last_shoot_time += delta
 
-func rotation():
+func update_rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
 		scale.y = -0.2
 	else:
 		scale.y = 0.2
-	
-func shoot():
-	var bullet = bullet_scene.instantiate()
-	get_tree().root.add_child(bullet)
-	bullet.global_position = marker_2d.global_position
-	bullet.rotation = rotation
-	
-	last_shoot_time = 0
-	
+
+func _on_enemy_player_seen() -> void:
+	if last_shoot_time >= shoot_cooldown:
+		var bullet = bullet_scene.instantiate()
+		get_tree().root.add_child(bullet)
+		bullet.global_position = marker_2d.global_position
+		bullet.rotation = rotation
+		
+		last_shoot_time = 0

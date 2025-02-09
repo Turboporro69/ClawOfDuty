@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ui8a0xtgwkor"]
+[gd_scene load_steps=7 format=3 uid="uid://ui8a0xtgwkor"]
 
 [ext_resource type="Script" path="res://Resources/example_world.gd" id="1_c47m8"]
 [ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="1_x0l7c"]
@@ -10,11 +10,47 @@ size = Vector2(100, 300)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymo8f"]
 size = Vector2(97, 298)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_77xai"]
+vertices = PackedVector2Array(1162.24, 769.719, 1667.8, 868.898, 621.219, 859.094, 960.883, 775.281, 1139.16, 247, 1139.15, 246.992, 1656.18, 241.109, 964.148, 494.219, 634.781, 254.852, 966.117, 324.508, 1151.4, 333.438)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(7, 3, 2, 8, 9), PackedInt32Array(10, 9, 8, 4, 6), PackedInt32Array(6, 1, 0, 10)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(625, 245, 611, 869, 1678, 879, 1666, 231, 1139, 237, 1152, 760, 971, 765, 974.147, 494.344, 976, 335, 1142, 343, 1139, 237)])
+
 [node name="Example_World" type="Node2D"]
 script = ExtResource("1_c47m8")
 
 [node name="player" parent="." instance=ExtResource("3_3fury")]
 position = Vector2(763, 526)
+
+[node name="Button" type="Button" parent="player/Camera2D" index="0"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -15.5
+offset_right = 37.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+disabled = true
+text = "RESTART"
+
+[node name="Label2" type="Label" parent="player/Camera2D" index="2"]
+offset_left = -143.6
+offset_top = -96.2
+offset_right = -103.6
+offset_bottom = -73.2
+text = "You: "
+
+[node name="Label3" type="Label" parent="player/Camera2D" index="3"]
+offset_left = 114.6
+offset_top = -96.6
+offset_right = 154.6
+offset_bottom = -73.6
+text = "Bot: "
 
 [node name="Enemy" parent="." instance=ExtResource("1_x0l7c")]
 position = Vector2(1405, 552)
@@ -29,3 +65,12 @@ texture = SubResource("PlaceholderTexture2D_lwqa8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1058.5, 553)
 shape = SubResource("RectangleShape2D_ymo8f")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_77xai")
+
+[connection signal="player_death" from="player" to="." method="_on_player_player_death"]
+[connection signal="pressed" from="player/Camera2D/Button" to="." method="_on_button_pressed"]
+[connection signal="bot_death" from="Enemy" to="." method="_on_enemy_bot_death"]
+
+[editable path="player"]
