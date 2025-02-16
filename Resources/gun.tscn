@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://782qw46cc6ib"]
+[gd_scene load_steps=3 format=3 uid="uid://cjyfvve1y4vkq"]
 
 [ext_resource type="Script" path="res://Resources/gun.gd" id="1_ffn8m"]
 [ext_resource type="Texture2D" uid="uid://oe31jw84ntx7" path="res://Sprites/rostmartin-rm1c-black.1708549237676-500x333.png" id="1_hbut8"]
@@ -13,3 +13,8 @@ texture = ExtResource("1_hbut8")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(101, 0)
+
+[node name="pewpew" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="pewpew" to="." method="_on_pewpew_timeout"]

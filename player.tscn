@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player.gd" id="1_k1csn"]
 [ext_resource type="Texture2D" uid="uid://dbvuxgeaso5pm" path="res://placeholders/B_witch_idle.png" id="2_f1imq"]
-[ext_resource type="PackedScene" uid="uid://782qw46cc6ib" path="res://Resources/gun.tscn" id="2_prt0q"]
+[ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_prt0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iy6ip"]
 size = Vector2(13.6, 22)
