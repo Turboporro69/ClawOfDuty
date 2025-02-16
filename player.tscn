@@ -33,6 +33,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -0.2)
 
 [node name="Label" type="Label" parent="Camera2D"]
 anchors_preset = 2
@@ -49,6 +50,7 @@ text = "<3: 0/3"
 [node name="Gun" parent="." instance=ExtResource("2_prt0q")]
 position = Vector2(-0.6, 9.6)
 scale = Vector2(0.2, 0.2)
+scale_gun = 0.2
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

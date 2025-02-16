@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var bullet_scene = preload("res://Resources/bullet.tscn")
 @onready var marker_2d: Marker2D = $Marker2D
+@export var scale_gun: float 
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -20,6 +21,6 @@ func shoot():
 
 func rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
-		scale.y = -0.2
+		scale.y = -scale_gun
 	else:
-		scale.y = 0.2
+		scale.y = scale_gun
