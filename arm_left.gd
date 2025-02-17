@@ -8,6 +8,7 @@ func _process(delta: float) -> void:
 
 func adjust_rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
-		get_tree().root.
+		#get_tree().root.
+		pass
 	else:
 		pass
