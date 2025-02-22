@@ -17,4 +17,7 @@ position = Vector2(101, 0)
 [node name="pewpew" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="GunHandle" type="Marker2D" parent="."]
+position = Vector2(3, 47)
+
 [connection signal="timeout" from="pewpew" to="." method="_on_pewpew_timeout"]

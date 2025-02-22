@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name Player2
+
 @onready var dashduration = $dashduration
 @onready var dashcooldown = $dashcooldown
 @export var normal_speed = 300.0
@@ -12,6 +13,10 @@ signal player_death
 var player_dead = false
 @export var scale_player : float
 @onready var arm_left = $Skeleton2D/hip/chest/arm_left
+@onready var arm_right = $Skeleton2D/hip/chest/arm_right
+@onready var marker2d_arm : Marker2D = $Skeleton2D/hip/chest/arm_right/hand_right/Marker2D
+@onready var gun_handle_marker2d : Marker2D = $Gun/GunHandle
+@onready var gun : Node2D = $Gun
 
 func _ready():
 	$polygons.visible = true
@@ -27,11 +32,11 @@ func _physics_process(delta: float) -> void:
 		health_label()
 		score.enemy_score += 1
 		emit_signal("player_death")
-		
 	else:
 		var direction_x := Input.get_axis("ui_left", "ui_right")
 		if direction_x:
 			velocity.x = direction_x * speed
+
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 		var direction_y := Input.get_axis("ui_up", "ui_down")
@@ -39,12 +44,15 @@ func _physics_process(delta: float) -> void:
 			velocity.y = direction_y * speed
 		else:
 			velocity.y = move_toward(velocity.y, 0, speed)
-
+			
 		move_and_slide()
+		
 		if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
 			start_wedashing()
+			
 		health_label()
-	
+		arm_rotation()
+
 func start_wedashing():
 	is_dashing = true
 	dash_available = false
@@ -66,3 +74,17 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func health_label():
 	#$Camera2D/Label.text = "<3: " + str(health) + "/3"
 	pass
+func left_arm_rotation():
+	arm_left.global_position = arm_right.global_position
+	arm_left.rotation_degrees = arm_right.rotation_degrees + 5
+
+func update_gun_position():
+	gun.global_position = marker2d_arm.global_position
+	gun.rotation_degrees = marker2d_arm.global_rotation_degrees
+
+func arm_rotation():
+	arm_right.look_at(get_global_mouse_position())
+	arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
+	arm_right.rotation_degrees += 180
+	left_arm_rotation()
+	update_gun_position()

@@ -8,7 +8,6 @@ var moving = false
 var drift = 0
 
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
 	rotation_degrees = wrap(rotation_degrees, 0, 360)
 	rotation()
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=8 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://y1lxwco5as8u" path="res://placeholders/gBot_pieces.png" id="1_mcejd"]
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
+[ext_resource type="Script" path="res://arm_left.gd" id="3_2qeg8"]
+[ext_resource type="Script" path="res://arm_right.gd" id="3_h7wjg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2s1p"]
 size = Vector2(340, 825)
@@ -17,7 +19,6 @@ health = 5
 scale_player = 0.3
 
 [node name="polygons" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="arm_left" type="Polygon2D" parent="polygons"]
 position = Vector2(-249.144, 105.782)
@@ -107,6 +108,7 @@ bone_angle = 0.0
 unique_name_in_owner = true
 position = Vector2(124.332, -72.088)
 rest = Transform2D(1, 0, 0, 1, 136.693, -93.9306)
+script = ExtResource("3_h7wjg")
 
 [node name="hand_right" type="Bone2D" parent="Skeleton2D/hip/chest/arm_right"]
 position = Vector2(-101.004, 0.419732)
@@ -123,6 +125,7 @@ position = Vector2(112.233, -4.83692)
 position = Vector2(161.604, -29.2744)
 rotation = -3.14159
 rest = Transform2D(1, 0, 0, 1, 153.856, 59.8434)
+script = ExtResource("3_2qeg8")
 
 [node name="hand_left" type="Bone2D" parent="Skeleton2D/hip/chest/arm_left"]
 position = Vector2(-121.115, -7.29837)
@@ -166,6 +169,7 @@ length = 76.893
 bone_angle = 0.0
 
 [node name="Gun" parent="." instance=ExtResource("2_1bl4l")]
+unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
 scale_gun = 2.5
