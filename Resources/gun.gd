@@ -6,6 +6,8 @@ extends Node2D
 var pewpewcooldown = true
 var moving = false
 var drift = 0
+signal left
+signal right
 
 func _process(delta: float) -> void:
 	rotation_degrees = wrap(rotation_degrees, 0, 360)
@@ -37,8 +39,10 @@ func shoot():
 func rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
 		scale.y = -scale_gun
+		emit_signal("left")
 	else:
 		scale.y = scale_gun
+		emit_signal("right")
 
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true

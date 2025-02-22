@@ -15,8 +15,11 @@ var player_dead = false
 @onready var arm_left = $Skeleton2D/hip/chest/arm_left
 @onready var arm_right = $Skeleton2D/hip/chest/arm_right
 @onready var marker2d_arm : Marker2D = $Skeleton2D/hip/chest/arm_right/hand_right/Marker2D
+@onready var skeleton : Skeleton2D = $Skeleton2D
 @onready var gun_handle_marker2d : Marker2D = $Gun/GunHandle
 @onready var gun : Node2D = $Gun
+var flip_h : bool = false
+@onready var polygons : Node2D = $polygons
 
 func _ready():
 	$polygons.visible = true
@@ -52,6 +55,17 @@ func _physics_process(delta: float) -> void:
 			
 		health_label()
 		arm_rotation()
+		#if flip_h == true:
+			#gun.rotation_degrees = gun.rotation_degrees * -1
+			#gun.scale.y = gun.scale.y * -1
+			#gun.scale.x = gun.scale_gun * -1
+			#
+		#elif flip_h == false:
+			#gun.rotation_degrees = gun.rotation_degrees
+			#gun.scale.y = gun.scale.y 
+			#gun.scale.x = gun.scale_gun
+		_on_gun_left()
+		_on_gun_right()
 
 func start_wedashing():
 	is_dashing = true
@@ -88,3 +102,13 @@ func arm_rotation():
 	arm_right.rotation_degrees += 180
 	left_arm_rotation()
 	update_gun_position()
+
+func _on_gun_left() -> void:
+	polygons.scale.x = -1
+	#rotation_degrees = 180
+	flip_h = true
+#
+func _on_gun_right() -> void:
+	polygons.scale.x = 1
+	#rotation_degrees = 0
+	flip_h = false

@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2s1p"]
-size = Vector2(340, 825)
+size = Vector2(266.667, 686.667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhipg"]
-size = Vector2(18.1818, 811.901)
+size = Vector2(15.4545, 811.901)
 
 [node name="Player_skeleton" type="CharacterBody2D"]
+position = Vector2(29, 1)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1r3qd")
 health = 5
@@ -44,7 +45,7 @@ uv = PackedVector2Array(333.295, 90.7478, 334.421, 174.063, 349.058, 255.127, 34
 bones = ["hip", PackedFloat32Array(0, 0, 0, 1, 1, 1, 1, 0, 0, 0), "hip/chest", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 1, 1, 1), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head/jaw", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right/hand_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left/hand_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left/foot_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right/calf_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right/calf_right/foot_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="head" type="Polygon2D" parent="polygons"]
-position = Vector2(-671.144, -470.218)
+position = Vector2(-730.913, -466.884)
 texture = ExtResource("1_mcejd")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(502.16, 317.294, 474.246, 387.08, 476.107, 487.572, 526.353, 510.834, 548.684, 529.444, 615.679, 539.679, 679.882, 534.096, 766.417, 525.722, 831.551, 506.182, 828.759, 352.652, 797.123, 294.032, 755.251, 254.021, 700.353, 233.551, 620.331, 238.203, 535.657, 283.797)
@@ -52,7 +53,7 @@ uv = PackedVector2Array(502.16, 317.294, 474.246, 387.08, 476.107, 487.572, 526.
 bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/chest/head/jaw", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right/hand_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left/hand_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left/foot_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right/calf_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right/calf_right/foot_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="jaw" type="Polygon2D" parent="polygons"]
-position = Vector2(-669.144, -546.218)
+position = Vector2(-728.913, -542.884)
 texture = ExtResource("1_mcejd")
 skeleton = NodePath("../../Skeleton2D")
 polygon = PackedVector2Array(500.299, 559.219, 829.69, 561.08, 815.732, 647.615, 764.556, 678.321, 639.871, 691.348, 530.075, 683.904, 493.786, 652.267, 473.315, 594.578)
@@ -177,7 +178,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-40, 234.167)
+position = Vector2(-50, 203.333)
 shape = SubResource("RectangleShape2D_g2s1p")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -189,10 +190,12 @@ collision_mask = 2
 [node name="Hurtbox" type="CollisionShape2D" parent="Hurtbox"]
 light_mask = 0
 visibility_layer = 0
-position = Vector2(-5.10637, 380.717)
+position = Vector2(-6.1702, 380)
 scale = Vector2(1.17021, 1)
 shape = SubResource("RectangleShape2D_uhipg")
 
+[connection signal="left" from="Gun" to="." method="_on_gun_left"]
+[connection signal="right" from="Gun" to="." method="_on_gun_right"]
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
