@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Resources/example_world.gd" id="1_c47m8"]
 [ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="1_x0l7c"]
-[ext_resource type="PackedScene" uid="uid://bmgjdmqukwo18" path="res://player.tscn" id="3_3fury"]
+[ext_resource type="PackedScene" uid="uid://c8fkdhc1b1syb" path="res://player_2.tscn" id="4_ohgxb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lwqa8"]
 size = Vector2(100, 300)
@@ -18,42 +18,9 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(625, 245, 611, 869, 167
 [node name="Example_World" type="Node2D"]
 script = ExtResource("1_c47m8")
 
-[node name="player" parent="." instance=ExtResource("3_3fury")]
-position = Vector2(763, 526)
-
-[node name="Button" type="Button" parent="player/Camera2D" index="0"]
-visible = false
-z_index = 2
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = -15.5
-offset_right = 37.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-disabled = true
-text = "RESTART"
-
-[node name="Label2" type="Label" parent="player/Camera2D" index="2"]
-offset_left = -143.6
-offset_top = -96.2
-offset_right = -103.6
-offset_bottom = -73.2
-text = "You: "
-
-[node name="Label3" type="Label" parent="player/Camera2D" index="3"]
-offset_left = 114.6
-offset_top = -96.6
-offset_right = 154.6
-offset_bottom = -73.6
-text = "Bot: "
-
 [node name="Enemy" parent="." instance=ExtResource("1_x0l7c")]
 position = Vector2(1405, 552)
+scale = Vector2(6.5, 6.5)
 health = 3.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -69,8 +36,51 @@ shape = SubResource("RectangleShape2D_ymo8f")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_77xai")
 
-[connection signal="player_death" from="player" to="." method="_on_player_player_death"]
-[connection signal="pressed" from="player/Camera2D/Button" to="." method="_on_button_pressed"]
+[node name="player" parent="." instance=ExtResource("4_ohgxb")]
+position = Vector2(688, 480)
+health = 3
+
+[node name="foot_left" parent="player/Player/Skeleton/Skeleton2D/hip/leg_left/calf_left" index="0"]
+scale = Vector2(0.999999, 0.999999)
+
+[node name="Button" type="Button" parent="player/Camera2D" index="0"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -372.0
+offset_right = 900.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+disabled = true
+text = "RESTART"
+
+[node name="Label2" type="Label" parent="player/Camera2D" index="1"]
+offset_left = -2826.67
+offset_top = -1710.0
+offset_right = -2788.67
+offset_bottom = -1687.0
+scale = Vector2(17.3359, 23.0359)
+text = "You: "
+
+[node name="Label3" type="Label" parent="player/Camera2D" index="2"]
+offset_left = 2093.33
+offset_top = -1630.0
+offset_right = 2133.33
+offset_bottom = -1607.0
+scale = Vector2(16.4798, 20.3354)
+text = "Bot: "
+
+[node name="PointLight2D" parent="player" index="7"]
+visible = false
+
 [connection signal="bot_death" from="Enemy" to="." method="_on_enemy_bot_death"]
+[connection signal="pressed" from="player/Camera2D/Button" to="." method="_on_button_pressed"]
 
 [editable path="player"]

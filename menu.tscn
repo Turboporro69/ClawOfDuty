@@ -32,21 +32,31 @@ theme_override_font_sizes/font_size = 150
 text = "Shoot, Kill, Bark!"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Panel"]
-custom_minimum_size = Vector2(350, 150)
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -175.0
-offset_top = -321.0
-offset_right = 175.0
-offset_bottom = -171.0
+offset_left = -350.0
+offset_top = -241.0
+offset_right = 354.0
+offset_bottom = -91.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "1vs1"
 
-[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[node name="Button2" type="Button" parent="Panel/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "1vs1"
+
+[connection signal="pressed" from="Panel/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="." method="_on_button_pressed"]
