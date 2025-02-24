@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://vp6h0kxp8j45"]
+[gd_scene load_steps=11 format=4 uid="uid://vp6h0kxp8j45"]
 
 [ext_resource type="PackedScene" uid="uid://c8fkdhc1b1syb" path="res://player_2.tscn" id="1_yk8uw"]
 [ext_resource type="Texture2D" uid="uid://3tcn7qt3pici" path="res://TX Plant.png" id="2_gbosv"]
@@ -28,6 +28,8 @@ sources/3 = SubResource("TileSetAtlasSource_yxbog")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dhiwb"]
 polygon = PackedVector2Array(840, 209, 840, 178, 846, 171, 855, 169, 956, 168, 965, 173, 967, 180, 968, 279, 968, 286, 964, 289, 960, 294, 953, 297, 852, 297, 846, 293, 841, 288, 840, 282)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fn71e"]
+
 [node name="TestWorld2" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -47,6 +49,11 @@ occluder = SubResource("OccluderPolygon2D_dhiwb")
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
 position = Vector2(560, 288)
 occluder = SubResource("OccluderPolygon2D_dhiwb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(732, 83)
+scale = Vector2(150, 150)
+texture = SubResource("PlaceholderTexture2D_fn71e")
 
 [node name="Player_skeleton" parent="." instance=ExtResource("1_yk8uw")]
 position = Vector2(961, 529)

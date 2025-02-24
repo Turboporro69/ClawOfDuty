@@ -77,6 +77,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func health_label():
 	#$Camera2D/Label.text = "<3: " + str(health) + "/3"
 	pass
+
 func left_arm_rotation():
 	arm_left.global_position = arm_right.global_position
 	arm_left.rotation_degrees = arm_right.rotation_degrees + 5

@@ -9,7 +9,7 @@
 size = Vector2(266.667, 686.667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhipg"]
-size = Vector2(15.4545, 811.901)
+size = Vector2(15.4545, 680)
 
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -194,15 +194,17 @@ collision_mask = 2
 [node name="Hurtbox" type="CollisionShape2D" parent="Hurtbox"]
 light_mask = 0
 visibility_layer = 0
-position = Vector2(-2.12765, 383.334)
+position = Vector2(-3.19148, 356.667)
 scale = Vector2(1.17021, 1)
 shape = SubResource("RectangleShape2D_uhipg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -40)
 energy = 0.5
 shadow_enabled = true
+shadow_filter_smooth = 0.1
 texture = ExtResource("4_tv144")
 texture_scale = 3.33
 
