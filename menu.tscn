@@ -45,6 +45,7 @@ offset_right = 354.0
 offset_bottom = -91.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 500
 
 [node name="Button" type="Button" parent="Panel/HBoxContainer"]
 custom_minimum_size = Vector2(350, 150)
@@ -56,7 +57,7 @@ text = "1vs1"
 custom_minimum_size = Vector2(350, 150)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "1vs1"
+text = "Tests"
 
 [connection signal="pressed" from="Panel/HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]

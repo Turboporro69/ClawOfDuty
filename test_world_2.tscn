@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=4 uid="uid://vp6h0kxp8j45"]
+[gd_scene load_steps=14 format=4 uid="uid://vp6h0kxp8j45"]
 
+[ext_resource type="Script" path="res://test_world_2.gd" id="1_ufbx3"]
 [ext_resource type="PackedScene" uid="uid://c8fkdhc1b1syb" path="res://player_2.tscn" id="1_yk8uw"]
 [ext_resource type="Texture2D" uid="uid://3tcn7qt3pici" path="res://TX Plant.png" id="2_gbosv"]
 [ext_resource type="Texture2D" uid="uid://ci3w85bc314wu" path="res://Tileset.png" id="3_6qr0l"]
@@ -33,7 +34,11 @@ light_mode = 2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fn71e"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nyq6k"]
+light_mode = 1
+
 [node name="TestWorld2" type="Node2D"]
+script = ExtResource("1_ufbx3")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.439049, 0.439049, 0.439049, 1)
@@ -61,3 +66,35 @@ texture = SubResource("PlaceholderTexture2D_fn71e")
 
 [node name="Player_skeleton" parent="." instance=ExtResource("1_yk8uw")]
 position = Vector2(961, 529)
+
+[node name="Button" type="Button" parent="."]
+process_mode = 2
+z_index = 10
+offset_left = 686.0
+offset_top = 552.0
+offset_right = 1210.0
+offset_bottom = 697.0
+theme_override_font_sizes/font_size = 100
+text = "CONTINUE"
+
+[node name="Label" type="Label" parent="."]
+z_index = 10
+material = SubResource("CanvasItemMaterial_nyq6k")
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 245.0
+offset_top = 111.0
+offset_right = 1706.0
+offset_bottom = 528.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "This is a scene used to test 
+different things, added in case 
+anyone is interested "
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

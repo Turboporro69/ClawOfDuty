@@ -7,6 +7,7 @@ class_name Player2
 @export var dash_speed = 600.0
 var speed = normal_speed
 var is_dashing = false
+var max_health = health
 var dash_available = true
 @export var health : int
 signal player_death
@@ -27,7 +28,7 @@ func _ready():
 	$CollisionShape2D.disabled = false
 
 func _physics_process(delta: float) -> void:
-	if health == 0 and not player_dead:
+	if health == 0 and player_dead == false:
 		player_dead = true
 		polygons.visible = false
 		$Gun/Sprite2D.visible = false
@@ -35,6 +36,8 @@ func _physics_process(delta: float) -> void:
 		health_label()
 		score.enemy_score += 1
 		emit_signal("player_death")
+	elif health == 0 and player_dead == true:
+		pass
 	else:
 		var direction_x := Input.get_axis("ui_left", "ui_right")
 		if direction_x:
@@ -74,10 +77,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullets"):
 		health -= 1
 
-func health_label():
-	#$Camera2D/Label.text = "<3: " + str(health) + "/3"
-	pass
-
 func left_arm_rotation():
 	arm_left.global_position = arm_right.global_position
 	arm_left.rotation_degrees = arm_right.rotation_degrees + 5
@@ -102,3 +101,7 @@ func _on_gun_right() -> void:
 	$Player.scale.x = 1
 	#rotation_degrees = 0
 	flip_h = false
+
+func health_label():
+	if $Camera2D.has_node("Label"):
+		$Camera2D/Label.text = "<3: " + str(health) + "/" + str(max_health)
