@@ -9,3 +9,7 @@ size = Vector2(250, 250)
 script = ExtResource("1_4kdfh")
 name = "test"
 texture = SubResource("PlaceholderTexture2D_rb6i3")
+damage = 10
+price = 100
+cadence = 15.0
+category = 0
