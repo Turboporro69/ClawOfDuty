@@ -8,32 +8,24 @@ var moving = false
 var drift = 0
 signal left
 signal right
-var primary_weapon : Resource = preload("res://Weapons/test.tres")
-var primary_data = {
-	"Texture": primary_weapon.Texture,
-	"Name": primary_weapon.Name
-}
-var secondary_weapon
+@export var weapon : Weapons:
+	set(value):
+		weapon = value
+		load_weapon()
 
 func _process(delta: float) -> void:
 	rotation_degrees = wrap(rotation_degrees, 0, 360)
 	rotation()
 
-
 	var jambo = get_parent()
-	if jambo == null or jambo is not CharacterBody2D:
-		pass
+	if jambo.velocity.length() > 0:
+		moving = true
 	else:
-		if jambo.velocity.length() > 0:
-			moving = true
-		else:
-			moving = false
+		moving = false
 
 
 	if Input.is_action_pressed("shoot") and pewpewcooldown == true :
 		shoot()
-	
-	PrimaryWeapon()
 
 func shoot():
 	if moving == true:
@@ -59,7 +51,5 @@ func rotation():
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
 
-func PrimaryWeapon():
-	if Input.is_action_just_pressed("PrimaryWeapon"):
-		pass
-		
+func load_weapon():
+	$Sprite2D.texture = weapon.texture
