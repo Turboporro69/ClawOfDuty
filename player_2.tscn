@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=7 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://y1lxwco5as8u" path="res://placeholders/gBot_pieces.png" id="1_mcejd"]
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
-[ext_resource type="Resource" uid="uid://cgl2jjq5355w2" path="res://weapons/weapons.tres" id="4_ipyd0"]
 [ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="5_udbs8"]
 
@@ -179,7 +178,6 @@ shape = SubResource("CapsuleShape2D_wcmjb")
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
 scale_gun = 2.5
-weapon = ExtResource("4_ipyd0")
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
