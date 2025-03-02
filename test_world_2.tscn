@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://3tcn7qt3pici" path="res://TX Plant.png" id="2_gbosv"]
 [ext_resource type="Texture2D" uid="uid://ci3w85bc314wu" path="res://Tileset.png" id="3_6qr0l"]
 [ext_resource type="Texture2D" uid="uid://b5sppaytfyvjg" path="res://icon.svg" id="3_gaafp"]
+[ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="5_tatco"]
+[ext_resource type="Resource" uid="uid://b5f8r52ut13l0" path="res://weapons/test2.tres" id="7_wy2ar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0kix"]
 texture = ExtResource("3_6qr0l")
@@ -28,11 +30,6 @@ sources/3 = SubResource("TileSetAtlasSource_yxbog")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dhiwb"]
 polygon = PackedVector2Array(840, 209, 840, 178, 846, 171, 855, 169, 956, 168, 965, 173, 967, 180, 968, 279, 968, 286, 964, 289, 960, 294, 953, 297, 852, 297, 846, 293, 841, 288, 840, 282)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0uqga"]
-light_mode = 2
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fn71e"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nyq6k"]
 light_mode = 1
@@ -58,14 +55,19 @@ occluder = SubResource("OccluderPolygon2D_dhiwb")
 position = Vector2(560, 288)
 occluder = SubResource("OccluderPolygon2D_dhiwb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_0uqga")
-position = Vector2(732, 83)
-scale = Vector2(150, 150)
-texture = SubResource("PlaceholderTexture2D_fn71e")
+[node name="Enemy" parent="." instance=ExtResource("5_tatco")]
+z_index = 12
+position = Vector2(483, 301)
+health = 5.0
 
 [node name="Player_skeleton" parent="." instance=ExtResource("1_yk8uw")]
 position = Vector2(961, 529)
+
+[node name="foot_left" parent="Player_skeleton/Player/Skeleton/Skeleton2D/hip/leg_left/calf_left" index="0"]
+scale = Vector2(0.999999, 0.999999)
+
+[node name="Gun" parent="Player_skeleton" index="2"]
+weapon = ExtResource("7_wy2ar")
 
 [node name="Button" type="Button" parent="."]
 process_mode = 2
@@ -98,3 +100,5 @@ anyone is interested "
 horizontal_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+
+[editable path="Player_skeleton"]

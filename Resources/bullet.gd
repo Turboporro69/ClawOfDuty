@@ -2,6 +2,7 @@ extends Area2D
 class_name bullet
 
 var speed = 900
+var damage : int
 
 func _ready():
 	add_to_group("bullets")
@@ -18,4 +19,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	queue_free()
+	if body.is_in_group("enemies"):
+		body.apply_damage(damage)
+		queue_free()

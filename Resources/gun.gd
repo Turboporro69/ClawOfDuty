@@ -6,6 +6,8 @@ extends Node2D
 var pewpewcooldown = true
 var moving = false
 var drift = 0
+var damage = 10
+var cadence
 signal left
 signal right
 @export var weapon : Weapons:
@@ -36,6 +38,7 @@ func shoot():
 	pewpew.start()
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
+	bullet.damage = damage
 	bullet.global_position = marker_2d.global_position
 	bullet.rotation = rotation + drift
 	
@@ -53,3 +56,6 @@ func _on_pewpew_timeout() -> void:
 
 func load_weapon():
 	$Sprite2D.texture = weapon.texture
+	damage = weapon.damage
+	
+	

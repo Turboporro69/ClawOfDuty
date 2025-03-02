@@ -10,3 +10,4 @@ enum Category {Primary, Secondary}
 @export var price : int
 @export var cadence : float
 @export var category : Category
+@export var automatic : bool

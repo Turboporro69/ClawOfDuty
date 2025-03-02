@@ -7,7 +7,7 @@ class_name Player2
 @export var dash_speed = 600.0
 var speed = normal_speed
 var is_dashing = false
-var max_health = health
+var max_health = 100
 var dash_available = true
 @export var health : int
 signal player_death
@@ -21,6 +21,7 @@ var player_dead = false
 @onready var gun : Node2D = $Gun
 var flip_h : bool = false
 @onready var polygons : Node2D = $Player/polygons
+@onready var gun_damage = $Gun.damage
 
 func _ready():
 	polygons.visible = true
@@ -75,7 +76,7 @@ func _on_dashcooldown_timeout() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullets"):
-		health -= 1
+		health -= area.damage
 
 func left_arm_rotation():
 	arm_left.global_position = arm_right.global_position
@@ -103,5 +104,4 @@ func _on_gun_right() -> void:
 	flip_h = false
 
 func health_label():
-	if $Camera2D.has_node("Label"):
-		$Camera2D/Label.text = "<3: " + str(health) + "/" + str(max_health)
+	$CanvasLayer/Label.text = "<3: " + str(health) + "/" + str(max_health)

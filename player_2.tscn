@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=8 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://y1lxwco5as8u" path="res://placeholders/gBot_pieces.png" id="1_mcejd"]
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
 [ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
+[ext_resource type="Resource" uid="uid://cgl2jjq5355w2" path="res://weapons/test.tres" id="4_wsvip"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="5_udbs8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wcmjb"]
@@ -13,7 +14,7 @@ height = 53.3333
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1r3qd")
-health = 5
+health = 100
 scale_player = 0.3
 
 [node name="Player" type="Node2D" parent="."]
@@ -175,9 +176,11 @@ scale = Vector2(15, 15)
 shape = SubResource("CapsuleShape2D_wcmjb")
 
 [node name="Gun" parent="." instance=ExtResource("2_1bl4l")]
+unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
 scale_gun = 2.5
+weapon = ExtResource("4_wsvip")
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
@@ -208,22 +211,30 @@ texture_scale = 3.33
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("5_udbs8")
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="Inventory" type="GridContainer" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-columns = 6
+[node name="Shop" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Inventory"]
-layout_mode = 2
+[node name="Panel" type="Panel" parent="CanvasLayer/Shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="left" from="Gun" to="." method="_on_gun_left"]
 [connection signal="right" from="Gun" to="." method="_on_gun_right"]

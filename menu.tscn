@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://menu.gd" id="1_f38ff"]
 
-[node name="Control" type="Control"]
+[node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f38ff")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Main" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="Main"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,10 +30,10 @@ offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 150
-text = "Shoot, Kill, Bark!"
+text = "Claw of Duty"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Main"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -47,17 +48,74 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 500
 
-[node name="Button" type="Button" parent="Panel/HBoxContainer"]
+[node name="Button" type="Button" parent="Main/HBoxContainer"]
 custom_minimum_size = Vector2(350, 150)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "1vs1"
 
-[node name="Button2" type="Button" parent="Panel/HBoxContainer"]
+[node name="Button2" type="Button" parent="Main/HBoxContainer"]
 custom_minimum_size = Vector2(350, 150)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Tests"
 
-[connection signal="pressed" from="Panel/HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[node name="vs1" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="vs1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 76.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Claw of Duty"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="vs1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -241.0
+offset_right = 354.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 300
+
+[node name="host" type="Button" parent="vs1/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Host"
+
+[node name="join" type="Button" parent="vs1/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Join"
+
+[node name="bot" type="Button" parent="vs1/HBoxContainer"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Bot"
+
+[connection signal="pressed" from="Main/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="vs1/HBoxContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="vs1/HBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="vs1/HBoxContainer/bot" to="." method="_on_button_bot_pressed"]

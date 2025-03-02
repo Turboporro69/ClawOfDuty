@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://b5f8r52ut13l0"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons.gd" id="1_86l55"]
+[ext_resource type="Texture2D" uid="uid://k2do0quvliyj" path="res://placeholders/FNVThatGun(1).png" id="2_c33he"]
+
+[resource]
+script = ExtResource("1_86l55")
+name = "test2"
+texture = ExtResource("2_c33he")
+damage = 50
+price = 1
+cadence = 1.0
+category = 0
+automatic = true
