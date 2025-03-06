@@ -1,7 +1,10 @@
 extends Node2D
+
 @onready var pewpew = $pewpew
 @onready var bullet_scene = preload("res://Resources/bullet.tscn")
 @onready var marker_2d: Marker2D = $Marker2D
+@onready var sprite: Sprite2D = $Sprite2D
+
 @export var scale_gun: float 
 var pewpewcooldown = true
 var moving = false
@@ -25,7 +28,6 @@ func _process(delta: float) -> void:
 	else:
 		moving = false
 
-
 	if Input.is_action_pressed("shoot") and pewpewcooldown == true :
 		shoot()
 
@@ -41,7 +43,6 @@ func shoot():
 	bullet.damage = damage
 	bullet.global_position = marker_2d.global_position
 	bullet.rotation = rotation + drift
-	
 
 func rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
@@ -55,7 +56,5 @@ func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
 
 func load_weapon():
-	$Sprite2D.texture = weapon.texture
+	%Sprite2D.texture = weapon.texture
 	damage = weapon.damage
-	
-	

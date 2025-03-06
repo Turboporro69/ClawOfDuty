@@ -28,6 +28,11 @@ func _ready():
 	$Gun/Sprite2D.visible = true
 	$CollisionShape2D.disabled = false
 
+	if is_multiplayer_authority():
+		var camera = Camera2D.new()
+		add_child(camera)
+		camera.make_current()
+
 func _physics_process(delta: float) -> void:
 	if health == 0 and player_dead == false:
 		player_dead = true
@@ -40,26 +45,26 @@ func _physics_process(delta: float) -> void:
 	elif health == 0 and player_dead == true:
 		pass
 	else:
-		var direction_x := Input.get_axis("ui_left", "ui_right")
-		if direction_x:
-			velocity.x = direction_x * speed
+		if is_multiplayer_authority():
+			var direction_x := Input.get_axis("ui_left", "ui_right")
+			if direction_x:
+				velocity.x = direction_x * speed
 
-		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
-		var direction_y := Input.get_axis("ui_up", "ui_down")
-		if direction_y:
-			velocity.y = direction_y * speed
-		else:
-			velocity.y = move_toward(velocity.y, 0, speed)
+			else:
+				velocity.x = move_toward(velocity.x, 0, speed)
+			var direction_y := Input.get_axis("ui_up", "ui_down")
+			if direction_y:
+				velocity.y = direction_y * speed
+			else:
+				velocity.y = move_toward(velocity.y, 0, speed)
+				
+			move_and_slide()
 			
-		move_and_slide()
-		
-		if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
-			start_wedashing()
-			
-		health_label()
-		arm_rotation()
-
+			if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
+				start_wedashing()
+				
+			health_label()
+			arm_rotation()
 func start_wedashing():
 	is_dashing = true
 	dash_available = false
@@ -87,17 +92,18 @@ func update_gun_position():
 	gun.rotation_degrees = marker2d_arm.global_rotation_degrees
 
 func arm_rotation():
-	arm_right.look_at(get_global_mouse_position())
-	arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
-	arm_right.rotation_degrees += 180
-	left_arm_rotation()
-	update_gun_position()
+	if is_multiplayer_authority():
+		arm_right.look_at(get_global_mouse_position())
+		arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
+		arm_right.rotation_degrees += 180
+		left_arm_rotation()
+		update_gun_position()
 
 func _on_gun_left() -> void:
 	$Player.scale.x = -1
 	#rotation_degrees = 180
 	flip_h = true
-#
+
 func _on_gun_right() -> void:
 	$Player.scale.x = 1
 	#rotation_degrees = 0
@@ -105,3 +111,6 @@ func _on_gun_right() -> void:
 
 func health_label():
 	$CanvasLayer/Label.text = "<3: " + str(health) + "/" + str(max_health)
+
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())

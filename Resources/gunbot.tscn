@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhwh3xawo08vw"]
 
-[ext_resource type="Script" path="res://Resources/gunbot.gd" id="1_xanab"]
+[ext_resource type="Script" uid="uid://cn2jme8ls8nma" path="res://Resources/gunbot.gd" id="1_xanab"]
 [ext_resource type="Texture2D" uid="uid://oe31jw84ntx7" path="res://Sprites/rostmartin-rm1c-black.1708549237676-500x333.png" id="2_r5rwt"]
 
 [node name="GunBot" type="Node2D"]

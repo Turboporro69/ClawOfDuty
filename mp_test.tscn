@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdogqjaq86t61"]
+
+[ext_resource type="Script" uid="uid://dhdqn6hua7tjy" path="res://mutliplayer_test.gd" id="1_10kiu"]
+
+[node name="main_scene" type="Node"]
+script = ExtResource("1_10kiu")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Button2" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
