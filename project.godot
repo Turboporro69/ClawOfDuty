@@ -8,30 +8,21 @@
 
 config_version=5
 
-[GD-Sync]
-
-version="0.7"
-
 [application]
 
 config/name="Claw of Duty"
-run/main_scene="res://main.tscn"
+run/main_scene="uid://jvj4yb0rub6y"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 score="*res://score.gd"
-Global="*res://global.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-
-[editor_plugins]
-
-enabled=PackedStringArray()
 
 [input]
 

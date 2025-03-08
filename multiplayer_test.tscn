@@ -1,12 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dafky28icj7la"]
-
-[ext_resource type="Script" uid="uid://dhdqn6hua7tjy" path="res://mutliplayer_test.gd" id="1_wen5k"]
+[gd_scene format=3 uid="uid://dafky28icj7la"]
 
 [node name="Multiplayer_test" type="Node2D"]
-script = ExtResource("1_wen5k")
 
 [node name="SpawnRoot" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://c8fkdhc1b1syb")
+_spawnable_scenes = PackedStringArray("res://player_2.tscn")
 spawn_path = NodePath("../SpawnRoot")

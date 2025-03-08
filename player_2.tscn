@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://c8fkdhc1b1syb"]
 
-[ext_resource type="Script" uid="uid://b8neef8bj7elr" path="res://player_2.gd" id="1_1r3qd"]
+[ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://y1lxwco5as8u" path="res://placeholders/gBot_pieces.png" id="1_mcejd"]
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
-[ext_resource type="Resource" uid="uid://dfcjds5wk2a7f" path="res://weapons/test1.tres" id="4_1hlws"]
 [ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
-[ext_resource type="Script" uid="uid://bb4arnwso6vct" path="res://canvas_layer.gd" id="5_udbs8"]
+[ext_resource type="Resource" uid="uid://cgl2jjq5355w2" path="res://weapons/test.tres" id="4_wsvip"]
+[ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wcmjb"]
 radius = 7.55556
@@ -15,15 +15,18 @@ height = 53.3333
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("Gun:position")
+properties/1/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Gun:rotation")
+properties/2/path = NodePath("Gun:position")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("Player/polygons:rotation")
+properties/3/path = NodePath("Player:scale")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("Gun:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -193,7 +196,8 @@ shape = SubResource("CapsuleShape2D_wcmjb")
 unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
-weapon = ExtResource("4_1hlws")
+scale_gun = 2.5
+weapon = ExtResource("4_wsvip")
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
@@ -210,6 +214,8 @@ collision_mask = 2
 position = Vector2(-0.444444, 15.5556)
 shape = SubResource("CapsuleShape2D_wcmjb")
 debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -40)
@@ -249,6 +255,9 @@ grow_vertical = 2
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_1hlws")
+
+[node name="Mouse" type="Marker2D" parent="."]
+position = Vector2(-823.333, 0)
 
 [connection signal="left" from="Gun" to="." method="_on_gun_left"]
 [connection signal="right" from="Gun" to="." method="_on_gun_right"]

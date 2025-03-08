@@ -1,16 +1,192 @@
-[gd_scene load_steps=4 format=3 uid="uid://dswu5048qtluq"]
+[gd_scene load_steps=3 format=3 uid="uid://jvj4yb0rub6y"]
 
 [ext_resource type="PackedScene" uid="uid://b0of1wdngjaup" path="res://menu.tscn" id="1_g5xth"]
 [ext_resource type="Script" uid="uid://c3phutxv0b4qv" path="res://main.gd" id="1_rfxpo"]
-[ext_resource type="Texture2D" uid="uid://b5sppaytfyvjg" path="res://icon.svg" id="3_h2yge"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_rfxpo")
 
 [node name="Menu" parent="." instance=ExtResource("1_g5xth")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_h2yge")
+[node name="vs1" parent="Menu" index="1"]
+visible = false
+
+[node name="Join" parent="Menu" index="2"]
+visible = false
+
+[node name="Labels" type="HBoxContainer" parent="Menu/Join" index="1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -150.0
+offset_right = 540.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="Menu/Join/Labels"]
+custom_minimum_size = Vector2(680, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "IP Adress"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu/Join/Labels"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Port"
+horizontal_alignment = 1
+
+[node name="TextInput" type="HBoxContainer" parent="Menu/Join" index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -26.0
+offset_right = 540.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="IP" type="LineEdit" parent="Menu/Join/TextInput"]
+custom_minimum_size = Vector2(680, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+alignment = 1
+caret_blink = true
+
+[node name="PORT" type="LineEdit" parent="Menu/Join/TextInput"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+virtual_keyboard_type = 2
+caret_blink = true
+secret_character = "*"
+
+[node name="join2" type="Button" parent="Menu/Join" index="3"]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -323.0
+offset_right = 180.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "JOIN"
+
+[node name="Host" type="Panel" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Menu/Host"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 76.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Claw of Duty"
+horizontal_alignment = 1
+
+[node name="Labels" type="HBoxContainer" parent="Menu/Host"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -150.0
+offset_right = 540.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="Menu/Host/Labels"]
+custom_minimum_size = Vector2(680, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "IP Adress"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Menu/Host/Labels"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Port"
+horizontal_alignment = 1
+
+[node name="TextInput" type="HBoxContainer" parent="Menu/Host"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -26.0
+offset_right = 540.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="IP" type="LineEdit" parent="Menu/Host/TextInput"]
+custom_minimum_size = Vector2(680, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+alignment = 1
+caret_blink = true
+
+[node name="PORT" type="LineEdit" parent="Menu/Host/TextInput"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+alignment = 1
+virtual_keyboard_type = 2
+caret_blink = true
+secret_character = "*"
+
+[node name="Host2" type="Button" parent="Menu/Host"]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -323.0
+offset_right = 180.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "HOST"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://c8fkdhc1b1syb")
@@ -21,5 +197,7 @@ spawn_path = NodePath("..")
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/bot" to="." method="_on_bot_pressed"]
+[connection signal="pressed" from="Menu/Join/join2" to="." method="_on_join_2_pressed"]
+[connection signal="pressed" from="Menu/Host/Host2" to="." method="_on_host_2_pressed"]
 
 [editable path="Menu"]

@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://vp6h0kxp8j45"]
+[gd_scene load_steps=14 format=4 uid="uid://vp6h0kxp8j45"]
 
-[ext_resource type="Script" uid="uid://dxt7i0r5mr2ky" path="res://test_world_2.gd" id="1_ufbx3"]
+[ext_resource type="Script" uid="uid://bdqdix6xgv3ya" path="res://test_world_2.gd" id="1_ufbx3"]
 [ext_resource type="PackedScene" uid="uid://c8fkdhc1b1syb" path="res://player_2.tscn" id="1_yk8uw"]
 [ext_resource type="Texture2D" uid="uid://3tcn7qt3pici" path="res://TX Plant.png" id="2_gbosv"]
 [ext_resource type="Texture2D" uid="uid://ci3w85bc314wu" path="res://Tileset.png" id="3_6qr0l"]
 [ext_resource type="Texture2D" uid="uid://b5sppaytfyvjg" path="res://icon.svg" id="3_gaafp"]
 [ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="5_tatco"]
+[ext_resource type="Resource" uid="uid://b5f8r52ut13l0" path="res://weapons/test2.tres" id="7_wy2ar"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0kix"]
 texture = ExtResource("3_6qr0l")
@@ -64,6 +65,9 @@ position = Vector2(961, 529)
 
 [node name="foot_left" parent="Player_skeleton/Player/Skeleton/Skeleton2D/hip/leg_left/calf_left" index="0"]
 scale = Vector2(0.999999, 0.999999)
+
+[node name="Gun" parent="Player_skeleton" index="2"]
+weapon = ExtResource("7_wy2ar")
 
 [node name="Button" type="Button" parent="."]
 process_mode = 2

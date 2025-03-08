@@ -1,30 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjyfvve1y4vkq"]
+[gd_scene load_steps=3 format=3 uid="uid://cjyfvve1y4vkq"]
 
-[ext_resource type="Script" uid="uid://pjunkpy4ui3i" path="res://Resources/gun.gd" id="1_ffn8m"]
+[ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="1_ffn8m"]
 [ext_resource type="Texture2D" uid="uid://oe31jw84ntx7" path="res://Sprites/rostmartin-rm1c-black.1708549237676-500x333.png" id="1_hbut8"]
-[ext_resource type="Script" uid="uid://bmgte1ks4pxol" path="res://Scripts/Weapons.gd" id="2_viyks"]
-
-[sub_resource type="Resource" id="Resource_6y5gd"]
-script = ExtResource("2_viyks")
-name = "test"
-texture = ExtResource("1_hbut8")
-damage = 10
-price = 100
-cadence = 15.0
-category = 0
-automatic = false
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_viyks"]
-size = Vector2(259, 259)
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ffn8m")
-scale_gun = 1.0
-weapon = SubResource("Resource_6y5gd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = SubResource("PlaceholderTexture2D_viyks")
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_hbut8")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(101, 0)

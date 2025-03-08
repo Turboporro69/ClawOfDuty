@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmgjdmqukwo18"]
+[gd_scene load_steps=7 format=3 uid="uid://bmgjdmqukwo18"]
 
-[ext_resource type="Script" uid="uid://cw7dipv1xkbgi" path="res://player.gd" id="1_k1csn"]
+[ext_resource type="Script" uid="uid://bl4omt748lh1" path="res://player.gd" id="1_k1csn"]
 [ext_resource type="Texture2D" uid="uid://dbvuxgeaso5pm" path="res://placeholders/B_witch_idle.png" id="2_f1imq"]
 [ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_prt0q"]
-[ext_resource type="Resource" uid="uid://dfcjds5wk2a7f" path="res://weapons/test1.tres" id="4_hqtel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iy6ip"]
 size = Vector2(13.6, 22)
@@ -51,7 +50,7 @@ text = "<3: 0/3"
 [node name="Gun" parent="." instance=ExtResource("2_prt0q")]
 position = Vector2(-0.6, 9.6)
 scale = Vector2(0.2, 0.2)
-weapon = ExtResource("4_hqtel")
+scale_gun = 0.2
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2

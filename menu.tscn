@@ -111,6 +111,27 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "Bot"
 
+[node name="Join" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Join"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 76.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "Claw of Duty"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Main/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="vs1/HBoxContainer/host" to="." method="_on_host_pressed"]

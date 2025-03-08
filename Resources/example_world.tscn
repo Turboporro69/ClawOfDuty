@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ui8a0xtgwkor"]
 
-[ext_resource type="Script" uid="uid://duith0rb76nv1" path="res://Resources/example_world.gd" id="1_c47m8"]
+[ext_resource type="Script" uid="uid://2rqg6mq3k3sp" path="res://Resources/example_world.gd" id="1_c47m8"]
 [ext_resource type="PackedScene" uid="uid://or1pm1e5nl4y" path="res://Resources/example_enemy.tscn" id="1_x0l7c"]
 [ext_resource type="PackedScene" uid="uid://c8fkdhc1b1syb" path="res://player_2.tscn" id="4_ohgxb"]
 
@@ -18,56 +18,12 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(625, 245, 611, 869, 167
 [node name="Example_World" type="Node2D"]
 script = ExtResource("1_c47m8")
 
-[node name="player_Camera2D#Button" type="Button" parent="."]
-visible = false
-z_index = 2
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -900.0
-offset_top = -372.0
-offset_right = 900.0
-offset_bottom = 372.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 256
-disabled = true
-text = "RESTART"
-
-[node name="player_Camera2D#Label2" type="Label" parent="."]
-offset_left = -2280.0
-offset_top = -1696.67
-offset_right = -2242.0
-offset_bottom = -1673.67
-theme_override_font_sizes/font_size = 250
-text = "You: "
-
-[node name="player_Camera2D#Label3" type="Label" parent="."]
-offset_left = 1523.33
-offset_top = -1643.33
-offset_right = 2073.33
-offset_bottom = -1301.33
-theme_override_font_sizes/font_size = 250
-text = "Bot: "
-
-[node name="player_Camera2D#Label" type="Label" parent="."]
-offset_left = -2173.33
-offset_top = 1046.67
-offset_right = -1888.33
-offset_bottom = 1388.67
-theme_override_font_sizes/font_size = 250
-text = "<3"
-
 [node name="Enemy" parent="." instance=ExtResource("1_x0l7c")]
 position = Vector2(1405, 552)
 scale = Vector2(6.5, 6.5)
 health = 3.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 3
-collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(1058, 554)
@@ -87,10 +43,53 @@ health = 3
 [node name="foot_left" parent="player/Player/Skeleton/Skeleton2D/hip/leg_left/calf_left" index="0"]
 scale = Vector2(0.999999, 0.999999)
 
-[node name="PointLight2D" parent="player" index="6"]
+[node name="Button" type="Button" parent="player/Camera2D" index="0"]
+visible = false
+z_index = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -900.0
+offset_top = -372.0
+offset_right = 900.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 256
+disabled = true
+text = "RESTART"
+
+[node name="Label2" type="Label" parent="player/Camera2D" index="1"]
+offset_left = -2280.0
+offset_top = -1696.67
+offset_right = -2242.0
+offset_bottom = -1673.67
+theme_override_font_sizes/font_size = 250
+text = "You: "
+
+[node name="Label3" type="Label" parent="player/Camera2D" index="2"]
+offset_left = 1523.33
+offset_top = -1643.33
+offset_right = 2073.33
+offset_bottom = -1301.33
+theme_override_font_sizes/font_size = 250
+text = "Bot: "
+
+[node name="Label" type="Label" parent="player/Camera2D" index="3"]
+offset_left = -2173.33
+offset_top = 1046.67
+offset_right = -1888.33
+offset_bottom = 1388.67
+theme_override_font_sizes/font_size = 250
+text = "<3"
+
+[node name="PointLight2D" parent="player" index="7"]
 visible = false
 
 [connection signal="bot_death" from="Enemy" to="." method="_on_enemy_bot_death"]
 [connection signal="player_death" from="player" to="." method="_on_player_player_death"]
+[connection signal="pressed" from="player/Camera2D/Button" to="." method="_on_button_pressed"]
 
 [editable path="player"]

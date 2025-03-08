@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://or1pm1e5nl4y"]
 
-[ext_resource type="Script" uid="uid://cxthbao6hs7kp" path="res://Resources/example_enemy.gd" id="1_sm0fq"]
+[ext_resource type="Script" uid="uid://cmd2a60qhjoln" path="res://Resources/example_enemy.gd" id="1_sm0fq"]
 [ext_resource type="Texture2D" uid="uid://73bqitmhbrjl" path="res://placeholders/IDLE.png" id="2_yssid"]
 [ext_resource type="PackedScene" uid="uid://bhwh3xawo08vw" path="res://Resources/gunbot.tscn" id="3_wga3c"]
 

@@ -1,5 +1,4 @@
 extends CharacterBody2D
-class_name Player2
 
 @onready var dashduration = $dashduration
 @onready var dashcooldown = $dashcooldown
@@ -22,6 +21,8 @@ var player_dead = false
 var flip_h : bool = false
 @onready var polygons : Node2D = $Player/polygons
 @onready var gun_damage = $Gun.damage
+var mouse_position
+
 
 func _ready():
 	polygons.visible = true
@@ -32,8 +33,10 @@ func _ready():
 		var camera = Camera2D.new()
 		add_child(camera)
 		camera.make_current()
+	set_physics_process(is_multiplayer_authority())
 
 func _physics_process(delta: float) -> void:
+	$Mouse.global_position = get_global_mouse_position()
 	if health == 0 and player_dead == false:
 		player_dead = true
 		polygons.visible = false
@@ -45,26 +48,25 @@ func _physics_process(delta: float) -> void:
 	elif health == 0 and player_dead == true:
 		pass
 	else:
-		if is_multiplayer_authority():
-			var direction_x := Input.get_axis("ui_left", "ui_right")
-			if direction_x:
-				velocity.x = direction_x * speed
-
-			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
-			var direction_y := Input.get_axis("ui_up", "ui_down")
-			if direction_y:
-				velocity.y = direction_y * speed
-			else:
-				velocity.y = move_toward(velocity.y, 0, speed)
-				
-			move_and_slide()
+		var direction_x := Input.get_axis("ui_left", "ui_right")
+		if direction_x:
+			velocity.x = direction_x * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
+		
+		var direction_y := Input.get_axis("ui_up", "ui_down")
+		if direction_y:
+			velocity.y = direction_y * speed
+		else:
+			velocity.y = move_toward(velocity.y, 0, speed)
 			
-			if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
-				start_wedashing()
-				
-			health_label()
-			arm_rotation()
+		move_and_slide()
+		
+		if Input.is_action_just_pressed("wedashing") and dash_available == true and not is_dashing:
+			start_wedashing()
+		
+		health_label()
+		arm_rotation()
 func start_wedashing():
 	is_dashing = true
 	dash_available = false
@@ -90,14 +92,14 @@ func left_arm_rotation():
 func update_gun_position():
 	gun.global_position = marker2d_arm.global_position
 	gun.rotation_degrees = marker2d_arm.global_rotation_degrees
+		
 
 func arm_rotation():
-	if is_multiplayer_authority():
-		arm_right.look_at(get_global_mouse_position())
-		arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
-		arm_right.rotation_degrees += 180
-		left_arm_rotation()
-		update_gun_position()
+	arm_right.look_at($Mouse.global_position)
+	arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
+	arm_right.rotation_degrees += 180
+	left_arm_rotation()
+	update_gun_position()
 
 func _on_gun_left() -> void:
 	$Player.scale.x = -1

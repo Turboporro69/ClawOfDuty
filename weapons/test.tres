@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://cgl2jjq5355w2"]
+
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/Weapons.gd" id="1_4kdfh"]
+[ext_resource type="Texture2D" uid="uid://oe31jw84ntx7" path="res://Sprites/rostmartin-rm1c-black.1708549237676-500x333.png" id="2_5dm5c"]
+
+[resource]
+script = ExtResource("1_4kdfh")
+name = "test"
+texture = ExtResource("2_5dm5c")
+damage = 10
+price = 100
+cadence = 15.0
+category = 0
