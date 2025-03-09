@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b5ta6j6rb6y0q"]
+
+[ext_resource type="Shader" uid="uid://dmey126wd4si2" path="res://shaders/not_selected_gun.gdshader" id="1_ebeei"]
+
+[resource]
+shader = ExtResource("1_ebeei")

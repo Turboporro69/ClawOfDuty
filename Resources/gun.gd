@@ -3,17 +3,41 @@ extends Node2D
 @onready var bullet_scene = preload("res://Resources/bullet.tscn")
 @onready var marker_2d: Marker2D = $Marker2D
 @export var scale_gun: float 
+@onready var selected_material = preload("res://shaders/selected_gun_material.tres")
+@onready var not_selected_material = preload("res://shaders/not_selected_gun_material.tres")
 var pewpewcooldown = true
 var moving = false
-var drift = 0
-var damage = 10
-var cadence
+var drift
+var cadence : float
+
+@export var primary_selected : bool = false
+@export var secondary_selected : bool = false
+@export var melee_selected : bool = false
 signal left
 signal right
-@export var weapon : Weapons:
+var current_weapon : String
+
+var automatic : bool = false
+var damage = 10
+
+@export var primary_weapon : Weapons:
 	set(value):
-		weapon = value
+		primary_weapon = value
 		load_weapon()
+@export var secondary_weapon : Weapons:
+	set(value):
+		secondary_weapon = value
+		load_weapon()
+
+func _ready() -> void:
+	if primary_weapon == null and secondary_weapon != null:
+		current_weapon = "secondary"
+	elif primary_weapon != null:
+		current_weapon = "primary"
+	else:
+		current_weapon = "melee"
+	load_weapon()
+	update_weapon_icons()
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
@@ -26,9 +50,32 @@ func _process(delta: float) -> void:
 		else:
 			moving = false
 
+		if automatic:
+			if Input.is_action_pressed("shoot") and pewpewcooldown == true:
+				shoot()
+		else:
+			if Input.is_action_just_pressed("shoot") and pewpewcooldown == true:
+				shoot()
+		
+		selected()
+		change_weapon()
+		load_weapon()
 
-		if Input.is_action_pressed("shoot") and pewpewcooldown == true :
-			shoot()
+	# Verificar si primary_weapon o secondary_weapon se vuelven null en medio de la partida
+	if current_weapon == "primary" and primary_weapon == null:
+		if secondary_weapon != null:
+			current_weapon = "secondary"
+		else:
+			current_weapon = "melee"
+		load_weapon()
+	elif current_weapon == "secondary" and secondary_weapon == null:
+		if primary_weapon != null:
+			current_weapon = "primary"
+		else:
+			current_weapon = "melee"
+		load_weapon()
+
+
 
 func shoot():
 	if moving == true:
@@ -44,6 +91,7 @@ func shoot():
 	bullet.rotation = rotation + drift
 	
 
+
 func rotation():
 	if rotation_degrees > 90 and rotation_degrees < 270:
 		scale.y = -scale_gun
@@ -56,7 +104,72 @@ func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
 
 func load_weapon():
-	$Sprite2D.texture = weapon.texture
-	damage = weapon.damage
+	if current_weapon == "primary" and primary_weapon != null:
+		if $Sprite2D != null:
+			$Sprite2D.texture = primary_weapon.texture
+		damage = primary_weapon.damage
+		automatic = primary_weapon.automatic
+		cadence = primary_weapon.cadence
+		
+		primary_selected = true
+		secondary_selected = false
+		melee_selected = false
+	elif current_weapon == "secondary" and secondary_weapon != null:
+		if $Sprite2D != null:
+			$Sprite2D.texture = secondary_weapon.texture
+		damage = secondary_weapon.damage
+		automatic = secondary_weapon.automatic
+		cadence = secondary_weapon.cadence
+		
+		primary_selected = false
+		secondary_selected = true
+		melee_selected = false
+	else:
+		if $Sprite2D != null:
+			$Sprite2D.texture = null
+		
+		primary_selected = false
+		secondary_selected = false
+		melee_selected = true
+
+	update_weapon_icons()
+
+func update_weapon_icons():
+	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
+		if primary_weapon != null:
+			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.texture = primary_weapon.icon
+		else:
+			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.texture = null
+
+	if $CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn != null:
+		if secondary_weapon != null:
+			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.texture = secondary_weapon.icon
+		else:
+			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.texture = null
+
+func change_weapon():
+	if Input.is_action_just_pressed("primary_weapon") and primary_weapon != null:
+		current_weapon = "primary"
+		load_weapon()
+	elif Input.is_action_just_pressed("secondary_weapon") and secondary_weapon != null:
+		current_weapon = "secondary"
+		load_weapon()
+	elif Input.is_action_just_pressed("melee"):
+		current_weapon = "melee"
+		load_weapon()
+
+func selected():
+	if primary_selected == true:
+		$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = selected_material
+	elif primary_selected == false:
+		$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = not_selected_material
 	
+	if secondary_selected == true:
+		$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = selected_material
+	elif secondary_selected == false:
+		$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = not_selected_material
 	
+	if melee_selected == true:
+		$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = selected_material
+	elif melee_selected == false:
+		$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = not_selected_material

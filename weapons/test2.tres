@@ -7,6 +7,7 @@
 script = ExtResource("1_86l55")
 name = "test2"
 texture = ExtResource("2_c33he")
+icon = ExtResource("2_c33he")
 damage = 50
 price = 1
 cadence = 1.0

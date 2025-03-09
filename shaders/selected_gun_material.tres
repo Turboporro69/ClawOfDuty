@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brtdhm5ktmr6j"]
+
+[ext_resource type="Shader" uid="uid://64jwturbnetp" path="res://shaders/selected_gun.gdshader" id="1_krw51"]
+
+[resource]
+shader = ExtResource("1_krw51")
+shader_parameter/shadow_size = 2.5
+shader_parameter/shadow_offset = Vector2(0.01, 0.01)
+shader_parameter/shadow_color = Vector4(0, 0, 0, 0.5)
+shader_parameter/sample_count = 64

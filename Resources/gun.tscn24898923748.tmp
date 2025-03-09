@@ -1,14 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjyfvve1y4vkq"]
 
 [ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="1_ffn8m"]
-[ext_resource type="Resource" uid="uid://dfcjds5wk2a7f" path="res://weapons/test1.tres" id="2_sbrxb"]
+[ext_resource type="Resource" uid="uid://b5f8r52ut13l0" path="res://weapons/test2.tres" id="3_4rubn"]
 [ext_resource type="PackedScene" uid="uid://djbu4eokswtsc" path="res://UI/gun_ui.tscn" id="3_viyks"]
 [ext_resource type="Texture2D" uid="uid://b72msogpxl2g4" path="res://banner.jpg" id="5_sbrxb"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ffn8m")
+scale_gun = null
 primary_selected = true
-secondary_weapon = ExtResource("2_sbrxb")
+secondary_selected = null
+melee_selected = null
+secondary_weapon = ExtResource("3_4rubn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(38, 27)

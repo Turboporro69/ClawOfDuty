@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 	if join.visible == true:
 		ip = $Menu/Join/TextInput/IP.text
 		port = int(float($Menu/Join/TextInput/PORT.text))
+		
 	elif $Menu/Host.visible == true:
 		if ip_assigned == false:
 			ip = IP.resolve_hostname(str(OS.get_environment("COMPUTERNAME")),1)

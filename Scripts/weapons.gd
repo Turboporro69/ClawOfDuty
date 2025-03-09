@@ -1,7 +1,7 @@
 extends Resource
 class_name Weapons
 
-enum Category {Primary, Secondary}
+enum Category {primary, secondary}
 
 @export var name : String
 @export var texture : Texture2D

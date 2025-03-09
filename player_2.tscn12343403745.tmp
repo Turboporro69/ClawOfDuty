@@ -165,7 +165,7 @@ rest = Transform2D(1, 0, 0, 1, -100.342, -23.592)
 [node name="foot_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/leg_left/calf_left"]
 position = Vector2(-113.525, 34.5991)
 rotation = 1.59811
-scale = Vector2(0.999998, 0.999998)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(-0.027312, 0.999627, -0.999627, -0.027312, -113.525, 34.5991)
 auto_calculate_length_and_angle = false
 length = 64.714
@@ -196,7 +196,7 @@ unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
 scale_gun = 2.5
-primary_selected = false
+primary_selected = null
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3

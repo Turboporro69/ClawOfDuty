@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://djbu4eokswtsc"]
+
+[ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="1_p75ro"]
+[ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="3_p75ro"]
+
+[node name="Gun_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -550.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="PrimaryWeapon" type="TextureRect" parent="VBoxContainer"]
+material = ExtResource("1_p75ro")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="SecondaryWeapn" type="TextureRect" parent="VBoxContainer"]
+material = ExtResource("3_p75ro")
+layout_mode = 2
+
+[node name="Melee" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
