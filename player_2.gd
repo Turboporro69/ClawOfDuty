@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 @onready var dashduration = $dashduration
 @onready var dashcooldown = $dashcooldown
 @export var normal_speed = 300.0

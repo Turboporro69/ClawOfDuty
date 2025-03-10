@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 900
+var speed = 100
 var damage : int
 
 func _ready():
@@ -18,6 +18,8 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if !is_multiplayer_authority():
+		return
 	if body.is_in_group("enemies"):
 		body.apply_damage(damage)
 		queue_free()

@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float shadow_size = 2.5; 
+uniform float shadow_size = 2.5;
 uniform vec2 shadow_offset = vec2(0.01, 0.01);
 uniform vec4 shadow_color = vec4(0.0, 0.0, 0.0, 0.5);
 uniform int sample_count = 64;

@@ -52,31 +52,29 @@ func _process(delta: float) -> void:
 
 		if automatic:
 			if Input.is_action_pressed("shoot") and pewpewcooldown == true:
-				shoot()
+				shoot.rpc()
 		else:
 			if Input.is_action_just_pressed("shoot") and pewpewcooldown == true:
-				shoot()
+				shoot.rpc()
 		
 		selected()
 		change_weapon()
 		load_weapon()
 
-	# Verificar si primary_weapon o secondary_weapon se vuelven null en medio de la partida
-	if current_weapon == "primary" and primary_weapon == null:
-		if secondary_weapon != null:
-			current_weapon = "secondary"
-		else:
-			current_weapon = "melee"
-		load_weapon()
-	elif current_weapon == "secondary" and secondary_weapon == null:
-		if primary_weapon != null:
-			current_weapon = "primary"
-		else:
-			current_weapon = "melee"
-		load_weapon()
+		if current_weapon == "primary" and primary_weapon == null:
+			if secondary_weapon != null:
+				current_weapon = "secondary"
+			else:
+				current_weapon = "melee"
+			load_weapon()
+		elif current_weapon == "secondary" and secondary_weapon == null:
+			if primary_weapon != null:
+				current_weapon = "primary"
+			else:
+				current_weapon = "melee"
+			load_weapon()
 
-
-
+@rpc("call_local")
 func shoot():
 	if moving == true:
 		drift = deg_to_rad(randf_range(-15, 15))
@@ -85,11 +83,11 @@ func shoot():
 	pewpewcooldown = false
 	pewpew.start()
 	var bullet = bullet_scene.instantiate()
-	get_tree().root.add_child(bullet)
+	get_parent().add_child(bullet)
 	bullet.damage = damage
 	bullet.global_position = marker_2d.global_position
-	bullet.rotation = rotation + drift
-	
+	bullet.rotation = rotation  + drift
+
 
 
 func rotation():

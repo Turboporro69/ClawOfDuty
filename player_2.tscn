@@ -10,22 +10,40 @@
 radius = 7.55556
 height = 53.3333
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1hlws"]
-properties/0/path = NodePath(".:position")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ryqyf"]
+properties/0/path = NodePath(".:scale_player")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
+properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Gun:position")
+properties/2/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("Player:scale")
+properties/3/path = NodePath("Player/polygons/arm_right:texture_rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("Gun:rotation")
+properties/4/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_left:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath("Player/polygons/arm_left:texture_rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Player/polygons:scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Gun:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Gun:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Player:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("Gun/Sprite2D:rotation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
 
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -165,7 +183,7 @@ rest = Transform2D(1, 0, 0, 1, -100.342, -23.592)
 [node name="foot_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/leg_left/calf_left"]
 position = Vector2(-113.525, 34.5991)
 rotation = 1.59811
-scale = Vector2(0.999998, 0.999998)
+scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(-0.027312, 0.999627, -0.999627, -0.027312, -113.525, 34.5991)
 auto_calculate_length_and_angle = false
 length = 64.714
@@ -252,14 +270,17 @@ offset_bottom = 1060.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_1hlws")
-
 [node name="Mouse" type="Marker2D" parent="."]
 position = Vector2(-823.333, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ryqyf")
 
 [connection signal="left" from="Gun" to="." method="_on_gun_left"]
 [connection signal="right" from="Gun" to="." method="_on_gun_right"]
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
+
+[editable path="Gun"]
+[editable path="Gun/CanvasLayer/Gun_UI"]

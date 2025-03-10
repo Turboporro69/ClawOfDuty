@@ -69,6 +69,7 @@ caret_blink = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
+alignment = 1
 virtual_keyboard_type = 2
 caret_blink = true
 secret_character = "*"
@@ -193,10 +194,8 @@ _spawnable_scenes = PackedStringArray("uid://c8fkdhc1b1syb")
 spawn_path = NodePath("..")
 
 [connection signal="pressed" from="Menu/Main/HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Menu/Main/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Menu/vs1/HBoxContainer/bot" to="." method="_on_bot_pressed"]
 [connection signal="pressed" from="Menu/Join/join2" to="." method="_on_join_2_pressed"]
 [connection signal="pressed" from="Menu/Host/Host2" to="." method="_on_host_2_pressed"]
 

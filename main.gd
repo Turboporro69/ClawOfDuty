@@ -51,9 +51,6 @@ func _on_join_pressed() -> void:
 	vs1.hide()
 	join.show()
 
-func _on_bot_pressed() -> void:
-	get_tree().change_scene_to_file("res://Resources/example_world.tscn")
-
 func _add_player(id = 1):
 	var player = Player.instantiate()
 	player.name = str(id)
