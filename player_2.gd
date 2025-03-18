@@ -67,6 +67,7 @@ func _physics_process(delta: float) -> void:
 		
 		health_label()
 		arm_rotation()
+		update_rotation()
 func start_wedashing():
 	is_dashing = true
 	dash_available = false
@@ -90,8 +91,8 @@ func left_arm_rotation():
 	arm_left.rotation_degrees = arm_right.rotation_degrees + 5
 
 func update_gun_position():
-	gun.global_position = marker2d_arm.global_position
-	gun.rotation_degrees = marker2d_arm.global_rotation_degrees
+	$Gun.global_position = marker2d_arm.global_position
+	$Gun.rotation_degrees = marker2d_arm.global_rotation_degrees
 		
 
 func arm_rotation():
@@ -103,11 +104,13 @@ func arm_rotation():
 
 func _on_gun_left() -> void:
 	$Player.scale.x = -1
+	$Gun.scale.y = -$Gun.scale_gun
 	#rotation_degrees = 180
 	flip_h = true
 
 func _on_gun_right() -> void:
 	$Player.scale.x = 1
+	$Gun.scale.y = $Gun.scale_gun
 	#rotation_degrees = 0
 	flip_h = false
 
@@ -116,3 +119,11 @@ func health_label():
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
+
+func update_rotation():
+	$Gun.rotation_degrees = wrap($Gun.rotation_degrees, 0, 360)
+	if $Gun.rotation_degrees > 90 and $Gun.rotation_degrees < 270:
+		_on_gun_left()
+		
+	else:
+		_on_gun_right()

@@ -10,6 +10,7 @@ var addresses: Array = []
 const Player = preload("res://player_2.tscn")
 var enet_peer = ENetMultiplayerPeer.new()
 var ip_assigned : bool = false
+var port_assigned : bool = false
 
 func _ready() -> void:
 	main.visible = true
@@ -25,8 +26,13 @@ func _ready() -> void:
  	  
 func _process(delta: float) -> void:
 	if join.visible == true:
-		ip = $Menu/Join/TextInput/IP.text
+		if port_assigned == false:
+			$Menu/Join/TextInput/PORT.text = str(port)
+			port_assigned = true
+			
 		port = int(float($Menu/Join/TextInput/PORT.text))
+		ip = $Menu/Join/TextInput/IP.text
+			
 		
 	elif $Menu/Host.visible == true:
 		if ip_assigned == false:

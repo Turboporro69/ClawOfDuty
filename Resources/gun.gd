@@ -5,16 +5,17 @@ extends Node2D
 @export var scale_gun: float 
 @onready var selected_material = preload("res://shaders/selected_gun_material.tres")
 @onready var not_selected_material = preload("res://shaders/not_selected_gun_material.tres")
+@onready var dropped_weapon = preload("res://dropped_gun.tscn")
 var pewpewcooldown = true
 var moving = false
 var drift
 var cadence : float
 
+# If for any reason you want to read this, don't do it. I don't even know why or how works uwu
+
 @export var primary_selected : bool = false
 @export var secondary_selected : bool = false
 @export var melee_selected : bool = false
-signal left
-signal right
 var current_weapon : String
 
 var automatic : bool = false
@@ -38,11 +39,13 @@ func _ready() -> void:
 		current_weapon = "melee"
 	load_weapon()
 	update_weapon_icons()
+	selected()
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
+		drop_weapon()
 		rotation_degrees = wrap(rotation_degrees, 0, 360)
-		rotation()
+		#rotation()
 
 		var jambo = get_parent()
 		if jambo.velocity.length() > 0:
@@ -60,6 +63,7 @@ func _process(delta: float) -> void:
 		selected()
 		change_weapon()
 		load_weapon()
+		
 
 		if current_weapon == "primary" and primary_weapon == null:
 			if secondary_weapon != null:
@@ -76,27 +80,34 @@ func _process(delta: float) -> void:
 
 @rpc("call_local")
 func shoot():
-	if moving == true:
-		drift = deg_to_rad(randf_range(-15, 15))
+	if is_multiplayer_authority():
+		if moving == true:
+			drift = deg_to_rad(randf_range(-15, 15))
+		else:
+			drift = deg_to_rad(randf_range(-5, 5))
+		rpc("apply_recoil", drift)
 	else:
-		drift = deg_to_rad(randf_range(-5, 5))
+		return
+
 	pewpewcooldown = false
 	pewpew.start()
 	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
 	bullet.damage = damage
 	bullet.global_position = marker_2d.global_position
-	bullet.rotation = rotation  + drift
+	bullet.rotation = rotation + drift
 
+@rpc("call_local")
+func apply_recoil(synced_drift: float):
+	drift = synced_drift
 
-
-func rotation():
-	if rotation_degrees > 90 and rotation_degrees < 270:
-		scale.y = -scale_gun
-		emit_signal("left")
-	else:
-		scale.y = scale_gun
-		emit_signal("right")
+func drop_weapon():
+	if Input.is_action_just_pressed("drop"):
+		if current_weapon == "primary" and primary_weapon !=null:
+			var dropped_weapon_instance = dropped_weapon.instantiate()
+			dropped_weapon_instance.weapon_data = primary_weapon
+			get_parent().add_child(dropped_weapon_instance)
+			primary_weapon = null
 
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
@@ -131,6 +142,7 @@ func load_weapon():
 		melee_selected = true
 
 	update_weapon_icons()
+	selected()
 
 func update_weapon_icons():
 	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
@@ -157,17 +169,20 @@ func change_weapon():
 		load_weapon()
 
 func selected():
-	if primary_selected == true:
-		$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = selected_material
-	elif primary_selected == false:
-		$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = not_selected_material
+	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
+		if primary_selected == true:
+			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = selected_material
+		else:
+			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.material = not_selected_material
 	
-	if secondary_selected == true:
-		$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = selected_material
-	elif secondary_selected == false:
-		$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = not_selected_material
+	if $CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn != null:
+		if secondary_selected == true:
+			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = selected_material
+		else:
+			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.material = not_selected_material
 	
-	if melee_selected == true:
-		$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = selected_material
-	elif melee_selected == false:
-		$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = not_selected_material
+	if $CanvasLayer/Gun_UI/VBoxContainer/Melee != null:
+		if melee_selected == true:
+			$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = selected_material
+		else:
+			$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = not_selected_material

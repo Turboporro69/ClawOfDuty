@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspo4r3ctvf4e"]
+
+[ext_resource type="Script" uid="uid://beg1vymvixtul" path="res://dropped_gun.gd" id="1_40qir"]
+
+[node name="DroppedGun" type="Area2D"]
+script = ExtResource("1_40qir")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

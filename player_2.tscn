@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=13 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://y1lxwco5as8u" path="res://placeholders/gBot_pieces.png" id="1_mcejd"]
-[ext_resource type="PackedScene" uid="uid://cjyfvve1y4vkq" path="res://Resources/gun.tscn" id="2_1bl4l"]
+[ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="3_jaoer"]
+[ext_resource type="Resource" uid="uid://dfcjds5wk2a7f" path="res://weapons/test1.tres" id="4_8lhrm"]
 [ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
+[ext_resource type="Resource" uid="uid://b5f8r52ut13l0" path="res://weapons/test2.tres" id="4_up5o4"]
 [ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
+[ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
+[ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
+[ext_resource type="Texture2D" uid="uid://b72msogpxl2g4" path="res://banner.jpg" id="7_ehhk3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wcmjb"]
 radius = 7.55556
@@ -44,6 +49,12 @@ properties/9/replication_mode = 1
 properties/10/path = NodePath("Gun/Sprite2D:rotation")
 properties/10/spawn = true
 properties/10/replication_mode = 1
+properties/11/path = NodePath("Gun:scale")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Gun:scale_gun")
+properties/12/spawn = true
+properties/12/replication_mode = 1
 
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -209,12 +220,68 @@ position = Vector2(-6.66667, 233.333)
 scale = Vector2(15, 15)
 shape = SubResource("CapsuleShape2D_wcmjb")
 
-[node name="Gun" parent="." instance=ExtResource("2_1bl4l")]
+[node name="Gun" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
+script = ExtResource("3_jaoer")
 scale_gun = 2.5
-primary_selected = false
+primary_weapon = ExtResource("4_up5o4")
+secondary_weapon = ExtResource("4_8lhrm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(101, 0)
+
+[node name="pewpew" type="Timer" parent="Gun"]
+wait_time = 0.3
+
+[node name="GunHandle" type="Marker2D" parent="Gun"]
+position = Vector2(3, 47)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Gun"]
+
+[node name="Gun_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -550.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="PrimaryWeapon" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("5_up5o4")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="SecondaryWeapn" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("6_wh5uk")
+layout_mode = 2
+texture = ExtResource("7_ehhk3")
+
+[node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+layout_mode = 2
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
@@ -276,11 +343,7 @@ position = Vector2(-823.333, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ryqyf")
 
-[connection signal="left" from="Gun" to="." method="_on_gun_left"]
-[connection signal="right" from="Gun" to="." method="_on_gun_right"]
+[connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
-
-[editable path="Gun"]
-[editable path="Gun/CanvasLayer/Gun_UI"]
