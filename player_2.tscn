@@ -116,7 +116,6 @@ uv = PackedVector2Array(59.2511, 397.316, 45.2938, 474.546, 7.1441, 547.123, 8.0
 bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head/jaw", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right/hand_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left/hand_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left/calf_left/foot_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(1, 1, 1, 0, 0, 0, 1, 1, 1), "hip/leg_right/calf_right", PackedFloat32Array(0, 0, 1, 1, 1, 1, 1, 0, 0), "hip/leg_right/calf_right/foot_right", PackedFloat32Array(0, 0, 0, 1, 1, 1, 0, 0, 0)]
 
 [node name="arm_right" type="Polygon2D" parent="Player/polygons"]
-z_index = 10
 position = Vector2(-190, 116.667)
 texture = ExtResource("1_mcejd")
 skeleton = NodePath("../../Skeleton/Skeleton2D")

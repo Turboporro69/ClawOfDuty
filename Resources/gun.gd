@@ -43,6 +43,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
+		print()
 		drop_weapon()
 		rotation_degrees = wrap(rotation_degrees, 0, 360)
 		#rotation()
@@ -106,8 +107,17 @@ func drop_weapon():
 		if current_weapon == "primary" and primary_weapon !=null:
 			var dropped_weapon_instance = dropped_weapon.instantiate()
 			dropped_weapon_instance.weapon_data = primary_weapon
-			get_parent().add_child(dropped_weapon_instance)
+			dropped_weapon_instance.global_position = marker_2d.global_position
+			dropped_weapon_instance.scale = $Sprite2D.scale
+			get_tree().root.add_child(dropped_weapon_instance)
 			primary_weapon = null
+		if current_weapon == "secondary" and secondary_weapon !=null:
+			var dropped_weapon_instance = dropped_weapon.instantiate()
+			dropped_weapon_instance.weapon_data = secondary_weapon
+			dropped_weapon_instance.global_position = marker_2d.global_position
+			dropped_weapon_instance.scale = $Sprite2D.scale
+			get_tree().root.add_child(dropped_weapon_instance)
+			secondary_weapon = null
 
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
