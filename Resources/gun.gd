@@ -10,6 +10,10 @@ var pewpewcooldown = true
 var moving = false
 var drift
 var cadence : float
+var feet_position
+var near_weapon : Area2D = null
+var weapon_data
+var weapon_category
 
 # If for any reason you want to read this, don't do it. I don't even know why or how works uwu
 
@@ -43,7 +47,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
-		print()
+		pick_weapon()
 		drop_weapon()
 		rotation_degrees = wrap(rotation_degrees, 0, 360)
 		#rotation()
@@ -78,6 +82,9 @@ func _process(delta: float) -> void:
 			else:
 				current_weapon = "melee"
 			load_weapon()
+			
+
+
 
 @rpc("call_local")
 func shoot():
@@ -107,17 +114,22 @@ func drop_weapon():
 		if current_weapon == "primary" and primary_weapon !=null:
 			var dropped_weapon_instance = dropped_weapon.instantiate()
 			dropped_weapon_instance.weapon_data = primary_weapon
-			dropped_weapon_instance.global_position = marker_2d.global_position
+			dropped_weapon_instance.global_position = feet_position
 			dropped_weapon_instance.scale = $Sprite2D.scale
 			get_tree().root.add_child(dropped_weapon_instance)
 			primary_weapon = null
 		if current_weapon == "secondary" and secondary_weapon !=null:
 			var dropped_weapon_instance = dropped_weapon.instantiate()
 			dropped_weapon_instance.weapon_data = secondary_weapon
-			dropped_weapon_instance.global_position = marker_2d.global_position
+			dropped_weapon_instance.global_position = feet_position
 			dropped_weapon_instance.scale = $Sprite2D.scale
 			get_tree().root.add_child(dropped_weapon_instance)
 			secondary_weapon = null
+
+func _on_pick_up_area_entered(area: Area2D) -> void:
+	if area.has_method("get_weapon_data"):
+		near_weapon = area
+
 
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
@@ -153,6 +165,32 @@ func load_weapon():
 
 	update_weapon_icons()
 	selected()
+
+func pick_weapon():
+	if Input.is_action_just_pressed("action") and near_weapon != null:
+		weapon_data = near_weapon.get_weapon_data()
+		weapon_category = weapon_data.category
+		if weapon_data.category == 0:
+			if primary_weapon != null:
+				var dropped_weapon_instance = dropped_weapon.instantiate()
+				dropped_weapon_instance.weapon_data = primary_weapon
+				dropped_weapon_instance.global_position = feet_position
+				dropped_weapon_instance.scale = $Sprite2D.scale
+				get_tree().root.add_child(dropped_weapon_instance)
+				primary_weapon = null
+			primary_weapon = weapon_data
+			current_weapon = "primary"
+		elif weapon_data.category == 1:
+			if secondary_weapon != null:
+				var dropped_weapon_instance = dropped_weapon.instantiate()
+				dropped_weapon_instance.weapon_data = secondary_weapon
+				dropped_weapon_instance.global_position = feet_position
+				dropped_weapon_instance.scale = $Sprite2D.scale
+				get_tree().root.add_child(dropped_weapon_instance)
+				secondary_weapon = null
+			secondary_weapon = weapon_data
+			current_weapon = "secondary"
+		near_weapon.queue_free()
 
 func update_weapon_icons():
 	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
@@ -196,3 +234,7 @@ func selected():
 			$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = selected_material
 		else:
 			$CanvasLayer/Gun_UI/VBoxContainer/Melee.material = not_selected_material
+
+
+func _on_pick_up_area_exited(area: Area2D) -> void:
+	near_weapon = null

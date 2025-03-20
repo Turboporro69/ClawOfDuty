@@ -352,12 +352,7 @@ position = Vector2(-823.333, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ryqyf")
 
-[node name="feet" type="Marker2D" parent="."]
-position = Vector2(0, 593.333)
-
 [connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="PickUp" to="Gun" method="_on_pick_up_area_entered"]
-[connection signal="area_exited" from="PickUp" to="Gun" method="_on_pick_up_area_exited"]

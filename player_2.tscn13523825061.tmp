@@ -360,4 +360,3 @@ position = Vector2(0, 593.333)
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="PickUp" to="Gun" method="_on_pick_up_area_entered"]
-[connection signal="area_exited" from="PickUp" to="Gun" method="_on_pick_up_area_exited"]

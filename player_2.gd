@@ -23,7 +23,6 @@ var flip_h : bool = false
 @onready var gun_damage = $Gun.damage
 var mouse_position
 
-
 func _ready():
 	polygons.visible = true
 	$Gun/Sprite2D.visible = true
@@ -37,6 +36,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	$Mouse.global_position = get_global_mouse_position()
+	$Gun.feet_position = $feet.global_position
 	if health == 0 and player_dead == false:
 		player_dead = true
 		polygons.visible = false
