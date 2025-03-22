@@ -14,14 +14,20 @@ var player_dead = false
 @export var scale_player : float
 @onready var arm_left = $Player/Skeleton/Skeleton2D/hip/chest/arm_left
 @onready var arm_right = $Player/Skeleton/Skeleton2D/hip/chest/arm_right
-@onready var marker2d_arm : Marker2D = $Player/Skeleton/Skeleton2D/hip/chest/arm_right/hand_right/Marker2D
+@onready var marker2d_arm : Marker2D = $Player/Skeleton/Skeleton2D/hip/chest/arm_right/Marker2D
 @onready var skeleton : Skeleton2D = $Player/Skeleton/Skeleton2D
 @onready var gun_handle_marker2d : Marker2D = $Gun/GunHandle
+@onready var blinking_timer : Timer = $Player/polygons/head/blinking
 @onready var gun : Node2D = $Gun
 var flip_h : bool = false
 @onready var polygons : Node2D = $Player/polygons
 @onready var gun_damage = $Gun.damage
 var mouse_position
+@onready var leg_left = $Player/Skeleton/Skeleton2D/hip/leg_left
+@onready var leg_right = $Player/Skeleton/Skeleton2D/hip/leg_right
+
+var walk_cycle_time = 0.0
+var walk_speed = 10.0 
 
 func _ready():
 	polygons.visible = true
@@ -33,8 +39,14 @@ func _ready():
 		add_child(camera)
 		camera.make_current()
 	set_physics_process(is_multiplayer_authority())
+	blinking()
 
 func _physics_process(delta: float) -> void:
+	arm_rotation()
+	if velocity.length() > 0:
+		animate_legs(delta)
+	else:
+		reset_leg_positions()
 	$Mouse.global_position = get_global_mouse_position()
 	$Gun.feet_position = $feet.global_position
 	if health == 0 and player_dead == false:
@@ -66,7 +78,6 @@ func _physics_process(delta: float) -> void:
 			start_wedashing()
 		
 		health_label()
-		arm_rotation()
 		update_rotation()
 func start_wedashing():
 	is_dashing = true
@@ -87,18 +98,18 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		health -= area.damage
 
 func left_arm_rotation():
-	arm_left.global_position = arm_right.global_position
-	arm_left.rotation_degrees = arm_right.rotation_degrees + 5
-
+	arm_left.look_at(get_global_mouse_position())
+	#arm_left.rotation_degrees = arm_right.rotation_degrees
+	arm_left.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
+	
 func update_gun_position():
 	$Gun.global_position = marker2d_arm.global_position
 	$Gun.rotation_degrees = marker2d_arm.global_rotation_degrees
-		
 
 func arm_rotation():
-	arm_right.look_at($Mouse.global_position)
+	arm_right.look_at(get_global_mouse_position())
 	arm_right.rotation_degrees = wrap(arm_right.rotation_degrees, 0, 360)
-	arm_right.rotation_degrees += 180
+	#arm_right.rotation_degrees += 180
 	left_arm_rotation()
 	update_gun_position()
 
@@ -127,3 +138,24 @@ func update_rotation():
 		
 	else:
 		_on_gun_right()
+
+func blinking():
+	blinking_timer.wait_time = randi_range(3, 20)
+	blinking_timer.one_shot = true
+	blinking_timer.start()
+	
+func _on_blinking_timeout() -> void:
+	$Player/polygons/head/AnimatedSprite2D.play("default")
+	blinking()
+
+func animate_legs(delta: float) -> void:
+	walk_cycle_time += delta * walk_speed
+
+	var leg_angle = sin(walk_cycle_time) * 15  # Oscila entre -15 y 15 grados
+
+	leg_left.rotation_degrees = leg_angle
+	leg_right.rotation_degrees = -leg_angle
+
+func reset_leg_positions() -> void:
+	leg_left.rotation_degrees = 0
+	leg_right.rotation_degrees = 0

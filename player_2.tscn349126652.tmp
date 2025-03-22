@@ -1,0 +1,274 @@
+[gd_scene load_steps=13 format=3 uid="uid://c8fkdhc1b1syb"]
+
+[ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
+[ext_resource type="PackedScene" uid="uid://dj6vn44s3m746" path="res://fox_polygons.tscn" id="2_8lhrm"]
+[ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="3_jaoer"]
+[ext_resource type="Resource" uid="uid://dfcjds5wk2a7f" path="res://weapons/test1.tres" id="4_8lhrm"]
+[ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
+[ext_resource type="Resource" uid="uid://b5f8r52ut13l0" path="res://weapons/test2.tres" id="4_up5o4"]
+[ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
+[ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
+[ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
+[ext_resource type="Texture2D" uid="uid://b72msogpxl2g4" path="res://banner.jpg" id="7_ehhk3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wcmjb"]
+radius = 7.55556
+height = 53.3333
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ryqyf"]
+properties/0/path = NodePath(".:scale_player")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Player/polygons/arm_right:texture_rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_left:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Player/polygons/arm_left:texture_rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Player/polygons:scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Gun:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Gun:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Player:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("Gun/Sprite2D:rotation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Gun:scale")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Gun:scale_gun")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+
+[node name="Player_skeleton" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_1r3qd")
+health = 100
+scale_player = 0.3
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(-246.667, -426.667)
+
+[node name="polygons" parent="Player" instance=ExtResource("2_8lhrm")]
+unique_name_in_owner = true
+
+[node name="arm_left" parent="Player/polygons" index="4"]
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/tail", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Skeleton" type="Node2D" parent="Player"]
+position = Vector2(-13.3333, 10)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Player/Skeleton"]
+position = Vector2(0.000330607, 0.000356038)
+scale = Vector2(1.3, 1.3)
+
+[node name="hip" type="Bone2D" parent="Player/Skeleton/Skeleton2D"]
+position = Vector2(203.333, 576.667)
+rest = Transform2D(1, 0, 0, 1, 203.333, 576.667)
+
+[node name="chest" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(3.33333, -56.6667)
+rest = Transform2D(1, 0, 0, 1, 3.33333, -56.6667)
+
+[node name="head" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(0, -196.667)
+rest = Transform2D(1, 0, 0, 1, 0, -196.667)
+
+[node name="arm_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(-76.6667, -103.333)
+rest = Transform2D(1, 0, 0, 1, -76.6667, -103.333)
+
+[node name="Marker2D" type="Marker2D" parent="Player/Skeleton/Skeleton2D/hip/chest/arm_right"]
+position = Vector2(112.233, -4.837)
+
+[node name="arm_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(66.6667, -113.333)
+rest = Transform2D(1, 0, 0, 1, 66.6667, -113.333)
+
+[node name="leg_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(-46.9228, -20.2567)
+rotation = 1.57803
+scale = Vector2(2.73333, 0.2)
+rest = Transform2D(-0.019763, 2.73326, -0.199995, -0.00144608, -46.9228, -20.2567)
+
+[node name="leg_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(47.949, -15.1285)
+rotation = 1.48917
+scale = Vector2(1.4965, 0.999999)
+rest = Transform2D(0.122017, 1.49152, -0.99667, 0.0815348, 47.949, -15.1285)
+
+[node name="tail" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(-67.4353, -61.2821)
+rotation = 1.59637
+scale = Vector2(5.42615, 1)
+rest = Transform2D(-0.138764, 5.42438, -0.999673, -0.0255733, -67.4353, -61.2821)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-6.66667, 233.333)
+scale = Vector2(15, 15)
+shape = SubResource("CapsuleShape2D_wcmjb")
+
+[node name="Gun" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(86.6667, 100)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("3_jaoer")
+scale_gun = 2.5
+primary_weapon = ExtResource("4_up5o4")
+secondary_weapon = ExtResource("4_8lhrm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+
+[node name="pewpew" type="Timer" parent="Gun"]
+wait_time = 0.3
+
+[node name="GunHandle" type="Marker2D" parent="Gun"]
+position = Vector2(3, 47)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Gun"]
+
+[node name="Gun_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -550.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+alignment = 1
+
+[node name="PrimaryWeapon" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("5_up5o4")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="SecondaryWeapn" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("6_wh5uk")
+layout_mode = 2
+texture = ExtResource("7_ehhk3")
+
+[node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(101, 3.8147e-06)
+
+[node name="dashduration" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="dashcooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+scale = Vector2(15, 15)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.444444, 15.5556)
+shape = SubResource("CapsuleShape2D_wcmjb")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="PickUp" type="Area2D" parent="."]
+visible = false
+scale = Vector2(15, 15)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp"]
+position = Vector2(-0.444444, 15.5556)
+shape = SubResource("CapsuleShape2D_wcmjb")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-236.667, -73.3333)
+energy = 0.5
+shadow_enabled = true
+shadow_filter_smooth = 0.1
+texture = ExtResource("4_tv144")
+texture_scale = 3.33
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_udbs8")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Shop" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mouse" type="Marker2D" parent="."]
+position = Vector2(-823.333, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ryqyf")
+
+[node name="feet" type="Marker2D" parent="."]
+position = Vector2(0, 593.333)
+
+[connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
+[connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
+[connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="PickUp" to="Gun" method="_on_pick_up_area_entered"]
+[connection signal="area_exited" from="PickUp" to="Gun" method="_on_pick_up_area_exited"]
+
+[editable path="Player/polygons"]
