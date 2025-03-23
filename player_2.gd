@@ -25,7 +25,7 @@ var flip_h : bool = false
 var mouse_position
 @onready var leg_left = $Player/Skeleton/Skeleton2D/hip/leg_left
 @onready var leg_right = $Player/Skeleton/Skeleton2D/hip/leg_right
-
+@onready var walk_particle = $Player/GPUParticles2D
 var walk_cycle_time = 0.0
 var walk_speed = 10.0 
 
@@ -40,12 +40,16 @@ func _ready():
 		camera.make_current()
 	set_physics_process(is_multiplayer_authority())
 	blinking()
+	walk_particle.emitting = false
 
 func _physics_process(delta: float) -> void:
+	walk_particle.emitting = false
 	arm_rotation()
 	if velocity.length() > 0:
+		walk_particle.emitting = true
 		animate_legs(delta)
 	else:
+		walk_particle.emitting = false
 		reset_leg_positions()
 	$Mouse.global_position = get_global_mouse_position()
 	$Gun.feet_position = $feet.global_position
@@ -114,13 +118,13 @@ func arm_rotation():
 	update_gun_position()
 
 func _on_gun_left() -> void:
-	$Player.scale.x = -1
+	$Player.scale.x = -1.2
 	$Gun.scale.y = -$Gun.scale_gun
 	#rotation_degrees = 180
 	flip_h = true
 
 func _on_gun_right() -> void:
-	$Player.scale.x = 1
+	$Player.scale.x = 1.2
 	$Gun.scale.y = $Gun.scale_gun
 	#rotation_degrees = 0
 	flip_h = false

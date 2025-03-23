@@ -14,6 +14,7 @@ var feet_position
 var near_weapon : Area2D = null
 var weapon_data
 var weapon_category
+var nearby_weapons = []
 
 # If for any reason you want to read this, don't do it. I don't even know why or how works uwu
 
@@ -59,10 +60,10 @@ func _process(delta: float) -> void:
 			moving = false
 
 		if automatic:
-			if Input.is_action_pressed("shoot") and pewpewcooldown == true:
+			if Input.is_action_pressed("shoot") and pewpewcooldown == true and current_weapon != "melee":
 				shoot.rpc()
 		else:
-			if Input.is_action_just_pressed("shoot") and pewpewcooldown == true:
+			if Input.is_action_just_pressed("shoot") and pewpewcooldown == true and current_weapon != "melee":
 				shoot.rpc()
 		
 		selected()
@@ -101,7 +102,10 @@ func shoot():
 	pewpew.start()
 	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
-	bullet.damage = damage
+	if current_weapon == "primary":
+		bullet.damage = primary_weapon.damage
+	else:
+		bullet.damage = secondary_weapon.damage
 	bullet.global_position = marker_2d.global_position
 	bullet.rotation = rotation + drift
 
@@ -128,7 +132,9 @@ func drop_weapon():
 
 func _on_pick_up_area_entered(area: Area2D) -> void:
 	if area.has_method("get_weapon_data"):
-		near_weapon = area
+		nearby_weapons.append(area)
+		if near_weapon == null:
+			near_weapon = area
 
 
 func _on_pewpew_timeout() -> void:
@@ -191,6 +197,8 @@ func pick_weapon():
 			secondary_weapon = weapon_data
 			current_weapon = "secondary"
 		near_weapon.queue_free()
+		nearby_weapons.erase(near_weapon)
+		near_weapon = nearby_weapons[0] if nearby_weapons.size() > 0 else null
 
 func update_weapon_icons():
 	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
@@ -237,4 +245,7 @@ func selected():
 
 
 func _on_pick_up_area_exited(area: Area2D) -> void:
-	near_weapon = null
+	if area in nearby_weapons:
+		nearby_weapons.erase(area)
+		if near_weapon == area:
+			near_weapon = nearby_weapons[0] if nearby_weapons.size() > 0 else null

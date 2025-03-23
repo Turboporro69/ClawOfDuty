@@ -89,8 +89,6 @@ properties/13/replication_mode = 1
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_1r3qd")
-normal_speed = null
-dash_speed = null
 health = 100
 scale_player = 1.2
 
