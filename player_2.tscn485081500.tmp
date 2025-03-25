@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=17 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://ca76j2y74ti8w" path="res://Sprites/fox.png" id="2_8lhrm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
 [ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
 [ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
+[ext_resource type="Resource" uid="uid://cpsiovoeuo8i4" path="res://weapons/ak47.tres" id="8_ehhk3"]
 [ext_resource type="Resource" uid="uid://ianb4asdb4l6" path="res://weapons/usps.tres" id="9_ehhk3"]
 [ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="14_mt4e1"]
 
@@ -87,6 +88,8 @@ properties/13/replication_mode = 1
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_1r3qd")
+normal_speed = null
+dash_speed = null
 health = 100
 scale_player = 1.2
 
@@ -205,6 +208,7 @@ position = Vector2(369.167, -292.5)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("3_jaoer")
 scale_gun = 2.5
+primary_weapon = ExtResource("8_ehhk3")
 secondary_weapon = ExtResource("9_ehhk3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Gun"]
@@ -262,30 +266,45 @@ stretch_mode = 5
 [node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -97.0
-offset_top = -151.0
-offset_right = 197.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
 grow_horizontal = 2
-grow_vertical = 0
-alignment = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 100
+alignment = 1
 
-[node name="Label" type="Label" parent="Gun/CanvasLayer/Gun_UI/HBoxContainer"]
+[node name="PrimaryWeapon" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer2"]
+material = ExtResource("5_up5o4")
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 110
-text = "05/01"
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SecondaryWeapn" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer2"]
+material = ExtResource("6_wh5uk")
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Bullets" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Marker2D" type="Marker2D" parent="Gun"]
 position = Vector2(121, -8)
-
-[node name="reload_timer" type="Timer" parent="Gun"]
-one_shot = true
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
@@ -364,9 +383,10 @@ replication_config = SubResource("SceneReplicationConfig_ryqyf")
 [node name="feet" type="Marker2D" parent="."]
 position = Vector2(-17.5, 175)
 
+[node name="reload_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Player/polygons/head/blinking" to="." method="_on_blinking_timeout"]
 [connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
-[connection signal="timeout" from="Gun/reload_timer" to="Gun" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
 [connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]

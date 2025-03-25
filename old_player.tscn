@@ -13,8 +13,6 @@ height = 53.3333
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_1r3qd")
-normal_speed = null
-dash_speed = null
 health = 100
 scale_player = 0.3
 

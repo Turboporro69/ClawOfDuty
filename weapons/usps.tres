@@ -15,4 +15,7 @@ category = 0
 automatic = false
 recoil = 0
 recoil_moving = 0
+mag_bullets = 12
+mag_max = 12
+reload_time = 1.0
 metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

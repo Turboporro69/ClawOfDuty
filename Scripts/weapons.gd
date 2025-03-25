@@ -13,3 +13,6 @@ enum Category {primary, secondary}
 @export var automatic : bool
 @export var recoil : int
 @export var recoil_moving : int
+@export var mag_bullets : int
+@export var mag_max : int
+@export var reload_time : float

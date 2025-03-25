@@ -155,7 +155,7 @@ func _on_blinking_timeout() -> void:
 func animate_legs(delta: float) -> void:
 	walk_cycle_time += delta * walk_speed
 
-	var leg_angle = sin(walk_cycle_time) * 15  # Oscila entre -15 y 15 grados
+	var leg_angle = sin(walk_cycle_time) * 15
 
 	leg_left.rotation_degrees = leg_angle
 	leg_right.rotation_degrees = -leg_angle
