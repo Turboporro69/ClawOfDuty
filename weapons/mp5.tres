@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://baye13yvint30"]
+
+[ext_resource type="Texture2D" uid="uid://cxors4vmktdaj" path="res://weapons/sprites/mp5_weapon.png" id="1_casco"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_g6cwh"]
+
+[resource]
+script = ExtResource("2_g6cwh")
+name = "mp5"
+texture = ExtResource("1_casco")
+icon = ExtResource("1_casco")
+damage = 15
+price = 1600
+cadence = 0.1
+category = 0
+automatic = true
+recoil = 3
+recoil_moving = 0
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

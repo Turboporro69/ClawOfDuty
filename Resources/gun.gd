@@ -15,6 +15,8 @@ var near_weapon : Area2D = null
 var weapon_data
 var weapon_category
 var nearby_weapons = []
+var extra_recoil : int
+var extra_recoil_moving : int
 
 # If for any reason you want to read this, don't do it. I don't even know why or how works uwu
 
@@ -69,8 +71,8 @@ func _process(delta: float) -> void:
 		selected()
 		change_weapon()
 		load_weapon()
+		$pewpew.wait_time = cadence
 		
-
 		if current_weapon == "primary" and primary_weapon == null:
 			if secondary_weapon != null:
 				current_weapon = "secondary"
@@ -90,24 +92,55 @@ func _process(delta: float) -> void:
 @rpc("call_local")
 func shoot():
 	if is_multiplayer_authority():
+	
+		if current_weapon == "primary":
+			extra_recoil = primary_weapon.recoil
+			extra_recoil_moving = primary_weapon.recoil_moving
+			if primary_weapon.name == "shotgun":
+				var pellet_count = 8
+				var spread_angle = 10
+				for i in range(pellet_count):
+					var pellet = bullet_scene.instantiate()
+					get_parent().add_child(pellet)
+					pellet.damage = primary_weapon.damage / 2
+					pellet.global_position = marker_2d.global_position
+					var angle_offset = deg_to_rad(randf_range(-spread_angle, spread_angle))
+					pellet.rotation = rotation + angle_offset
+
+
+					var timer = Timer.new()
+					timer.wait_time = .5
+					timer.one_shot = true
+					timer.connect("timeout", Callable(pellet, "queue_free"))
+					pellet.add_child(timer)
+					timer.start()
+		elif current_weapon == "secondary":
+			extra_recoil = secondary_weapon.recoil
+			extra_recoil_moving = secondary_weapon.recoil_moving
+			
 		if moving == true:
-			drift = deg_to_rad(randf_range(-15, 15))
+			drift = deg_to_rad(randf_range(-15-extra_recoil-extra_recoil_moving, 15+extra_recoil+extra_recoil_moving))
+		elif primary_weapon.name == "sniper":
+			drift = 0
 		else:
-			drift = deg_to_rad(randf_range(-5, 5))
+			drift = deg_to_rad(randf_range(-5-extra_recoil, 5+extra_recoil))
 		rpc("apply_recoil", drift)
 	else:
 		return
 
 	pewpewcooldown = false
 	pewpew.start()
-	var bullet = bullet_scene.instantiate()
-	get_parent().add_child(bullet)
-	if current_weapon == "primary":
-		bullet.damage = primary_weapon.damage
+	if primary_weapon.name == "shotgun":
+		pass
 	else:
-		bullet.damage = secondary_weapon.damage
-	bullet.global_position = marker_2d.global_position
-	bullet.rotation = rotation + drift
+		var bullet = bullet_scene.instantiate()
+		get_parent().add_child(bullet)
+		if current_weapon == "primary":
+			bullet.damage = primary_weapon.damage
+		else:
+			bullet.damage = secondary_weapon.damage
+		bullet.global_position = marker_2d.global_position
+		bullet.rotation = rotation + drift
 
 @rpc("call_local")
 func apply_recoil(synced_drift: float):
@@ -140,17 +173,22 @@ func _on_pick_up_area_entered(area: Area2D) -> void:
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
 
+
 func load_weapon():
+	
 	if current_weapon == "primary" and primary_weapon != null:
 		if $Sprite2D != null:
 			$Sprite2D.texture = primary_weapon.texture
 		damage = primary_weapon.damage
 		automatic = primary_weapon.automatic
 		cadence = primary_weapon.cadence
-		
 		primary_selected = true
 		secondary_selected = false
 		melee_selected = false
+		$Marker2D.position.x = $Sprite2D.texture.get_width() / 5
+
+
+
 	elif current_weapon == "secondary" and secondary_weapon != null:
 		if $Sprite2D != null:
 			$Sprite2D.texture = secondary_weapon.texture
@@ -161,6 +199,9 @@ func load_weapon():
 		primary_selected = false
 		secondary_selected = true
 		melee_selected = false
+		$Marker2D.position.x = $Sprite2D.texture.get_width() / 5
+
+		
 	else:
 		if $Sprite2D != null:
 			$Sprite2D.texture = null
@@ -171,6 +212,7 @@ func load_weapon():
 
 	update_weapon_icons()
 	selected()
+	
 
 func pick_weapon():
 	if Input.is_action_just_pressed("action") and near_weapon != null:

@@ -11,3 +11,5 @@ enum Category {primary, secondary}
 @export var cadence : float
 @export var category : Category
 @export var automatic : bool
+@export var recoil : int
+@export var recoil_moving : int

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://dbsx3gtajx8li"]
+
+[ext_resource type="Texture2D" uid="uid://dp372n3kwlijm" path="res://weapons/sprites/m16_weapon.png" id="1_m737j"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_sn376"]
+
+[resource]
+script = ExtResource("2_sn376")
+name = "M16"
+texture = ExtResource("1_m737j")
+icon = ExtResource("1_m737j")
+damage = 24
+price = 3100
+cadence = 0.14
+category = 0
+automatic = true
+recoil = 5
+recoil_moving = 0
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

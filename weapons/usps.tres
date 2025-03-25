@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://ianb4asdb4l6"]
+
+[ext_resource type="Texture2D" uid="uid://btayu8popneam" path="res://weapons/sprites/usp_weapon.png" id="1_kmthh"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_sq16h"]
+
+[resource]
+script = ExtResource("2_sq16h")
+name = "USP-S"
+texture = ExtResource("1_kmthh")
+icon = ExtResource("1_kmthh")
+damage = 20
+price = 200
+cadence = 0.4
+category = 0
+automatic = false
+recoil = 0
+recoil_moving = 0
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

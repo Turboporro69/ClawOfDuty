@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://bppmnp3futiib"]
+
+[ext_resource type="Texture2D" uid="uid://bv6ak32socuc2" path="res://weapons/sprites/deagle_weapon.png" id="1_yu23r"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_hfa3p"]
+
+[resource]
+script = ExtResource("2_hfa3p")
+name = "desert eagle"
+texture = ExtResource("1_yu23r")
+icon = ExtResource("1_yu23r")
+damage = 50
+price = 2700
+cadence = 0.5
+category = 1
+automatic = false
+recoil = 15
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

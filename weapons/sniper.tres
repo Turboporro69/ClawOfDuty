@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://cwndrn0ntnin2"]
+
+[ext_resource type="Texture2D" uid="uid://dwha1tom6jmqm" path="res://weapons/sprites/sniper_weapon.png" id="1_fkq78"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_i7fen"]
+
+[resource]
+script = ExtResource("2_i7fen")
+name = "sniper"
+texture = ExtResource("1_fkq78")
+icon = ExtResource("1_fkq78")
+damage = 100
+price = 4750
+cadence = 2.0
+category = 0
+automatic = false
+recoil = 0
+recoil_moving = 50
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

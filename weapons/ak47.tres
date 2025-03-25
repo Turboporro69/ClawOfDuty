@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://cpsiovoeuo8i4"]
+
+[ext_resource type="Texture2D" uid="uid://wlt3hejliljt" path="res://weapons/sprites/ak_weapon.png" id="1_vtm0l"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="2_mtux0"]
+
+[resource]
+script = ExtResource("2_mtux0")
+name = "ak47"
+texture = ExtResource("1_vtm0l")
+icon = ExtResource("1_vtm0l")
+damage = 35
+price = 2700
+cadence = 0.15
+category = 0
+automatic = true
+recoil = 5
+recoil_moving = 0
+metadata/_custom_type_script = "uid://dr4mhib4bcsbs"
