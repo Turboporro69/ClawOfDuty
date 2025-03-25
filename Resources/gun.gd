@@ -19,6 +19,7 @@ var nearby_weapons = []
 var extra_recoil : int
 var extra_recoil_moving : int
 var reloading : bool
+@onready var reload_circle = $CanvasLayer/Reload_UI/reload
 
 
 # If for any reason you want to read this, don't do it. I don't even know why or how works uwu
@@ -53,6 +54,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
+		update_reload_ui()
 		update_mag_ui()
 		pick_weapon()
 		drop_weapon()
@@ -300,14 +302,19 @@ func _on_pick_up_area_exited(area: Area2D) -> void:
 			near_weapon = nearby_weapons[0] if nearby_weapons.size() > 0 else null
 
 func reload():
-	if current_weapon == "primary" and primary_weapon.mag_bullets == 0 and reloading == false:
-		reloading = true
-		$reload_timer.wait_time = primary_weapon.reload_time
-		$reload_timer.start()
-	if current_weapon == "secondary" and secondary_weapon.mag_bullets == 0 and reloading == false:
-		reloading = true
-		$reload_timer.wait_time = secondary_weapon.reload_time
-		$reload_timer.start()
+	if current_weapon == "primary" and primary_weapon.mag_bullets == primary_weapon.mag_max:
+		pass
+	elif current_weapon == "secondary" and secondary_weapon.mag_bullets == secondary_weapon.mag_max:
+		pass
+	else:
+		if current_weapon == "primary" and primary_weapon.mag_bullets == 0 and reloading == false and primary_weapon != null or current_weapon == "primary" and reloading == false and Input.is_action_just_pressed("reload"):
+			reloading = true
+			$reload_timer.wait_time = primary_weapon.reload_time
+			$reload_timer.start()
+		if current_weapon == "secondary" and secondary_weapon.mag_bullets == 0 and reloading == false and secondary_weapon != null or current_weapon == "secondary" and reloading == false and Input.is_action_just_pressed("reload"):
+			reloading = true
+			$reload_timer.wait_time = secondary_weapon.reload_time
+			$reload_timer.start()
 		
 func _on_reload_timer_timeout() -> void:
 	if current_weapon == "primary" and primary_weapon != null:
@@ -325,3 +332,19 @@ func update_mag_ui():
 		mag_ui.text = str(secondary_weapon.mag_bullets) + "/" + str(secondary_weapon.mag_max)
 	else:
 		mag_ui.visible = false
+func update_reload_ui():
+	if reloading == false:
+		reload_circle.visible = false
+	elif reloading == true:
+		reload_circle.visible = true
+		if current_weapon == "primary":
+			$CanvasLayer/Reload_UI/reload.max_value = primary_weapon.reload_time
+			$reload_timer.wait_time = primary_weapon.reload_time
+			
+			
+		elif current_weapon == "secondary":
+			$CanvasLayer/Reload_UI/reload.max_value = secondary_weapon.reload_time
+			$reload_timer.wait_time = secondary_weapon.reload_time
+		$CanvasLayer/Reload_UI/reload.value = $reload_timer.time_left
+
+		
