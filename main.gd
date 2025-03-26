@@ -22,6 +22,7 @@ func _ready() -> void:
 	join.hide()
 	vs1.hide()
 	host.hide()
+	$Map.hide()
 
  	  
 func _process(delta: float) -> void:
@@ -56,6 +57,7 @@ func _on_host_pressed() -> void:
 func _on_join_pressed() -> void:
 	vs1.hide()
 	join.show()
+	
 
 func _add_player(id = 1):
 	var player = Player.instantiate()
@@ -66,6 +68,7 @@ func _on_join_2_pressed() -> void:
 	menu.hide()
 	enet_peer.create_client(ip, port)
 	multiplayer.multiplayer_peer = enet_peer
+	$Map.show()
 
 func _on_host_2_pressed() -> void:
 	menu.hide()
@@ -73,3 +76,4 @@ func _on_host_2_pressed() -> void:
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(_add_player)
 	_add_player()
+	$Map.show()

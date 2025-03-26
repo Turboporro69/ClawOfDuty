@@ -1,7 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxfkgr51v8wf0"]
+[gd_scene load_steps=18 format=3 uid="uid://dxfkgr51v8wf0"]
 
-[ext_resource type="Texture2D" uid="uid://dauxcaoidnbyn" path="res://MAP/map_path1.png" id="1_wijl4"]
+[ext_resource type="Script" uid="uid://pthr0x4enkti" path="res://map.gd" id="1_2wwcf"]
+[ext_resource type="Texture2D" uid="uid://byhpvo10o40e" path="res://MAP/map_path24.png" id="1_ooc2g"]
+[ext_resource type="Texture2D" uid="uid://by4nd6738afku" path="res://Sprites/black.png" id="2_a6rn7"]
 [ext_resource type="Texture2D" uid="uid://ypms57d5gkqq" path="res://MAP/map_path6.png" id="2_e0an3"]
+[ext_resource type="Texture2D" uid="uid://qf6n61antwpp" path="res://MAP/map_path23.png" id="2_wbpbn"]
 [ext_resource type="Texture2D" uid="uid://c20g1ccnwbo6q" path="res://MAP/map_path7.png" id="3_e0an3"]
 [ext_resource type="Texture2D" uid="uid://pnfq7novlhtt" path="res://MAP/map_path10.png" id="4_p5pve"]
 [ext_resource type="Texture2D" uid="uid://drg2350m80yvy" path="res://MAP/map_path13.png" id="5_71pa8"]
@@ -16,36 +19,47 @@
 [ext_resource type="Texture2D" uid="uid://2iqf8hh4a8sx" path="res://MAP/map_path20.png" id="14_ooc2g"]
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_2wwcf")
 
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2(0.2, 0.2)
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-scale = Vector2(3.33333, 3.33333)
-texture = ExtResource("1_wijl4")
+[node name="Sprite2D15" type="Sprite2D" parent="Node2D"]
+scale = Vector2(1000, 1000)
+texture = ExtResource("2_a6rn7")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
-position = Vector2(-1373.33, 11180)
-scale = Vector2(3.33333, 3.33333)
-texture = ExtResource("2_e0an3")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
-position = Vector2(-1380, 4730)
-scale = Vector2(3.33333, 3.33333)
-texture = ExtResource("3_e0an3")
-
-[node name="Sprite2D4" type="Sprite2D" parent="Node2D"]
-position = Vector2(11883.3, -9536.67)
-scale = Vector2(3.33333, 3.33333)
-texture = ExtResource("4_p5pve")
+[node name="MapPath23" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1736.81, 6225)
+scale = Vector2(3.34396, 3.25)
+texture = ExtResource("2_wbpbn")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Node2D"]
-position = Vector2(10283.3, -12578.3)
+position = Vector2(10430, -12580)
 scale = Vector2(3.33333, 3.38159)
 texture = ExtResource("5_71pa8")
 
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(-162.493, 1445)
+scale = Vector2(3.35389, 3.33333)
+texture = ExtResource("1_ooc2g")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1367.5, 11180)
+scale = Vector2(3.39503, 3.33333)
+texture = ExtResource("2_e0an3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1355, 4730)
+scale = Vector2(3.39503, 3.33333)
+texture = ExtResource("3_e0an3")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D"]
+position = Vector2(12035, -9545)
+scale = Vector2(3.33333, 3.33333)
+texture = ExtResource("4_p5pve")
+
 [node name="Sprite2D5" type="Sprite2D" parent="Node2D"]
-position = Vector2(8663.33, -10413.3)
+position = Vector2(8815, -10415)
 scale = Vector2(3.33333, 3.33333)
 texture = ExtResource("5_urblq")
 
@@ -63,6 +77,11 @@ texture = ExtResource("8_0t07s")
 position = Vector2(1696.67, 1023.33)
 scale = Vector2(3.33333, 3.33333)
 texture = ExtResource("8_05x41")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Node2D"]
+position = Vector2(4996.67, -6670)
+scale = Vector2(3.33333, 3.68419)
+texture = ExtResource("13_6qsgm")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Node2D"]
 position = Vector2(993.333, -3960)
@@ -84,7 +103,10 @@ position = Vector2(4996.67, -4705)
 scale = Vector2(3.57843, 3.33675)
 texture = ExtResource("14_ooc2g")
 
-[node name="Sprite2D13" type="Sprite2D" parent="Node2D"]
-position = Vector2(4996.67, -6636.67)
-scale = Vector2(3.33333, 3.33333)
-texture = ExtResource("13_6qsgm")
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-2357, -411)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1632, -234)

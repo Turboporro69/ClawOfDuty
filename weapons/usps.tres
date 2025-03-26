@@ -17,5 +17,6 @@ recoil = 0
 recoil_moving = 0
 mag_bullets = 12
 mag_max = 12
-reload_time = 1.0
+reload_time = 2.2
+sprite_scale = 0.2
 metadata/_custom_type_script = "uid://dr4mhib4bcsbs"

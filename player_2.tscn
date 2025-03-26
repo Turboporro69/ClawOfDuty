@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=19 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://ca76j2y74ti8w" path="res://Sprites/fox.png" id="2_8lhrm"]
@@ -10,7 +10,8 @@
 [ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
 [ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
 [ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
-[ext_resource type="Resource" uid="uid://ianb4asdb4l6" path="res://weapons/usps.tres" id="9_ehhk3"]
+[ext_resource type="Resource" uid="uid://cpsiovoeuo8i4" path="res://weapons/ak47.tres" id="8_7d0q2"]
+[ext_resource type="Resource" uid="uid://c6173nqnqxu2h" path="res://weapons/glock.tres" id="8_mt4e1"]
 [ext_resource type="Texture2D" uid="uid://cp3adtj5y4d86" path="res://Sprites/progressbar/progress-bar-circle.png" id="11_mt4e1"]
 [ext_resource type="Texture2D" uid="uid://bge8lb0pa40ma" path="res://Sprites/progressbar/progress-bar-frame.png" id="12_7d0q2"]
 [ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="14_mt4e1"]
@@ -85,6 +86,21 @@ properties/12/replication_mode = 1
 properties/13/path = NodePath("Player/GPUParticles2D:emitting")
 properties/13/spawn = true
 properties/13/replication_mode = 1
+properties/14/path = NodePath("Player/polygons/head/AnimatedSprite2D:animation")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+properties/15/path = NodePath("Gun:primary_selected")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath("Gun:secondary_selected")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+properties/17/path = NodePath("Gun:melee_selected")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("feet:position")
+properties/18/spawn = true
+properties/18/replication_mode = 1
 
 [node name="Player_skeleton" type="CharacterBody2D"]
 scale = Vector2(0.4, 0.4)
@@ -98,6 +114,7 @@ scale = Vector2(1.2, 1.2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
 position = Vector2(-17.4999, 585)
+amount = 16
 process_material = ExtResource("14_mt4e1")
 
 [node name="polygons" type="Node2D" parent="Player"]
@@ -207,7 +224,11 @@ position = Vector2(369.167, -292.5)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("3_jaoer")
 scale_gun = 2.5
-secondary_weapon = ExtResource("9_ehhk3")
+primary_selected = null
+secondary_selected = null
+melee_selected = null
+primary_weapon = ExtResource("8_7d0q2")
+secondary_weapon = ExtResource("8_mt4e1")
 
 [node name="Sprite2D" type="Sprite2D" parent="Gun"]
 z_index = 1
@@ -351,24 +372,8 @@ position = Vector2(-20.3333, 36.5)
 shape = SubResource("CapsuleShape2D_wcmjb")
 debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(-236.667, -73.3333)
-energy = 0.5
-shadow_enabled = true
-shadow_filter_smooth = 0.1
-texture = ExtResource("4_tv144")
-texture_scale = 3.33
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("5_udbs8")
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-metadata/_edit_use_anchors_ = true
 
 [node name="Shop" type="Control" parent="CanvasLayer"]
 visible = false
@@ -390,6 +395,15 @@ offset_right = 1900.0
 offset_bottom = 1060.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer"]
+position = Vector2(-94.6668, -29.3333)
+scale = Vector2(1920, 1920)
+energy = 0.2
+shadow_enabled = true
+shadow_filter_smooth = 0.1
+texture = ExtResource("4_tv144")
+texture_scale = 3.33
 
 [node name="Mouse" type="Marker2D" parent="."]
 position = Vector2(-823.333, 0)

@@ -179,6 +179,8 @@ unique_name_in_owner = true
 position = Vector2(86.6667, 100)
 scale = Vector2(2.5, 2.5)
 scale_gun = 2.5
+secondary_selected = null
+melee_selected = null
 
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3

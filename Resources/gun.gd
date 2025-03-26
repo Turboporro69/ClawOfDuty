@@ -18,7 +18,7 @@ var weapon_category
 var nearby_weapons = []
 var extra_recoil : int
 var extra_recoil_moving : int
-var reloading : bool
+var reloading : bool = false
 @onready var reload_circle = $CanvasLayer/Reload_UI/reload
 
 
@@ -42,6 +42,7 @@ var damage = 10
 		load_weapon()
 
 func _ready() -> void:
+	$CanvasLayer.hide()
 	if primary_weapon == null and secondary_weapon != null:
 		current_weapon = "secondary"
 	elif primary_weapon != null:
@@ -51,9 +52,20 @@ func _ready() -> void:
 	load_weapon()
 	update_weapon_icons()
 	selected()
+	mag_ui.show()
+	reload_circle.visible = false
+	update_reload_ui()
+	
+	if is_multiplayer_authority():
+		$CanvasLayer.show()
+	
+	
+	
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
+		if not Input.is_action_pressed("shoot"):
+			continuous_fire_time = 0.0
 		update_reload_ui()
 		update_mag_ui()
 		pick_weapon()
@@ -96,10 +108,11 @@ func _process(delta: float) -> void:
 
 
 
+var continuous_fire_time: float = 0.0
+
 @rpc("call_local")
 func shoot():
 	if is_multiplayer_authority():
-	
 		if current_weapon == "primary":
 			extra_recoil = primary_weapon.recoil
 			extra_recoil_moving = primary_weapon.recoil_moving
@@ -114,7 +127,6 @@ func shoot():
 					var angle_offset = deg_to_rad(randf_range(-spread_angle, spread_angle))
 					pellet.rotation = rotation + angle_offset
 
-
 					var timer = Timer.new()
 					timer.wait_time = .5
 					timer.one_shot = true
@@ -124,13 +136,18 @@ func shoot():
 		elif current_weapon == "secondary":
 			extra_recoil = secondary_weapon.recoil
 			extra_recoil_moving = secondary_weapon.recoil_moving
-			
+
+		continuous_fire_time += $pewpew.wait_time
+
+		var additional_recoil = continuous_fire_time * 10
 		if moving == true:
-			drift = deg_to_rad(randf_range(-15-extra_recoil-extra_recoil_moving, 15+extra_recoil+extra_recoil_moving))
+			drift = deg_to_rad(randf_range(-15 - extra_recoil - extra_recoil_moving - additional_recoil, 
+										   15 + extra_recoil + extra_recoil_moving + additional_recoil))
 		elif primary_weapon != null and primary_weapon.name == "sniper":
 			drift = 0
 		else:
-			drift = deg_to_rad(randf_range(-5-extra_recoil, 5+extra_recoil))
+			drift = deg_to_rad(randf_range(-5 - extra_recoil - additional_recoil, 
+										   5 + extra_recoil + additional_recoil))
 		rpc("apply_recoil", drift)
 	else:
 		return
@@ -156,21 +173,26 @@ func apply_recoil(synced_drift: float):
 	drift = synced_drift
 
 func drop_weapon():
+	if not is_multiplayer_authority():
+		return
+
 	if Input.is_action_just_pressed("drop") and reloading == false:
-		if current_weapon == "primary" and primary_weapon !=null:
+		if current_weapon == "primary" and primary_weapon != null:
 			var dropped_weapon_instance = dropped_weapon.instantiate()
-			dropped_weapon_instance.weapon_data = primary_weapon
-			dropped_weapon_instance.global_position = feet_position
-			dropped_weapon_instance.scale = $Sprite2D.scale
-			get_tree().root.add_child(dropped_weapon_instance)
-			primary_weapon = null
-		if current_weapon == "secondary" and secondary_weapon !=null:
+			if dropped_weapon_instance is Node2D:
+				dropped_weapon_instance.weapon_data = primary_weapon
+				dropped_weapon_instance.global_position = feet_position if feet_position != null else global_position
+				dropped_weapon_instance.scale = $Sprite2D.scale
+				get_tree().root.add_child(dropped_weapon_instance)
+				primary_weapon = null
+		elif current_weapon == "secondary" and secondary_weapon != null:
 			var dropped_weapon_instance = dropped_weapon.instantiate()
-			dropped_weapon_instance.weapon_data = secondary_weapon
-			dropped_weapon_instance.global_position = feet_position
-			dropped_weapon_instance.scale = $Sprite2D.scale
-			get_tree().root.add_child(dropped_weapon_instance)
-			secondary_weapon = null
+			if dropped_weapon_instance is Node2D:
+				dropped_weapon_instance.weapon_data = secondary_weapon
+				dropped_weapon_instance.global_position = feet_position if feet_position != null else global_position
+				dropped_weapon_instance.scale = $Sprite2D.scale
+				get_tree().root.add_child(dropped_weapon_instance)
+				secondary_weapon = null
 
 func _on_pick_up_area_entered(area: Area2D) -> void:
 	if area.has_method("get_weapon_data"):
@@ -182,9 +204,8 @@ func _on_pick_up_area_entered(area: Area2D) -> void:
 func _on_pewpew_timeout() -> void:
 	pewpewcooldown = true
 
-
+@rpc("call_local")
 func load_weapon():
-	
 	if current_weapon == "primary" and primary_weapon != null:
 		if $Sprite2D != null:
 			$Sprite2D.texture = primary_weapon.texture
@@ -195,6 +216,9 @@ func load_weapon():
 		secondary_selected = false
 		melee_selected = false
 		$Marker2D.position.x = $Sprite2D.texture.get_width() / 5
+		$Sprite2D.scale.x = primary_weapon.sprite_scale
+		$Sprite2D.scale.y = primary_weapon.sprite_scale
+		
 
 
 
@@ -209,6 +233,10 @@ func load_weapon():
 		secondary_selected = true
 		melee_selected = false
 		$Marker2D.position.x = $Sprite2D.texture.get_width() / 5
+		$Sprite2D.scale.x = secondary_weapon.sprite_scale
+		$Sprite2D.scale.y = secondary_weapon.sprite_scale
+		
+		
 
 		
 	else:
@@ -222,7 +250,7 @@ func load_weapon():
 	update_weapon_icons()
 	selected()
 	
-
+@rpc("call_local")
 func pick_weapon():
 	if Input.is_action_just_pressed("action") and near_weapon != null and reloading == false:
 		weapon_data = near_weapon.get_weapon_data()
@@ -255,25 +283,30 @@ func update_weapon_icons():
 	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
 		if primary_weapon != null:
 			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.texture = primary_weapon.icon
+			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.scale = Vector2(1, 1)
 		else:
 			$CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon.texture = null
 
 	if $CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn != null:
 		if secondary_weapon != null:
 			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.texture = secondary_weapon.icon
+			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.scale = Vector2(0.8, 0.8)
 		else:
 			$CanvasLayer/Gun_UI/VBoxContainer/SecondaryWeapn.texture = null
-
 func change_weapon():
-	if Input.is_action_just_pressed("primary_weapon") and primary_weapon != null and reloading == false:
-		current_weapon = "primary"
-		load_weapon()
-	elif Input.is_action_just_pressed("secondary_weapon") and secondary_weapon != null and reloading == false:
-		current_weapon = "secondary"
-		load_weapon()
-	elif Input.is_action_just_pressed("melee") and reloading == false:
-		current_weapon = "melee"
-		load_weapon()
+	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("primary_weapon") and primary_weapon != null and reloading == false:
+			current_weapon = "primary"
+			load_weapon()
+			selected()
+		elif Input.is_action_just_pressed("secondary_weapon") and secondary_weapon != null and reloading == false:
+			current_weapon = "secondary"
+			load_weapon()
+			selected()
+		elif Input.is_action_just_pressed("melee") and reloading == false:
+			current_weapon = "melee"
+			load_weapon()
+			selected() 
 
 func selected():
 	if $CanvasLayer/Gun_UI/VBoxContainer/PrimaryWeapon != null:
@@ -302,16 +335,16 @@ func _on_pick_up_area_exited(area: Area2D) -> void:
 			near_weapon = nearby_weapons[0] if nearby_weapons.size() > 0 else null
 
 func reload():
-	if current_weapon == "primary" and primary_weapon.mag_bullets == primary_weapon.mag_max:
+	if current_weapon == "primary" and primary_weapon != null and primary_weapon.mag_bullets == primary_weapon.mag_max and primary_weapon != null:
 		pass
-	elif current_weapon == "secondary" and secondary_weapon.mag_bullets == secondary_weapon.mag_max:
+	elif current_weapon == "secondary" and secondary_weapon != null and secondary_weapon.mag_bullets == secondary_weapon.mag_max:
 		pass
 	else:
-		if current_weapon == "primary" and primary_weapon.mag_bullets == 0 and reloading == false and primary_weapon != null or current_weapon == "primary" and reloading == false and Input.is_action_just_pressed("reload"):
+		if current_weapon == "primary" and primary_weapon != null and primary_weapon.mag_bullets == 0 and reloading == false and primary_weapon != null or current_weapon == "primary" and reloading == false and Input.is_action_just_pressed("reload"):
 			reloading = true
 			$reload_timer.wait_time = primary_weapon.reload_time
 			$reload_timer.start()
-		if current_weapon == "secondary" and secondary_weapon.mag_bullets == 0 and reloading == false and secondary_weapon != null or current_weapon == "secondary" and reloading == false and Input.is_action_just_pressed("reload"):
+		if current_weapon == "secondary" and secondary_weapon != null and  secondary_weapon.mag_bullets == 0 and reloading == false and secondary_weapon != null or current_weapon == "secondary" and reloading == false and Input.is_action_just_pressed("reload"):
 			reloading = true
 			$reload_timer.wait_time = secondary_weapon.reload_time
 			$reload_timer.start()
@@ -326,12 +359,14 @@ func _on_reload_timer_timeout() -> void:
 
 
 func update_mag_ui():
-	if current_weapon == "primary":
+	if current_weapon == "primary" and primary_weapon != null:
+		mag_ui.show()
 		mag_ui.text = str(primary_weapon.mag_bullets) + "/" + str(primary_weapon.mag_max)
-	elif current_weapon == "secondary":
+	elif current_weapon == "secondary" and secondary_weapon != null:
+		mag_ui.show()
 		mag_ui.text = str(secondary_weapon.mag_bullets) + "/" + str(secondary_weapon.mag_max)
 	else:
-		mag_ui.visible = false
+		mag_ui.hide()
 func update_reload_ui():
 	if reloading == false:
 		reload_circle.visible = false
@@ -346,5 +381,3 @@ func update_reload_ui():
 			$CanvasLayer/Reload_UI/reload.max_value = secondary_weapon.reload_time
 			$reload_timer.wait_time = secondary_weapon.reload_time
 		$CanvasLayer/Reload_UI/reload.value = $reload_timer.time_left
-
-		

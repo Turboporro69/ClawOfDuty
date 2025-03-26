@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://jvj4yb0rub6y"]
+[gd_scene load_steps=4 format=3 uid="uid://jvj4yb0rub6y"]
 
 [ext_resource type="PackedScene" uid="uid://b0of1wdngjaup" path="res://menu.tscn" id="1_g5xth"]
 [ext_resource type="Script" uid="uid://c3phutxv0b4qv" path="res://main.gd" id="1_rfxpo"]
+[ext_resource type="PackedScene" uid="uid://dxfkgr51v8wf0" path="res://map.tscn" id="3_h2yge"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_rfxpo")
@@ -192,6 +193,11 @@ text = "HOST"
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://c8fkdhc1b1syb")
 spawn_path = NodePath("..")
+
+[node name="Map" parent="." instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(1963.27, -1818.42)
+scale = Vector2(1.2, 1.2)
 
 [connection signal="pressed" from="Menu/Main/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu/vs1/HBoxContainer/host" to="." method="_on_host_pressed"]

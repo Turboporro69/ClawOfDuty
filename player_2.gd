@@ -33,11 +33,26 @@ func _ready():
 	polygons.visible = true
 	$Gun/Sprite2D.visible = true
 	$CollisionShape2D.disabled = false
+	$CanvasLayer.hide()
 
 	if is_multiplayer_authority():
 		var camera = Camera2D.new()
 		add_child(camera)
 		camera.make_current()
+		camera.zoom = Vector2(0.8, 0.8)
+		camera.position_smoothing_enabled = true
+		
+		var light2d = PointLight2D.new()
+		add_child(light2d)
+		light2d.texture = preload("res://1920x1080-white-solid-color-background.jpg")
+		light2d.texture_scale = 3.33
+		light2d.color = Color(1.0, 1.0, 1.0)
+		light2d.shadow_enabled = true
+		light2d.scale = Vector2(1920, 1080)
+		light2d.energy = 0.1
+		
+		$CanvasLayer.show()
+		
 	set_physics_process(is_multiplayer_authority())
 	blinking()
 	walk_particle.emitting = false
@@ -52,7 +67,7 @@ func _physics_process(delta: float) -> void:
 		walk_particle.emitting = false
 		reset_leg_positions()
 	$Mouse.global_position = get_global_mouse_position()
-	$Gun.feet_position = $feet.global_position
+	gun.feet_position = $feet.global_position
 	if health == 0 and player_dead == false:
 		player_dead = true
 		polygons.visible = false
@@ -130,7 +145,9 @@ func _on_gun_right() -> void:
 	flip_h = false
 
 func health_label():
-	$CanvasLayer/Label.text = "<3: " + str(health) + "/" + str(max_health)
+	#$CanvasLayer/Label.text = "<3: " + str(health) + "/" + str(max_health)
+	pass
+	
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())

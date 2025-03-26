@@ -16,3 +16,4 @@ enum Category {primary, secondary}
 @export var mag_bullets : int
 @export var mag_max : int
 @export var reload_time : float
+@export var sprite_scale : float
