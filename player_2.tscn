@@ -1,17 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8fkdhc1b1syb"]
+[gd_scene load_steps=18 format=3 uid="uid://c8fkdhc1b1syb"]
 
 [ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
 [ext_resource type="Texture2D" uid="uid://ca76j2y74ti8w" path="res://Sprites/fox.png" id="2_8lhrm"]
 [ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="3_jaoer"]
 [ext_resource type="Texture2D" uid="uid://cc83yskmytckx" path="res://Sprites/eyes/1.png" id="3_up5o4"]
 [ext_resource type="Texture2D" uid="uid://6cimsjqxgdyq" path="res://Sprites/eyes/2.png" id="4_ehhk3"]
-[ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="4_tv144"]
 [ext_resource type="Texture2D" uid="uid://bjyngqqhk4bbl" path="res://Sprites/eyes/3.png" id="5_mt4e1"]
 [ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
 [ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
 [ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
 [ext_resource type="Resource" uid="uid://cpsiovoeuo8i4" path="res://weapons/ak47.tres" id="8_7d0q2"]
-[ext_resource type="Resource" uid="uid://c6173nqnqxu2h" path="res://weapons/glock.tres" id="8_mt4e1"]
+[ext_resource type="Resource" uid="uid://bppmnp3futiib" path="res://weapons/deagle.tres" id="9_7d0q2"]
 [ext_resource type="Texture2D" uid="uid://cp3adtj5y4d86" path="res://Sprites/progressbar/progress-bar-circle.png" id="11_mt4e1"]
 [ext_resource type="Texture2D" uid="uid://bge8lb0pa40ma" path="res://Sprites/progressbar/progress-bar-frame.png" id="12_7d0q2"]
 [ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="14_mt4e1"]
@@ -224,11 +223,8 @@ position = Vector2(369.167, -292.5)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("3_jaoer")
 scale_gun = 2.5
-primary_selected = null
-secondary_selected = null
-melee_selected = null
 primary_weapon = ExtResource("8_7d0q2")
-secondary_weapon = ExtResource("8_mt4e1")
+secondary_weapon = ExtResource("9_7d0q2")
 
 [node name="Sprite2D" type="Sprite2D" parent="Gun"]
 z_index = 1
@@ -302,7 +298,7 @@ alignment = 2
 [node name="Label" type="Label" parent="Gun/CanvasLayer/Gun_UI/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 110
-text = "05/01"
+text = "00/00"
 
 [node name="Reload_UI" type="Control" parent="Gun/CanvasLayer"]
 layout_mode = 3
@@ -395,15 +391,6 @@ offset_right = 1900.0
 offset_bottom = 1060.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PointLight2D" type="PointLight2D" parent="CanvasLayer"]
-position = Vector2(-94.6668, -29.3333)
-scale = Vector2(1920, 1920)
-energy = 0.2
-shadow_enabled = true
-shadow_filter_smooth = 0.1
-texture = ExtResource("4_tv144")
-texture_scale = 3.33
 
 [node name="Mouse" type="Marker2D" parent="."]
 position = Vector2(-823.333, 0)
