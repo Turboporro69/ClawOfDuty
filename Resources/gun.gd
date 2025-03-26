@@ -171,7 +171,6 @@ func apply_recoil(synced_drift: float):
 @rpc("call_local", "any_peer")
 func drop_weapon():
 	if feet_position == null:
-		# Si feet_position no está inicializada, usa global_position como respaldo
 		feet_position = global_position
 
 	if current_weapon == "primary" and primary_weapon != null:
@@ -245,7 +244,7 @@ func pick_weapon():
 	if Input.is_action_just_pressed("action") and near_weapon != null and reloading == false:
 		weapon_data = near_weapon.get_weapon_data()
 		weapon_category = weapon_data.category
-		if weapon_data.category == 0:  # Primary weapon
+		if weapon_data.category == 0:
 			if primary_weapon != null:
 				var dropped_weapon_instance = dropped_weapon.instantiate()
 				dropped_weapon_instance.weapon_data = primary_weapon
@@ -254,8 +253,8 @@ func pick_weapon():
 				get_tree().root.add_child(dropped_weapon_instance)
 				primary_weapon = null
 			primary_weapon = weapon_data
-			load_weapon.rpc("primary")  # Sync the weapon pickup
-		elif weapon_data.category == 1:  # Secondary weapon
+			load_weapon.rpc("primary")
+		elif weapon_data.category == 1:
 			if secondary_weapon != null:
 				var dropped_weapon_instance = dropped_weapon.instantiate()
 				dropped_weapon_instance.weapon_data = secondary_weapon
@@ -264,7 +263,7 @@ func pick_weapon():
 				get_tree().root.add_child(dropped_weapon_instance)
 				secondary_weapon = null
 			secondary_weapon = weapon_data
-			load_weapon.rpc("secondary")  # Sync the weapon pickup
+			load_weapon.rpc("secondary")
 		near_weapon.queue_free()
 		nearby_weapons.erase(near_weapon)
 		near_weapon = nearby_weapons[0] if nearby_weapons.size() > 0 else null
