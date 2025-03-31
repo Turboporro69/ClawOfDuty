@@ -1,0 +1,414 @@
+[gd_scene load_steps=18 format=3 uid="uid://c8fkdhc1b1syb"]
+
+[ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_1r3qd"]
+[ext_resource type="Texture2D" uid="uid://ca76j2y74ti8w" path="res://Sprites/fox.png" id="2_8lhrm"]
+[ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="3_jaoer"]
+[ext_resource type="Texture2D" uid="uid://cc83yskmytckx" path="res://Sprites/eyes/1.png" id="3_up5o4"]
+[ext_resource type="Texture2D" uid="uid://6cimsjqxgdyq" path="res://Sprites/eyes/2.png" id="4_ehhk3"]
+[ext_resource type="Texture2D" uid="uid://bjyngqqhk4bbl" path="res://Sprites/eyes/3.png" id="5_mt4e1"]
+[ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="5_udbs8"]
+[ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="5_up5o4"]
+[ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="6_wh5uk"]
+[ext_resource type="Resource" uid="uid://cpsiovoeuo8i4" path="res://weapons/ak47.tres" id="8_7d0q2"]
+[ext_resource type="Resource" uid="uid://bppmnp3futiib" path="res://weapons/deagle.tres" id="9_7d0q2"]
+[ext_resource type="Texture2D" uid="uid://cp3adtj5y4d86" path="res://Sprites/progressbar/progress-bar-circle.png" id="11_mt4e1"]
+[ext_resource type="Texture2D" uid="uid://bge8lb0pa40ma" path="res://Sprites/progressbar/progress-bar-frame.png" id="12_7d0q2"]
+[ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="14_mt4e1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wh5uk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_up5o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ehhk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mt4e1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ehhk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_up5o4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wcmjb"]
+radius = 7.55556
+height = 35.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ryqyf"]
+properties/0/path = NodePath(".:scale_player")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Player/polygons/arm_right:texture_rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_left:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Player/polygons/arm_left:texture_rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Player/polygons:scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Gun:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Gun:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Player:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("Gun/Sprite2D:rotation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Gun:scale")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Gun:scale_gun")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath("Player/GPUParticles2D:emitting")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath("Player/polygons/head/AnimatedSprite2D:animation")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+properties/15/path = NodePath("Gun:primary_selected")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath("Gun:secondary_selected")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+properties/17/path = NodePath("Gun:melee_selected")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("feet:position")
+properties/18/spawn = true
+properties/18/replication_mode = 1
+
+[node name="Player_skeleton" type="CharacterBody2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_1r3qd")
+health = 100
+scale_player = 1.2
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(2.5, -462.5)
+scale = Vector2(1.2, 1.2)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+position = Vector2(-17.4999, 585)
+amount = 16
+process_material = ExtResource("14_mt4e1")
+
+[node name="polygons" type="Node2D" parent="Player"]
+position = Vector2(16.6667, 0)
+
+[node name="arm_left" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-352.5, 185)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(365.318, 122.844, 340.522, 205.983, 358.025, 261.41, 430.955, 284.747, 492.216, 286.206, 511.177, 233.697, 463.044, 188.48, 448.458, 99.5064, 388.656, 87.8377)
+uv = PackedVector2Array(365.318, 122.844, 340.522, 205.983, 358.025, 261.41, 430.955, 284.747, 492.216, 286.206, 511.177, 233.697, 463.044, 188.48, 448.458, 99.5064, 388.656, 87.8377)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(1, 1, 0.5, 1, 1, 1, 1, 1, 1), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="leg_right" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-197.5, -150)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(83.0797, 618.348, 182.703, 632.345, 181.057, 653.751, 173.647, 697.388, 164.59, 721.265, 148.947, 737.732, 134.126, 748.435, 113.543, 750.082, 102.84, 716.325, 92.1364, 675.981, 87.1964, 637.285)
+uv = PackedVector2Array(83.0797, 618.348, 182.703, 632.345, 181.057, 653.751, 173.647, 697.388, 164.59, 721.265, 148.947, 737.732, 134.126, 748.435, 113.543, 750.082, 102.84, 716.325, 92.1364, 675.981, 87.1964, 637.285)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
+
+[node name="leg_left" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-222.5, -150)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(208.677, 647.193, 210.079, 673.83, 214.285, 692.056, 221.645, 717.992, 230.057, 735.868, 238.469, 747.083, 248.282, 747.434, 253.189, 740.424, 259.498, 727.456, 266.859, 711.683, 271.766, 699.767, 275.621, 686.798, 278.425, 670.325, 280.878, 652.45, 282.631, 638.781, 285.084, 623.359, 283.332, 613.545, 270.013, 614.947, 253.189, 620.906, 224.799, 627.214, 206.574, 637.379)
+uv = PackedVector2Array(208.677, 647.193, 210.079, 673.83, 214.285, 692.056, 221.645, 717.992, 230.057, 735.868, 238.469, 747.083, 248.282, 747.434, 253.189, 740.424, 259.498, 727.456, 266.859, 711.683, 271.766, 699.767, 275.621, 686.798, 278.425, 670.325, 280.878, 652.45, 282.631, 638.781, 285.084, 623.359, 283.332, 613.545, 270.013, 614.947, 253.189, 620.906, 224.799, 627.214, 206.574, 637.379)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="body" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-207.5, -80)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(90.9418, 484.507, 86.8438, 547.344, 102.553, 590.374, 158.56, 604.718, 217.299, 613.597, 256.914, 590.374, 285.601, 549.393, 285.601, 466.066, 291.748, 416.889, 295.846, 390.934, 287.65, 349.953, 236.424, 350.636, 185.881, 339.025, 142.851, 340.391, 100.504, 360.199, 78.6476, 378.64, 82.0626, 399.813, 82.0626, 425.085, 87.5267, 457.187)
+uv = PackedVector2Array(90.9418, 484.507, 86.8438, 547.344, 102.553, 590.374, 158.56, 604.718, 217.299, 613.597, 256.914, 590.374, 285.601, 549.393, 285.601, 466.066, 291.748, 416.889, 295.846, 390.934, 287.65, 349.953, 236.424, 350.636, 185.881, 339.025, 142.851, 340.391, 100.504, 360.199, 78.6476, 378.64, 82.0626, 399.813, 82.0626, 425.085, 87.5267, 457.187)
+bones = ["hip", PackedFloat32Array(0, 0.5, 1, 1, 1, 1, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(1, 0.5, 0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="head" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-192.5, 10)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(41, 151.034, 27, 199.034, 29, 254.034, 75, 308.034, 152, 323.034, 228, 309.034, 275, 281.034, 304, 229.034, 305, 156.034, 291, 89.034, 262, 15.034, 211, 19.034, 163, 17.034, 124, -4.966, 81, -2.966, 31, 72.034)
+uv = PackedVector2Array(41, 151.034, 27, 199.034, 29, 254.034, 75, 308.034, 152, 323.034, 228, 309.034, 275, 281.034, 304, 229.034, 305, 156.034, 291, 89.034, 262, 15.034, 211, 19.034, 163, 17.034, 124, -4.966, 81, -2.966, 31, 72.034)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/polygons/head"]
+position = Vector2(160, 407.5)
+sprite_frames = SubResource("SpriteFrames_wh5uk")
+frame = 4
+frame_progress = 1.0
+
+[node name="blinking" type="Timer" parent="Player/polygons/head"]
+wait_time = 0.1
+
+[node name="arm_right" type="Polygon2D" parent="Player/polygons"]
+position = Vector2(-495, 182.5)
+texture = ExtResource("2_8lhrm")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(365.031, 100.128, 351.031, 251.128, 490.031, 275.128, 493.031, 217.128, 433.031, 201.128, 439.031, 111.128)
+uv = PackedVector2Array(365.031, 100.128, 351.031, 251.128, 490.031, 275.128, 493.031, 217.128, 433.031, 201.128, 439.031, 111.128)
+bones = ["hip", PackedFloat32Array(0, 0, 0, 0, 0, 0), "hip/chest", PackedFloat32Array(0, 0, 0, 0, 0, 0), "hip/chest/head", PackedFloat32Array(0, 0, 0, 0, 0, 0), "hip/chest/arm_left", PackedFloat32Array(0, 0, 0, 0, 0, 0), "hip/chest/arm_right", PackedFloat32Array(1, 1, 1, 1, 1, 1), "hip/leg_left", PackedFloat32Array(0, 0, 0, 0, 0, 0), "hip/leg_right", PackedFloat32Array(0, 0, 0, 0, 0, 0)]
+
+[node name="Skeleton" type="Node2D" parent="Player"]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Player/Skeleton"]
+position = Vector2(14.5833, 0)
+
+[node name="hip" type="Bone2D" parent="Player/Skeleton/Skeleton2D"]
+position = Vector2(-12.4999, 507.5)
+rest = Transform2D(1, 0, 0, 1, -12.4999, 507.5)
+
+[node name="chest" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(1.19209e-06, -40)
+rest = Transform2D(1, 0, 0, 1, 1.19209e-06, -40)
+
+[node name="head" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(-2.5, -202.5)
+rest = Transform2D(1, 0, 0, 1, -2.5, -202.5)
+
+[node name="arm_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(55, -140)
+rest = Transform2D(1, 0, 0, 1, 55, -140)
+
+[node name="arm_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(-87.5, -142.5)
+rest = Transform2D(1, 0, 0, 1, -87.5, -142.5)
+
+[node name="Marker2D" type="Marker2D" parent="Player/Skeleton/Skeleton2D/hip/chest/arm_right"]
+position = Vector2(72.5, 100)
+
+[node name="leg_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(32.5, -20)
+rest = Transform2D(1, 0, 0, 1, 32.5, -20)
+
+[node name="leg_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(-60, -22.5)
+rest = Transform2D(1, 0, 0, 1, -60, -22.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -57.5)
+scale = Vector2(15, 15)
+shape = SubResource("CapsuleShape2D_wcmjb")
+
+[node name="Gun" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(369.167, -292.5)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("3_jaoer")
+scale_gun = 2.5
+primary_selected = null
+secondary_selected = null
+melee_selected = null
+primary_weapon = ExtResource("8_7d0q2")
+secondary_weapon = ExtResource("9_7d0q2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+z_index = 1
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+
+[node name="pewpew" type="Timer" parent="Gun"]
+wait_time = 0.3
+
+[node name="GunHandle" type="Marker2D" parent="Gun"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Gun"]
+
+[node name="Gun_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -550.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="PrimaryWeapon" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("5_up5o4")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SecondaryWeapn" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("6_wh5uk")
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -151.0
+offset_right = 197.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="Gun/CanvasLayer/Gun_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 110
+text = "00/00"
+
+[node name="Reload_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+
+[node name="reload" type="TextureProgressBar" parent="Gun/CanvasLayer/Reload_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("11_mt4e1")
+texture_over = ExtResource("12_7d0q2")
+texture_progress = ExtResource("11_mt4e1")
+tint_under = Color(0, 0, 0, 0.45098)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0.813116, 0, 1)
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(121, -8)
+
+[node name="reload_timer" type="Timer" parent="Gun"]
+one_shot = true
+
+[node name="dashduration" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="dashcooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(305, -607.5)
+scale = Vector2(15, 15)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-20.6667, 36.5)
+shape = SubResource("CapsuleShape2D_wcmjb")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="PickUp" type="Area2D" parent="."]
+position = Vector2(305, -607.5)
+scale = Vector2(15, 15)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp"]
+position = Vector2(-20.3333, 36.5)
+shape = SubResource("CapsuleShape2D_wcmjb")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_udbs8")
+
+[node name="Shop" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mouse" type="Marker2D" parent="."]
+position = Vector2(-823.333, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ryqyf")
+
+[node name="feet" type="Marker2D" parent="."]
+position = Vector2(-17.5, 175)
+
+[connection signal="timeout" from="Player/polygons/head/blinking" to="." method="_on_blinking_timeout"]
+[connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
+[connection signal="timeout" from="Gun/reload_timer" to="Gun" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
+[connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="PickUp" to="Gun" method="_on_pick_up_area_entered"]
+[connection signal="area_exited" from="PickUp" to="Gun" method="_on_pick_up_area_exited"]

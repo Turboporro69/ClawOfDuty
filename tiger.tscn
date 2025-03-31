@@ -1,0 +1,491 @@
+[gd_scene load_steps=31 format=3 uid="uid://oacdyftnjem7"]
+
+[ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_5phpl"]
+[ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="2_prk18"]
+[ext_resource type="PackedScene" uid="uid://xd3utvwxeivs" path="res://tiger_polygons.tscn" id="3_041tb"]
+[ext_resource type="Resource" uid="uid://dbsx3gtajx8li" path="res://weapons/M16.tres" id="3_idv0f"]
+[ext_resource type="Resource" uid="uid://baye13yvint30" path="res://weapons/mp5.tres" id="4_kn8xp"]
+[ext_resource type="Resource" uid="uid://cffmxjtho6c3m" path="res://weapons/shotgun.tres" id="5_pqoxx"]
+[ext_resource type="Resource" uid="uid://cwndrn0ntnin2" path="res://weapons/sniper.tres" id="6_h7g4i"]
+[ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="7_hie6c"]
+[ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="7_idv0f"]
+[ext_resource type="Resource" uid="uid://cpsiovoeuo8i4" path="res://weapons/ak47.tres" id="8_kn8xp"]
+[ext_resource type="Resource" uid="uid://c6173nqnqxu2h" path="res://weapons/glock.tres" id="9_hvro1"]
+[ext_resource type="Resource" uid="uid://bppmnp3futiib" path="res://weapons/deagle.tres" id="9_pqoxx"]
+[ext_resource type="Resource" uid="uid://ianb4asdb4l6" path="res://weapons/usps.tres" id="10_0port"]
+[ext_resource type="Material" uid="uid://brtdhm5ktmr6j" path="res://shaders/selected_gun_material.tres" id="10_h7g4i"]
+[ext_resource type="Texture2D" uid="uid://by4nd6738afku" path="res://black.png" id="11_5phpl"]
+[ext_resource type="Material" uid="uid://b5ta6j6rb6y0q" path="res://shaders/not_selected_gun_material.tres" id="11_hie6c"]
+[ext_resource type="Texture2D" uid="uid://cp3adtj5y4d86" path="res://Sprites/progressbar/progress-bar-circle.png" id="12_hvro1"]
+[ext_resource type="Texture2D" uid="uid://dalgfddix70ci" path="res://UI/solid-color-image(3).png" id="12_prk18"]
+[ext_resource type="Texture2D" uid="uid://bge8lb0pa40ma" path="res://Sprites/progressbar/progress-bar-frame.png" id="13_0port"]
+[ext_resource type="Texture2D" uid="uid://df6d7njjcvlyr" path="res://UI/solid-color-image(7).png" id="13_e2ibh"]
+[ext_resource type="Script" uid="uid://bkkxx22xm6qt4" path="res://canvas_layer.gd" id="14_4qsbe"]
+[ext_resource type="Texture2D" uid="uid://biny5ef4ap4lj" path="res://1920x1080-white-solid-color-background.jpg" id="15_prk18"]
+[ext_resource type="Texture2D" uid="uid://ca76j2y74ti8w" path="res://Sprites/fox.png" id="16_a5fxu"]
+[ext_resource type="Texture2D" uid="uid://c5fn1ub2obpx" path="res://Sprites/tiger.png" id="17_4aawn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5phpl"]
+radius = 3.16667
+height = 10.6667
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hrkxs"]
+radius = 7.55556
+height = 35.0
+
+[sub_resource type="Theme" id="Theme_e2ibh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idv0f"]
+atlas = ExtResource("16_a5fxu")
+region = Rect2(39.627, 18.1655, 249.79, 290.029)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn8xp"]
+atlas = ExtResource("17_4aawn")
+region = Rect2(272, -0.232905, 249.259, 242.47)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ryqyf"]
+properties/0/path = NodePath(".:scale_player")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_right:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Player/polygons/arm_right:texture_rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Player/Skeleton/Skeleton2D/hip/chest/arm_left:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Player/polygons/arm_left:texture_rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Player/polygons:scale")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Gun:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Gun:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("Player:scale")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("Gun/Sprite2D:rotation")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Gun:scale")
+properties/11/spawn = true
+properties/11/replication_mode = 1
+properties/12/path = NodePath("Gun:scale_gun")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath("Player/GPUParticles2D:emitting")
+properties/13/spawn = true
+properties/13/replication_mode = 1
+properties/14/path = NodePath("Player/polygons/head/AnimatedSprite2D:animation")
+properties/14/spawn = true
+properties/14/replication_mode = 1
+properties/15/path = NodePath("Gun:primary_selected")
+properties/15/spawn = true
+properties/15/replication_mode = 1
+properties/16/path = NodePath("Gun:secondary_selected")
+properties/16/spawn = true
+properties/16/replication_mode = 1
+properties/17/path = NodePath("Gun:melee_selected")
+properties/17/spawn = true
+properties/17/replication_mode = 1
+properties/18/path = NodePath("feet:position")
+properties/18/spawn = true
+properties/18/replication_mode = 1
+properties/19/path = NodePath(".:health")
+properties/19/spawn = true
+properties/19/replication_mode = 1
+properties/20/path = NodePath(".:visible")
+properties/20/spawn = true
+properties/20/replication_mode = 1
+properties/21/path = NodePath("Player/polygons:visible")
+properties/21/spawn = true
+properties/21/replication_mode = 1
+properties/22/path = NodePath("Gun:visible")
+properties/22/spawn = true
+properties/22/replication_mode = 1
+
+[node name="Player_skeleton" type="CharacterBody2D" groups=["players", "tiger"]]
+z_index = 10
+scale = Vector2(0.4, 0.4)
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_5phpl")
+health = 100
+scale_player = 1.2
+primary_weapons = [ExtResource("8_kn8xp"), ExtResource("3_idv0f"), ExtResource("4_kn8xp"), ExtResource("5_pqoxx"), ExtResource("6_h7g4i")]
+secondary_weapons = Array[ExtResource("7_hie6c")]([ExtResource("9_pqoxx"), ExtResource("9_hvro1"), ExtResource("10_0port")])
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(2.5, -462.5)
+scale = Vector2(1.2, 1.2)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+position = Vector2(-17.4999, 585)
+amount = 16
+process_material = ExtResource("2_prk18")
+
+[node name="Skeleton" type="Node2D" parent="Player"]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Player/Skeleton"]
+position = Vector2(14.5833, 0)
+
+[node name="hip" type="Bone2D" parent="Player/Skeleton/Skeleton2D"]
+position = Vector2(-12.4999, 507.5)
+rest = Transform2D(1, 0, 0, 1, -12.4999, 507.5)
+
+[node name="chest" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(1.19209e-06, -40)
+rest = Transform2D(1, 0, 0, 1, 1.19209e-06, -40)
+
+[node name="head" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(-2.5, -202.5)
+rest = Transform2D(1, 0, 0, 1, -2.5, -202.5)
+
+[node name="arm_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(55, -140)
+rest = Transform2D(1, 0, 0, 1, 55, -140)
+
+[node name="arm_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip/chest"]
+position = Vector2(-87.5, -142.5)
+rest = Transform2D(1, 0, 0, 1, -87.5, -142.5)
+
+[node name="Marker2D" type="Marker2D" parent="Player/Skeleton/Skeleton2D/hip/chest/arm_right"]
+position = Vector2(72.5, 100)
+
+[node name="leg_left" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(32.5, -20)
+rest = Transform2D(1, 0, 0, 1, 32.5, -20)
+
+[node name="leg_right" type="Bone2D" parent="Player/Skeleton/Skeleton2D/hip"]
+position = Vector2(-60, -22.5)
+rest = Transform2D(1, 0, 0, 1, -60, -22.5)
+
+[node name="polygons" parent="Player" instance=ExtResource("3_041tb")]
+position = Vector2(11.8056, 385.417)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.5, 207.5)
+rotation = 1.5708
+scale = Vector2(15, 15)
+shape = SubResource("CapsuleShape2D_5phpl")
+
+[node name="Gun" type="Node2D" parent="." groups=["tiger"]]
+unique_name_in_owner = true
+position = Vector2(369.167, -292.5)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("7_idv0f")
+scale_gun = 2.5
+
+[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+z_index = 1
+position = Vector2(38, 27)
+scale = Vector2(0.3, 0.3)
+
+[node name="pewpew" type="Timer" parent="Gun"]
+wait_time = 0.3
+
+[node name="GunHandle" type="Marker2D" parent="Gun"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Gun"]
+
+[node name="Gun_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -550.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -11.0
+offset_right = 201.0
+offset_bottom = 428.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="PrimaryWeapon" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("10_h7g4i")
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="SecondaryWeapn" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+material = ExtResource("11_hie6c")
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Melee" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Bomb" type="TextureRect" parent="Gun/CanvasLayer/Gun_UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gun/CanvasLayer/Gun_UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -151.0
+offset_right = 197.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="Gun/CanvasLayer/Gun_UI/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 110
+text = "00/00"
+
+[node name="Reload_UI" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+
+[node name="reload" type="TextureProgressBar" parent="Gun/CanvasLayer/Reload_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("12_hvro1")
+texture_over = ExtResource("13_0port")
+texture_progress = ExtResource("12_hvro1")
+tint_under = Color(0, 0, 0, 0.45098)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(0, 0.813116, 0, 1)
+
+[node name="bomb_ui" type="Control" parent="Gun/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="bomb" type="TextureProgressBar" parent="Gun/CanvasLayer/bomb_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -45.0
+offset_right = 320.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+nine_patch_stretch = true
+texture_under = ExtResource("11_5phpl")
+texture_progress = ExtResource("13_e2ibh")
+
+[node name="Marker2D" type="Marker2D" parent="Gun"]
+position = Vector2(121, -8)
+
+[node name="reload_timer" type="Timer" parent="Gun"]
+one_shot = true
+
+[node name="defuse_timer" type="Timer" parent="Gun"]
+wait_time = 5.0
+one_shot = true
+
+[node name="dashduration" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="dashcooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(305, -607.5)
+scale = Vector2(15, 15)
+collision_layer = 18
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-20.6667, 36.5)
+shape = SubResource("CapsuleShape2D_hrkxs")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="PickUp" type="Area2D" parent="."]
+position = Vector2(305, -607.5)
+scale = Vector2(15, 15)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUp"]
+position = Vector2(-20.3333, 36.5)
+shape = SubResource("CapsuleShape2D_hrkxs")
+debug_color = Color(0.93209, 2.44504e-05, 0.650146, 0.42)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("14_4qsbe")
+
+[node name="Shop" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="health" type="TextureProgressBar" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 87.0
+offset_top = -159.0
+offset_right = 599.0
+offset_bottom = -59.0
+grow_vertical = 0
+theme = SubResource("Theme_e2ibh")
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("11_5phpl")
+texture_progress = ExtResource("12_prk18")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fox" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 53.0
+offset_right = 517.0
+offset_bottom = 343.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 32
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/fox"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_idv0f")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/fox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "10 "
+
+[node name="tiger" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 1632.0
+offset_top = 53.0
+offset_right = 2092.0
+offset_bottom = 343.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/tiger"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "10 "
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/tiger"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kn8xp")
+
+[node name="Mouse" type="Marker2D" parent="."]
+position = Vector2(-823.333, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ryqyf")
+
+[node name="feet" type="Marker2D" parent="."]
+position = Vector2(-17.5, 175)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.7
+shadow_enabled = true
+texture = ExtResource("15_prk18")
+texture_scale = 3.3
+
+[node name="reset_round" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="player_death" from="." to="Gun" method="_on_player_skeleton_player_death"]
+[connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
+[connection signal="timeout" from="Gun/reload_timer" to="Gun" method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="Gun/defuse_timer" to="Gun" method="_on_defuse_timer_timeout"]
+[connection signal="timeout" from="dashduration" to="." method="_on_dashduration_timeout"]
+[connection signal="timeout" from="dashcooldown" to="." method="_on_dashcooldown_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="PickUp" to="Gun" method="_on_pick_up_area_entered"]
+[connection signal="area_exited" from="PickUp" to="Gun" method="_on_pick_up_area_exited"]

@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://df08efugjd7ye"]
+
+[ext_resource type="Texture2D" uid="uid://c5fn1ub2obpx" path="res://Sprites/tiger.png" id="1_dvsul"]
+[ext_resource type="Texture2D" uid="uid://7cexl8qlhh5q" path="res://Sprites/eyes/tiger/3.png" id="2_bdmff"]
+[ext_resource type="Texture2D" uid="uid://bevwvybtvwhit" path="res://Sprites/eyes/tiger/2.png" id="3_dvsul"]
+[ext_resource type="Texture2D" uid="uid://cr5wkts32goul" path="res://Sprites/eyes/tiger/1.png" id="4_uws3c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wh5uk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bdmff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dvsul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uws3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bdmff")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="polygons" type="Node2D"]
+position = Vector2(16.6667, 0)
+
+[node name="arm_left" type="Polygon2D" parent="."]
+position = Vector2(-82.6667, 193)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(74.4237, 218.089, 97.8748, 233.242, 122.769, 239.375, 151.993, 245.509, 180.134, 248.395, 198.173, 247.313, 215.491, 232.881, 214.408, 212.677, 198.895, 193.195, 156.322, 182.01, 144.416, 179.485, 171.481, 82.2574, 124.13, 81.2281, 82.9554, 86.3749, 66.4857, 149.166, 59.2801, 192.399)
+uv = PackedVector2Array(74.4237, 218.089, 97.8748, 233.242, 122.769, 239.375, 151.993, 245.509, 180.134, 248.395, 198.173, 247.313, 215.491, 232.881, 214.408, 212.677, 198.895, 193.195, 156.322, 182.01, 144.416, 179.485, 171.481, 82.2574, 124.13, 81.2281, 82.9554, 86.3749, 66.4857, 149.166, 59.2801, 192.399)
+
+[node name="leg_right" type="Polygon2D" parent="."]
+position = Vector2(-526.667, -82)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(428.637, 561.975, 436.495, 680.716, 474.475, 689.884, 501.541, 661.945, 516.82, 629.203, 518.13, 594.279, 518.566, 554.99)
+uv = PackedVector2Array(428.637, 561.975, 436.495, 680.716, 474.475, 689.884, 501.541, 661.945, 516.82, 629.203, 518.13, 594.279, 518.566, 554.99)
+
+[node name="leg_left" type="Polygon2D" parent="."]
+position = Vector2(-530.667, -72)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(523.539, 564.442, 516.509, 597.486, 519.321, 683.261, 572.051, 688.885, 612.829, 578.503, 594.549, 534.21)
+uv = PackedVector2Array(523.539, 564.442, 516.509, 597.486, 519.321, 683.261, 572.051, 688.885, 612.829, 578.503, 594.549, 534.21)
+
+[node name="body" type="Polygon2D" parent="."]
+position = Vector2(-205.667, -33)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(124.043, 288.642, 66.3985, 320.552, 61.2517, 468.78, 79.7802, 552.159, 136.395, 572.746, 185.805, 570.687, 263.007, 540.836, 302.123, 497.602, 310.358, 363.785, 290.8, 275.26, 233.155, 255.702)
+uv = PackedVector2Array(124.043, 288.642, 66.3985, 320.552, 61.2517, 468.78, 79.7802, 552.159, 136.395, 572.746, 185.805, 570.687, 263.007, 540.836, 302.123, 497.602, 310.358, 363.785, 290.8, 275.26, 233.155, 255.702)
+
+[node name="head" type="Polygon2D" parent="."]
+position = Vector2(-404.667, 57)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(380.744, 258.247, 472.451, 257.311, 530.469, 175.898, 541.699, 57.9894, 479.937, 2.77812, 400.395, -10.3229, 296.523, 2.77812, 210.431, 35.5306, 231.018, 155.311, 292.78, 243.275)
+uv = PackedVector2Array(380.744, 258.247, 472.451, 257.311, 530.469, 175.898, 541.699, 57.9894, 479.937, 2.77812, 400.395, -10.3229, 296.523, 2.77812, 210.431, 35.5306, 231.018, 155.311, 292.78, 243.275)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="head"]
+position = Vector2(382, 352)
+sprite_frames = SubResource("SpriteFrames_wh5uk")
+frame = 3
+frame_progress = 1.0
+
+[node name="blinking" type="Timer" parent="head"]
+wait_time = 0.1
+
+[node name="arm_right" type="Polygon2D" parent="."]
+position = Vector2(-208.667, 205)
+texture = ExtResource("1_dvsul")
+skeleton = NodePath("../../Skeleton/Skeleton2D")
+polygon = PackedVector2Array(87.3305, 99.026, 57.1689, 213.486, 93.5175, 238.234, 177.042, 264.528, 212.617, 245.194, 232.725, 193.378, 199.47, 146.202, 147.654, 56.4903)
+uv = PackedVector2Array(87.3305, 99.026, 57.1689, 213.486, 93.5175, 238.234, 177.042, 264.528, 212.617, 245.194, 232.725, 193.378, 199.47, 146.202, 147.654, 56.4903)

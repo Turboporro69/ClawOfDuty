@@ -14,5 +14,9 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("shop") and shop_open == true:
 		$Shop.visible = false
 		shop_open = false
+	
+	$Control/tiger/Label.text = str(Global2Vs2.tiger_score)
+	$Control/fox/Label.text = str(Global2Vs2.fox_score)
+	
 		
 	

@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmryo0x2q6no2"]
 
 [ext_resource type="Script" uid="uid://dhcqedi3cl5sm" path="res://Resources/bullet.gd" id="1_fn0rq"]
+[ext_resource type="Texture2D" uid="uid://bnh1hxaj0jr57" path="res://Resources/640x480-lemon-yellow-solid-color-background.jpg" id="3_l3m2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr6dg"]
-size = Vector2(26, 10)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_doa57"]
+size = Vector2(25.4545, 9.84848)
 
 [node name="Bullet" type="Area2D"]
 z_index = 1
@@ -15,13 +14,14 @@ collision_mask = 3
 script = ExtResource("1_fn0rq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.01328e-07, 0.0250001)
 scale = Vector2(0.33, 0.33)
 shape = SubResource("RectangleShape2D_nr6dg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9.83477e-07, 0)
-scale = Vector2(8, 3.077)
-texture = SubResource("PlaceholderTexture2D_doa57")
+position = Vector2(0, 3.72529e-09)
+scale = Vector2(0.0125, 0.00645833)
+texture = ExtResource("3_l3m2p")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

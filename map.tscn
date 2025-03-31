@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxfkgr51v8wf0"]
+[gd_scene load_steps=36 format=3 uid="uid://dxfkgr51v8wf0"]
 
 [ext_resource type="Script" uid="uid://pthr0x4enkti" path="res://map.gd" id="1_2wwcf"]
-[ext_resource type="Texture2D" uid="uid://byhpvo10o40e" path="res://MAP/map_path24.png" id="1_ooc2g"]
-[ext_resource type="Texture2D" uid="uid://by4nd6738afku" path="res://Sprites/black.png" id="2_a6rn7"]
+[ext_resource type="Texture2D" uid="uid://by4nd6738afku" path="res://black.png" id="2_a6rn7"]
 [ext_resource type="Texture2D" uid="uid://ypms57d5gkqq" path="res://MAP/map_path6.png" id="2_e0an3"]
 [ext_resource type="Texture2D" uid="uid://qf6n61antwpp" path="res://MAP/map_path23.png" id="2_wbpbn"]
 [ext_resource type="Texture2D" uid="uid://c20g1ccnwbo6q" path="res://MAP/map_path7.png" id="3_e0an3"]
 [ext_resource type="Texture2D" uid="uid://pnfq7novlhtt" path="res://MAP/map_path10.png" id="4_p5pve"]
+[ext_resource type="Texture2D" uid="uid://b8fpj7p7pldjp" path="res://MAP/custrosacaca.png" id="5_4on3e"]
 [ext_resource type="Texture2D" uid="uid://drg2350m80yvy" path="res://MAP/map_path13.png" id="5_71pa8"]
 [ext_resource type="Texture2D" uid="uid://c4ovaoobhnmlu" path="res://MAP/map_path11.png" id="5_urblq"]
 [ext_resource type="Texture2D" uid="uid://bei2bbavgpt2j" path="res://MAP/map_path12.png" id="6_iw27f"]
@@ -17,9 +17,93 @@
 [ext_resource type="Texture2D" uid="uid://by468xk0gcu5q" path="res://MAP/map_path17.png" id="11_sb2pt"]
 [ext_resource type="Texture2D" uid="uid://c6c3naxc88kdw" path="res://MAP/map_path19.png" id="13_6qsgm"]
 [ext_resource type="Texture2D" uid="uid://2iqf8hh4a8sx" path="res://MAP/map_path20.png" id="14_ooc2g"]
+[ext_resource type="Texture2D" uid="uid://dlr53okwa5mr8" path="res://MAP/solid-color-image(6).png" id="18_4on3e"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a6rn7"]
+polygon = PackedVector2Array(-1837, 2812, -1468, 2812, -1468, 2540, 931, 2540, 937, 2810, -1262, 3612, -1955, 3038)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4on3e"]
+polygon = PackedVector2Array(-1838, 2813, -1838, 2676, -1925, 2676, -1925, 2365, -1837, 2365, -1837, 2012, -1676, 2012, -1677, 1646, -1866, 1646, -1866, 1550, -1988, 1550, -1988, -162, -2724, -162, -2724, -677, -2466, -677, -2466, -799, -1985, -799, -1768, -718, -1441, -718, -1441, -514, -593, -514, -594, -1098, -471, -1098, -471, -1859, -634, -1859, -634, -2077, -512, -2077, -512, -1995, 459, -1995, 458, -2234, 458, -2235, 801, -2235, 801, -1996, 1442, -1996, 1432, -2885, 3099, -2938, 3177, -1431, 2730, -1591, 2086, -1591, 2086, -1414, 2086, -1412, 2304, -1412, 2304, -1235, 2085, -1235, 2085, -447, 2495, -447, 2563, -57, 2563, 14, 2659, 14, 2659, 1196, 2563, 1196, 2563, 1699, 2659, 1699, 2659, 2092, 2022, 2201, 1238, 2201, 1238, 1455, 937, 1455, 937, 1441, 931, 1441, 928.505, 2541.15, 928, 2764, 1656, 3696, 5530, 1707, 4465, -4959, -1939, -2621, -3631, -21, -2968, 3050, -1784, 3300)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bssq0"]
+polygon = PackedVector2Array(-667, 239, -580, 239, -580, 1498, -639, 1498, -639, 763, -667, 763)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r5om4"]
+polygon = PackedVector2Array(-581, 1497, 671, 1498, 671, 1236, 929, 1234, 930, 1202, -580, 1200)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jky6x"]
+polygon = PackedVector2Array(-1468, 2540, -1467, 2449, -658, 2449, -658, 1766, 878, 1766, 878, 1383, 914, 1383, 914, 1442, 937, 1442, 937, 1482, 933, 2733, 792.985, 2728.74, -1469, 2660)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4sf5t"]
+polygon = PackedVector2Array(-1837, 2812, -1468, 2812, -1468, 2540, 931, 2540, 937, 2810, -1262, 3612, -1955, 3038)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3mr0t"]
+polygon = PackedVector2Array(-1472, 1065, -1472, -40, -579, -41, -579, 42, -882, 42, -882, 828, -951, 828, -951, 777, -1357, 777, -1357, 1064)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jk4ss"]
+polygon = PackedVector2Array(-1463, 1246, -1352, 1246, -1352, 1565, -1088, 1565, -1088, 1460, -949, 1460, -949, 934, -884, 934, -884, 1512, -1017, 1512, -1017, 1778, -870, 1778, -869, 2217, -1467, 2217)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6sq2s"]
+polygon = PackedVector2Array(2092, -1942, 2091, -1779, 2158, -1779, 2185, -1808, 2186, -2212, 2297, -2214, 2295, -2443, 2215, -2443, 2215, -2309, 1760, -2310, 1759, -2814, 2570, -2813, 2569, -2228, 2720, -2228, 2719, -1558, 2159, -1586, 2159, -1615, 2145, -1630, 2090, -1630, 2090, -1546, 2344, -1497, 3351, -1568, 3016, -3899, 1874, -3851, 1128, -3534, 1236, -2287, 1441, -1998, 1462, -1997, 1462, -1957, 1475, -1943)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4v3wx"]
+polygon = PackedVector2Array(846, 523, 845, 382, 548, 382, 565, -750, 951, -750, 951, -615, 1048, -616, 1048, -750, 1433, -751, 1434, -876, 552, -877, -168, -877, -158, 524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4on3e"]
+size = Vector2(2725, 1191.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bssq0"]
+size = Vector2(3956, 1353)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk4ss"]
+size = Vector2(764, 376)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5om4"]
+size = Vector2(572, 752)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jky6x"]
+size = Vector2(478, 316)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6rn7"]
+size = Vector2(1099, 1401)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sf5t"]
+size = Vector2(848, 1120)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_2wwcf")
+
+[node name="LightOccluder" type="Node2D" parent="."]
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_a6rn7")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_4on3e")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_bssq0")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_r5om4")
+
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_jky6x")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_4sf5t")
+
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_3mr0t")
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_jk4ss")
+
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_6sq2s")
+
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="LightOccluder"]
+occluder = SubResource("OccluderPolygon2D_4v3wx")
 
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -28,20 +112,15 @@ scale = Vector2(0.2, 0.2)
 scale = Vector2(1000, 1000)
 texture = ExtResource("2_a6rn7")
 
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(1.52588e-05, -0.00012207)
+scale = Vector2(3.35389, 3.33333)
+texture = ExtResource("5_4on3e")
+
 [node name="MapPath23" type="Sprite2D" parent="Node2D"]
 position = Vector2(-1736.81, 6225)
 scale = Vector2(3.34396, 3.25)
 texture = ExtResource("2_wbpbn")
-
-[node name="Sprite2D7" type="Sprite2D" parent="Node2D"]
-position = Vector2(10430, -12580)
-scale = Vector2(3.33333, 3.38159)
-texture = ExtResource("5_71pa8")
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(-162.493, 1445)
-scale = Vector2(3.35389, 3.33333)
-texture = ExtResource("1_ooc2g")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
 position = Vector2(-1367.5, 11180)
@@ -73,9 +152,15 @@ position = Vector2(4708.33, -5373.33)
 scale = Vector2(3.76336, 3.33333)
 texture = ExtResource("8_0t07s")
 
-[node name="Sprite2D8" type="Sprite2D" parent="Node2D"]
-position = Vector2(1696.67, 1023.33)
-scale = Vector2(3.33333, 3.33333)
+[node name="center2" type="Sprite2D" parent="Node2D"]
+y_sort_enabled = true
+position = Vector2(3475.83, 1023.33)
+scale = Vector2(0.993864, 3.33333)
+texture = ExtResource("8_05x41")
+
+[node name="Sprite2D16" type="Sprite2D" parent="Node2D"]
+position = Vector2(993.336, 1023.33)
+scale = Vector2(2.4085, 3.33333)
 texture = ExtResource("8_05x41")
 
 [node name="Sprite2D13" type="Sprite2D" parent="Node2D"]
@@ -84,11 +169,22 @@ scale = Vector2(3.33333, 3.68419)
 texture = ExtResource("13_6qsgm")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Node2D"]
-position = Vector2(993.333, -3960)
-scale = Vector2(3.33333, 3.33333)
+position = Vector2(993.333, -5828.33)
+scale = Vector2(3.33333, 1.50522)
 texture = ExtResource("9_gqbix")
 
+[node name="Sprite2D7" type="Sprite2D" parent="Node2D"]
+position = Vector2(10430, -12580)
+scale = Vector2(3.33333, 3.38159)
+texture = ExtResource("5_71pa8")
+
 [node name="Sprite2D10" type="Sprite2D" parent="Node2D"]
+position = Vector2(993.333, -2479.17)
+scale = Vector2(3.33333, 1.88438)
+texture = ExtResource("9_gqbix")
+
+[node name="center1" type="Sprite2D" parent="Node2D"]
+y_sort_enabled = true
 position = Vector2(3530, -740)
 scale = Vector2(3.33333, 3.33333)
 texture = ExtResource("10_oysan")
@@ -103,10 +199,125 @@ position = Vector2(4996.67, -4705)
 scale = Vector2(3.57843, 3.33675)
 texture = ExtResource("14_ooc2g")
 
+[node name="Solid-color-image(6)" type="Sprite2D" parent="Node2D"]
+position = Vector2(-7850, 5810)
+scale = Vector2(97, 126)
+texture = ExtResource("18_4on3e")
+
+[node name="Solid-color-image(6)2" type="Sprite2D" parent="Node2D"]
+position = Vector2(-2410, 635)
+scale = Vector2(97, 126)
+texture = ExtResource("18_4on3e")
+
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(-2357, -411)
+position = Vector2(-2258, -494)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1632, -234)
+
+[node name="walls" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="walls"]
+light_mask = 8
+visibility_layer = 8
+polygon = PackedVector2Array(-1838, 2813, -1838, 2676, -1925, 2676, -1925, 2365, -1837, 2365, -1837, 2012, -1676, 2012, -1677, 1646, -1866, 1646, -1866, 1550, -1988, 1550, -1988, -162, -2724, -162, -2724, -677, -2466, -677, -2466, -799, -1985, -799, -1768, -718, -1441, -718, -1441, -514, -593, -514, -594, -1098, -471, -1098, -471, -1859, -634, -1859, -634, -2077, -512, -2077, -512, -1995, 459, -1995, 458, -2234, 458, -2235, 801, -2235, 801, -1996, 1442, -1996, 1397, -3695, 2940, -3810, 3244, -1583, 2730, -1591, 2086, -1591, 2086, -1414, 2086, -1412, 2304, -1412, 2304, -1235, 2085, -1235, 2085, -447, 2495, -447, 2563, -57, 2563, 14, 2659, 14, 2659, 1196, 2563, 1196, 2563, 1699, 2659, 1699, 2659, 2092, 2022, 2201, 1238, 2201, 1238, 1455, 937, 1455, 937, 1441, 931, 1441, 928.505, 2541.15, 928, 2764, 1656, 3696, 5530, 1707, 2899, -4337, -1939, -2621, -3631, -21, -2968, 3050, -1784, 3300)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-1837, 2812, -1468, 2812, -1468, 2540, 931, 2540, 937, 2810, -1262, 3612, -1955, 3038)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-1468, 2540, -1467, 2449, -658, 2449, -658, 1766, 878, 1766, 878, 1383, 914, 1383, 914, 1442, 937, 1442, 937, 1482, 933, 2733, -1469, 2660)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-1463, 1246, -1352, 1246, -1352, 1565, -1088, 1565, -1088, 1460, -949, 1460, -949, 934, -884, 934, -884, 1512, -1017, 1512, -1017, 1778, -870, 1778, -869, 2217, -1467, 2217)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-1462, 1064, -1456, -31, -578, -30, -579, 42, -882, 42, -882, 828, -951, 828, -951, 777, -1357, 777, -1357, 1064)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-667, 239, -580, 239, -580, 1498, -639, 1498, -639, 763, -667, 763)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(-581, 1497, 671, 1498, 671, 1236, 912, 1236, 912, 1210, -580, 1214)
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(846, 523, 845, 382, 548, 382, 565, -750, 951, -750, 951, -615, 1048, -616, 1048, -750, 1433, -751, 1434, -876, 552, -877, -168, -877, -158, 524)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="walls"]
+polygon = PackedVector2Array(2092, -1942, 2091, -1779, 2158, -1779, 2185, -1808, 2186, -2212, 2297, -2214, 2295, -2443, 2215, -2443, 2215, -2309, 1760, -2310, 1759, -2814, 2570, -2813, 2569, -2228, 2720, -2228, 2719, -1558, 2159, -1586, 2159, -1615, 2145, -1630, 2090, -1630, 2090, -1546, 2344, -1497, 3351, -1568, 3016, -3899, 1874, -3851, 1128, -3534, 1236, -2287, 1441, -1998, 1462, -1997, 1462, -1957, 1475, -1943)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.439049, 0.439049, 0.439049, 1)
+
+[node name="Center inside" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 16
+
+[node name="Center_inside" type="CollisionShape2D" parent="Center inside" groups=["center_inside"]]
+visible = false
+position = Vector2(1360, -245.75)
+shape = SubResource("RectangleShape2D_4on3e")
+
+[node name="Center" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Center"]
+position = Vector2(1332, -1556.5)
+shape = SubResource("RectangleShape2D_bssq0")
+
+[node name="apartments" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="apartments"]
+position = Vector2(-1840, 2306)
+shape = SubResource("RectangleShape2D_jk4ss")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="apartments"]
+position = Vector2(-1840, 1120)
+shape = SubResource("RectangleShape2D_jk4ss")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="apartments"]
+position = Vector2(1152, 1320)
+shape = SubResource("RectangleShape2D_r5om4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="apartments"]
+position = Vector2(-396, 127)
+shape = SubResource("RectangleShape2D_jky6x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="apartments"]
+polygon = PackedVector2Array(-1412, 4, -1427, 2572, 1090, 2476, 918, 1485, 923, 1216, 666, 1226, -609, 1278, -634, 252, -679, 20, -1159, 60)
+
+[node name="library" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="library"]
+position = Vector2(2215.5, -2206.5)
+shape = SubResource("RectangleShape2D_a6rn7")
+
+[node name="bombarea" type="Area2D" parent="." groups=["bomb_area"]]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bombarea" groups=["bomb_area"]]
+position = Vector2(1002, -183)
+shape = SubResource("RectangleShape2D_4sf5t")
+
+[connection signal="area_entered" from="Center inside" to="." method="_on_opacity_area_entered"]
+[connection signal="area_exited" from="Center inside" to="." method="_on_opacity_area_exited"]
+[connection signal="area_entered" from="Center" to="." method="_on_center_area_entered"]
+[connection signal="area_exited" from="Center" to="." method="_on_center_area_exited"]
+[connection signal="area_entered" from="apartments" to="." method="_on_apartments_area_entered"]
+[connection signal="area_exited" from="apartments" to="." method="_on_apartments_area_exited"]
+[connection signal="area_entered" from="library" to="." method="_on_library_area_entered"]
+[connection signal="area_exited" from="library" to="." method="_on_library_area_exited"]

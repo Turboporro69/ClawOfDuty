@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt16klrxac3xx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mt4e1"]
+radius = 56.13
+height = 150.0
+
+[node name="walls" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(-12.5, 205)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mt4e1")
