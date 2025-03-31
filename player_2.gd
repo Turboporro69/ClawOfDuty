@@ -54,7 +54,6 @@ func _ready():
 		
 		$PointLight2D.visible = true
 		$CanvasLayer.visible = true
-		assign_random_weapons()
 		
 	set_physics_process(is_multiplayer_authority())
 	blinking()
@@ -88,9 +87,6 @@ func _physics_process(delta: float) -> void:
 		
 		
 	else:
-		if gun.timer_started == true or gun.defusing == true:
-			pass
-		else:
 			var direction_x := Input.get_axis("ui_left", "ui_right")
 			if direction_x:
 				velocity.x = direction_x * speed
@@ -124,6 +120,8 @@ func _on_dashduration_timeout() -> void:
 
 func _on_dashcooldown_timeout() -> void:
 	dash_available = true
+
+
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullets"):
@@ -227,13 +225,3 @@ func reset_round():
 	reset_leg_positions()
 	health_label()
 	#Global2Vs2._reset_game()
-	assign_random_weapons()
-
-func assign_random_weapons():
-	if primary_weapons.size() > 0:
-		var random_primary = primary_weapons[randi() % primary_weapons.size()]
-		$Gun.primary_weapon = random_primary
-	
-	if secondary_weapons.size() > 0:
-		var random_secondary = secondary_weapons[randi() % secondary_weapons.size()]
-		$Gun.secondary_weapon = random_secondary

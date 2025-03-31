@@ -1,11 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://oacdyftnjem7"]
+[gd_scene load_steps=30 format=3 uid="uid://oacdyftnjem7"]
 
 [ext_resource type="Script" uid="uid://dfmmmxywnc45w" path="res://player_2.gd" id="1_5phpl"]
 [ext_resource type="Material" uid="uid://d12jqn3spv7sd" path="res://Sprites/dust.tres" id="2_prk18"]
 [ext_resource type="PackedScene" uid="uid://xd3utvwxeivs" path="res://tiger_polygons.tscn" id="3_041tb"]
 [ext_resource type="Resource" uid="uid://dbsx3gtajx8li" path="res://weapons/M16.tres" id="3_idv0f"]
 [ext_resource type="Resource" uid="uid://baye13yvint30" path="res://weapons/mp5.tres" id="4_kn8xp"]
-[ext_resource type="Resource" uid="uid://cffmxjtho6c3m" path="res://weapons/shotgun.tres" id="5_pqoxx"]
 [ext_resource type="Resource" uid="uid://cwndrn0ntnin2" path="res://weapons/sniper.tres" id="6_h7g4i"]
 [ext_resource type="Script" uid="uid://dr4mhib4bcsbs" path="res://Scripts/weapons.gd" id="7_hie6c"]
 [ext_resource type="Script" uid="uid://3gypv6ltwcqj" path="res://Resources/gun.gd" id="7_idv0f"]
@@ -120,9 +119,7 @@ scale = Vector2(0.4, 0.4)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_5phpl")
-health = 100
-scale_player = 1.2
-primary_weapons = [ExtResource("8_kn8xp"), ExtResource("3_idv0f"), ExtResource("4_kn8xp"), ExtResource("5_pqoxx"), ExtResource("6_h7g4i")]
+primary_weapons = Array[ExtResource("7_hie6c")]([ExtResource("8_kn8xp"), ExtResource("3_idv0f"), ExtResource("4_kn8xp"), ExtResource("6_h7g4i")])
 secondary_weapons = Array[ExtResource("7_hie6c")]([ExtResource("9_pqoxx"), ExtResource("9_hvro1"), ExtResource("10_0port")])
 
 [node name="Player" type="Node2D" parent="."]
@@ -185,6 +182,10 @@ position = Vector2(369.167, -292.5)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("7_idv0f")
 scale_gun = 2.5
+primary_weapons = Array[ExtResource("7_hie6c")]([ExtResource("8_kn8xp"), ExtResource("3_idv0f"), ExtResource("4_kn8xp"), ExtResource("6_h7g4i")])
+secondary_weapons = Array[ExtResource("7_hie6c")]([ExtResource("9_pqoxx"), ExtResource("9_hvro1"), ExtResource("10_0port")])
+primary_weapon = ExtResource("3_idv0f")
+secondary_weapon = ExtResource("10_0port")
 
 [node name="Sprite2D" type="Sprite2D" parent="Gun"]
 z_index = 1
@@ -298,6 +299,7 @@ tint_over = Color(0, 0, 0, 1)
 tint_progress = Color(0, 0.813116, 0, 1)
 
 [node name="bomb_ui" type="Control" parent="Gun/CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -480,7 +482,6 @@ texture_scale = 3.3
 wait_time = 10.0
 one_shot = true
 
-[connection signal="player_death" from="." to="Gun" method="_on_player_skeleton_player_death"]
 [connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
 [connection signal="timeout" from="Gun/reload_timer" to="Gun" method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="Gun/defuse_timer" to="Gun" method="_on_defuse_timer_timeout"]

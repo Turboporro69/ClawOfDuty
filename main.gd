@@ -74,7 +74,6 @@ func _on_button_pressed_connect() -> void:
 func _load_player(id, character):
 	if is_multiplayer_authority():
 		var pl
-		var spawn_node = get_tree().current_scene.get_node("Player")
 
 		if character == "fox":
 			if Global2Vs2.fox_players.size() >= 2:
