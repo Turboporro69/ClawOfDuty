@@ -52,8 +52,8 @@ func _ready():
 		camera.zoom.x = 0.8
 		camera.zoom.y = 0.8
 		
-		$PointLight2D.visible = true
-		$CanvasLayer.visible = true
+		$PointLight2D.visible = false
+		$CanvasLayer.visible = false
 		
 	set_physics_process(is_multiplayer_authority())
 	blinking()
@@ -61,6 +61,8 @@ func _ready():
 
 func _physics_process(delta: float) -> void: 
 	health_label()
+	$CanvasLayer/Control/fox/Label.text = str(Global2Vs2.fox_score)
+	$CanvasLayer/Control/tiger/Label.text = str(Global2Vs2.tiger_score)
 	
 	walk_particle.emitting = false
 	arm_rotation()
@@ -80,6 +82,10 @@ func _physics_process(delta: float) -> void:
 		$CollisionShape2D.disabled = true
 		$CanvasLayer/Shop.visible = false
 		$CanvasLayer/health.visible = false
+		if is_in_group("fox"):
+			Global2Vs2.fox_death = 1
+		else:
+			Global2Vs2.tiger_death = 1
 		reset_round.rpc()
 		
 		health_label()
@@ -157,6 +163,7 @@ func _on_gun_right() -> void:
 	#rotation_degrees = 0
 	flip_h = false
 
+@rpc("any_peer", "call_local")
 func health_label():	
 	if is_multiplayer_authority():
 		$CanvasLayer/health/Label.text = str(health)

@@ -9,11 +9,14 @@ extends Node2D
 @onready var mag_ui = $CanvasLayer/Gun_UI/HBoxContainer/Label
 var pewpewcooldown = true
 var moving = false
+@onready var random_pistol = preload("res://Resources/random_sounds_pistol.tres")
+@export var pistol_sound : Array
 var drift
 @export var primary_weapons: Array[Weapons] = []
 @export var secondary_weapons: Array[Weapons] = []
 var cadence : float
 var feet_position
+
 var near_weapon : Area2D = null
 var weapon_data
 var weapon_category
@@ -22,6 +25,7 @@ var extra_recoil : int
 var extra_recoil_moving : int
 var reloading : bool
 @onready var reload_circle = $CanvasLayer/Reload_UI/reload
+
 
 
 # If for any reason you want to read this, don't do it. I don't even know why or how works uwu
@@ -53,13 +57,14 @@ func _ready() -> void:
 	update_weapon_icons()
 	selected()
 	$CanvasLayer.visible = false
-
+	
 	if is_multiplayer_authority():
 		$CanvasLayer.visible = true
 		#assign_random_weapons.rpc()
 
 func _process(delta: float) -> void:
 	if is_multiplayer_authority():
+		print()
 		update_reload_ui()
 		update_mag_ui()
 		pick_weapon.rpc()
@@ -183,6 +188,7 @@ func drop_weapon():
 		dropped_weapon_instance.scale = $Sprite2D.scale
 		get_tree().root.add_child(dropped_weapon_instance)
 		primary_weapon = null
+		
 	elif current_weapon == "secondary" and secondary_weapon != null:
 		var dropped_weapon_instance = dropped_weapon.instantiate()
 		dropped_weapon_instance.weapon_data = secondary_weapon

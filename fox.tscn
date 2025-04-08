@@ -112,6 +112,9 @@ properties/21/replication_mode = 1
 properties/22/path = NodePath("Gun:visible")
 properties/22/spawn = true
 properties/22/replication_mode = 1
+properties/23/path = NodePath("Gun/AudioStreamPlayer2D:playing")
+properties/23/spawn = true
+properties/23/replication_mode = 1
 
 [node name="Player_skeleton" type="CharacterBody2D" groups=["fox", "players"]]
 z_index = 10
@@ -341,6 +344,8 @@ one_shot = true
 wait_time = 3.8
 one_shot = true
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Gun"]
+
 [node name="dashduration" type="Timer" parent="."]
 wait_time = 0.3
 
@@ -484,6 +489,7 @@ replication_config = SubResource("SceneReplicationConfig_ryqyf")
 position = Vector2(-17.5, 175)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(227.5, 10)
 energy = 0.7
 shadow_enabled = true
@@ -493,6 +499,8 @@ texture_scale = 4.0
 [node name="reset_round" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="timeout" from="Gun/pewpew" to="Gun" method="_on_pewpew_timeout"]
 [connection signal="timeout" from="Gun/reload_timer" to="Gun" method="_on_reload_timer_timeout"]

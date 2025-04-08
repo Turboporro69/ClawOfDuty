@@ -1,0 +1,23 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=10 format=3 uid="uid://b12665tfytt65"]
+
+[ext_resource type="AudioStream" uid="uid://cp1v6flauvld5" path="res://sounds/pistol/pistol_-01.wav" id="1_8yrqa"]
+[ext_resource type="AudioStream" uid="uid://dr4ifnr8dp23n" path="res://sounds/pistol/pistol_-02.wav" id="2_r0tum"]
+[ext_resource type="AudioStream" uid="uid://cpevvpgv8uab0" path="res://sounds/pistol/pistol_-03.wav" id="3_wkiv4"]
+[ext_resource type="AudioStream" uid="uid://diywxsbdck4mg" path="res://sounds/pistol/pistol_-04.wav" id="4_ha4vb"]
+[ext_resource type="AudioStream" uid="uid://d0eh48vxc4arc" path="res://sounds/pistol/pistol_-05.wav" id="5_vbdnt"]
+[ext_resource type="AudioStream" uid="uid://c0m2il6vdei8r" path="res://sounds/pistol/pistol_-06.wav" id="6_76aa8"]
+[ext_resource type="AudioStream" uid="uid://3rfig2fwkl2r" path="res://sounds/pistol/pistol_-07.wav" id="7_dhoo3"]
+[ext_resource type="AudioStream" uid="uid://be1j2xl30jvkp" path="res://sounds/pistol/pistol_-08.wav" id="8_aaul3"]
+[ext_resource type="AudioStream" uid="uid://dl4mfd23ulgs5" path="res://sounds/pistol/pistol_-09.wav" id="9_liyq7"]
+
+[resource]
+streams_count = 9
+stream_0/stream = ExtResource("1_8yrqa")
+stream_1/stream = ExtResource("2_r0tum")
+stream_2/stream = ExtResource("3_wkiv4")
+stream_3/stream = ExtResource("4_ha4vb")
+stream_4/stream = ExtResource("5_vbdnt")
+stream_5/stream = ExtResource("6_76aa8")
+stream_6/stream = ExtResource("7_dhoo3")
+stream_7/stream = ExtResource("8_aaul3")
+stream_8/stream = ExtResource("9_liyq7")

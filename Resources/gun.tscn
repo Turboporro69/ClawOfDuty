@@ -6,6 +6,7 @@
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ffn8m")
+pistol_sound = [null, null, null, null, null, null]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(38, 27)
@@ -26,6 +27,8 @@ position = Vector2(3, 47)
 
 [node name="SecondaryWeapn" parent="CanvasLayer/Gun_UI/VBoxContainer" index="1"]
 texture = ExtResource("5_sbrxb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="pewpew" to="." method="_on_pewpew_timeout"]
 

@@ -74,6 +74,7 @@ size = Vector2(848, 1120)
 script = ExtResource("1_2wwcf")
 
 [node name="LightOccluder" type="Node2D" parent="."]
+visible = false
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="LightOccluder"]
 occluder = SubResource("OccluderPolygon2D_a6rn7")
@@ -215,7 +216,7 @@ texture = ExtResource("18_4on3e")
 position = Vector2(-2258, -494)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1632, -234)
+position = Vector2(-1884, -490)
 
 [node name="walls" type="StaticBody2D" parent="."]
 collision_layer = 3
@@ -251,6 +252,7 @@ polygon = PackedVector2Array(846, 523, 845, 382, 548, 382, 565, -750, 951, -750,
 polygon = PackedVector2Array(2092, -1942, 2091, -1779, 2158, -1779, 2185, -1808, 2186, -2212, 2297, -2214, 2295, -2443, 2215, -2443, 2215, -2309, 1760, -2310, 1759, -2814, 2570, -2813, 2569, -2228, 2720, -2228, 2719, -1558, 2159, -1586, 2159, -1615, 2145, -1630, 2090, -1630, 2090, -1546, 2344, -1497, 3351, -1568, 3016, -3899, 1874, -3851, 1128, -3534, 1236, -2287, 1441, -1998, 1462, -1997, 1462, -1957, 1475, -1943)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.439049, 0.439049, 0.439049, 1)
 
 [node name="Center inside" type="Area2D" parent="."]
